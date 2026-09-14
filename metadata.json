@@ -1,0 +1,6 @@
+{
+  "name": "Love Diary",
+  "description": "A private, romantic digital love diary and relationship timeline for couples.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

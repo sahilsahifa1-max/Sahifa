@@ -1,0 +1,33 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Outer glow / soft aura -->
+    <path
+        android:pathData="M54,54m-28,0a28,28 0 1,1 56,0a28,28 0 1,1 -56,0"
+        android:fillColor="#33FF4D6D" />
+    
+    <!-- Heart shape -->
+    <path
+        android:pathData="M54,75.5 C52.2,74.1 34,60.8 34,45.5 C34,37.5 40.2,31.5 48,31.5 C51.4,31.5 53.6,32.8 54,34 C54.4,32.8 56.6,31.5 60,31.5 C67.8,31.5 74,37.5 74,45.5 C74,60.8 55.8,74.1 54,75.5 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:startX="34"
+                android:startY="31.5"
+                android:endX="74"
+                android:endY="75.5"
+                android:type="linear">
+                <item android:color="#FF758F" android:offset="0.0" />
+                <item android:color="#FF4D6D" android:offset="0.5" />
+                <item android:color="#C9184A" android:offset="1.0" />
+            </gradient>
+        </aapt:attr>
+    </path>
+
+    <!-- Inner decorative sparkle and ribbon line -->
+    <path
+        android:pathData="M54,41 C54,41 50,47 44,49 C48,51 51,55 54,63 C57,55 60,51 64,49 C58,47 54,41 54,41 Z"
+        android:fillColor="#FFFFFFFF" />
+</vector>
