@@ -1773,12 +1773,12 @@
       <!-- Couple Portraits Avatar Frame -->
       <div class="hero-portraits-wrap" id="heroPortraitsWrap">
         <div class="hero-portrait-avatar" title="Sahil">
-          <img src="media/photos/photo1.jpg" alt="Sahil" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="media/photos/IMG_20260908_123640.jpg" alt="Sahil" onerror="if(this.src.indexOf('photo1.jpg')===-1){this.src='media/photos/photo1.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}">
           <div class="hero-portrait-placeholder" style="display:none;">Sahil</div>
         </div>
         <div class="hero-heart-connector">❤️</div>
         <div class="hero-portrait-avatar" title="Sahifa">
-          <img src="media/photos/photo2.jpg" alt="Sahifa" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <img src="media/photos/memory-04.jpg" alt="Sahifa" onerror="if(this.src.indexOf('photo2.jpg')===-1){this.src='media/photos/photo2.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}">
           <div class="hero-portrait-placeholder" style="display:none;">Sahifa</div>
         </div>
       </div>
@@ -1994,43 +1994,99 @@
 
     const photos = [
       {
-        src: "media/photos/photo1.jpg",
+        src: "media/photos/IMG_20260908_123640.jpg",
+        sources: [
+          "media/photos/IMG_20260908_123640.jpg",
+          "media/photos/photo1.jpg",
+          "photos/IMG_20260908_123640.jpg",
+          "photos/photo1.jpg",
+          "IMG_20260908_123640.jpg",
+          "photo1.jpg"
+        ],
         title: "The Day We Met",
         caption: "We first met on the road going from home to school — our story began here.",
         date: "30 March 2024"
       },
       {
-        src: "media/photos/photo2.jpg",
+        src: "media/photos/memory-04.jpg",
+        sources: [
+          "media/photos/memory-04.jpg",
+          "media/photos/photo2.jpg",
+          "photos/memory-04.jpg",
+          "photos/photo2.jpg",
+          "memory-04.jpg",
+          "photo2.jpg"
+        ],
         title: "Sahifa's Gentle Radiance",
         caption: "A flower in her hair, bringing soft light and warmth to every moment.",
         date: "Sweet Memory"
       },
       {
-        src: "media/photos/photo3.jpg",
+        src: "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
+        sources: [
+          "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
+          "media/photos/photo3.jpg",
+          "photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
+          "photos/photo3.jpg",
+          "Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
+          "photo3.jpg"
+        ],
         title: "Our Video Calls",
         caption: "Miles away but never apart, laughing and talking for hours.",
         date: "Cherished Calls"
       },
       {
-        src: "media/photos/photo4.jpg",
+        src: "media/photos/memory-03.jpg",
+        sources: [
+          "media/photos/memory-03.jpg",
+          "media/photos/photo4.jpg",
+          "photos/memory-03.jpg",
+          "photos/photo4.jpg",
+          "memory-03.jpg",
+          "photo4.jpg"
+        ],
         title: "Late Night Whispers",
         caption: "Quiet conversations under starlight that brought our souls close together.",
         date: "Endless Talks"
       },
       {
-        src: "media/photos/photo5.jpg",
+        src: "media/photos/IMG_20260628_114036.jpg",
+        sources: [
+          "media/photos/IMG_20260628_114036.jpg",
+          "media/photos/photo5.jpg",
+          "photos/IMG_20260628_114036.jpg",
+          "photos/photo5.jpg",
+          "IMG_20260628_114036.jpg",
+          "photo5.jpg"
+        ],
         title: "When Our Eyes Met",
         caption: "In your eyes, our souls recognized each other in a single tender heartbeat.",
         date: "28 June 2024"
       },
       {
-        src: "media/photos/photo6.jpg",
+        src: "media/photos/memory-05.jpg",
+        sources: [
+          "media/photos/memory-05.jpg",
+          "media/photos/photo6.jpg",
+          "photos/memory-05.jpg",
+          "photos/photo6.jpg",
+          "memory-05.jpg",
+          "photo6.jpg"
+        ],
         title: "Reflections of Our Love",
         caption: "A shared gaze holding all our promises and quiet dreams for the future.",
         date: "28 June 2024"
       },
       {
-        src: "media/photos/photo7.jpg",
+        src: "media/photos/memory-02.jpg",
+        sources: [
+          "media/photos/memory-02.jpg",
+          "media/photos/photo7.jpg",
+          "photos/memory-02.jpg",
+          "photos/photo7.jpg",
+          "memory-02.jpg",
+          "photo7.jpg"
+        ],
         title: "Sahil & Sahifa Forever",
         caption: "Two souls, one heart, walking hand in hand into eternity.",
         date: "Forever & Always"
@@ -2040,7 +2096,12 @@
     const videos = [
       {
         src: "media/videos/video1.mp4",
-        poster: "media/photos/photo1.jpg",
+        sources: [
+          "media/videos/video1.mp4",
+          "videos/video1.mp4",
+          "video1.mp4"
+        ],
+        poster: "media/photos/memory-04.jpg",
         title: "Laughter, Joy & Twirling Smiles",
         caption: "Her joyful laughter and radiant happiness lighting up the screen.",
         date: "Living Memory"
@@ -2096,9 +2157,10 @@ Sahil ❤️`,
           tag: "The Beginning",
           media: {
             type: "image",
-            src: "media/photos/photo1.jpg",
-            title: "Sahifa — The Morning We Met",
-            caption: "Her radiant, shy smile that made my heart skip its very first beat."
+            src: "media/photos/IMG_20260908_123640.jpg",
+            sources: ["media/photos/IMG_20260908_123640.jpg", "media/photos/photo1.jpg", "IMG_20260908_123640.jpg", "photo1.jpg"],
+            title: "Sahil & Sahifa — The Morning We Met",
+            caption: "Our eyes met on the road — our forever began here."
           }
         },
         {
@@ -2122,9 +2184,10 @@ Sahil ❤️`,
           tag: "Safe Haven",
           media: {
             type: "image",
-            src: "media/photos/photo3.jpg",
+            src: "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
+            sources: ["media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg", "media/photos/photo3.jpg", "Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg", "photo3.jpg"],
             title: "Our Sweet Smiles",
-            caption: "Holding each other close across every distance."
+            caption: "Holding each other close across every distance on our video calls."
           }
         },
         {
@@ -2148,7 +2211,8 @@ Sahil ❤️`,
           tag: "Celebrations",
           media: {
             type: "image",
-            src: "media/photos/photo5.jpg",
+            src: "media/photos/memory-03.jpg",
+            sources: ["media/photos/memory-03.jpg", "media/photos/photo5.jpg", "memory-03.jpg", "photo5.jpg"],
             title: "Late Night Moments",
             caption: "Celebrating each milestone together across the screen and in our hearts."
           }
@@ -2164,9 +2228,10 @@ Sahil ❤️`,
           tag: "Deep Connection",
           media: {
             type: "image",
-            src: "media/photos/photo6.jpg",
+            src: "media/photos/IMG_20260628_114036.jpg",
+            sources: ["media/photos/IMG_20260628_114036.jpg", "media/photos/photo6.jpg", "IMG_20260628_114036.jpg", "photo6.jpg"],
             title: "Our Eyes Side by Side",
-            caption: "The gaze that started it all on 30 March 2024."
+            caption: "The sacred moment our eyes met — 28 June 2024."
           }
         }
       ]
@@ -2416,6 +2481,20 @@ Sahil ❤️`,
           `;
         }
 
+        if (mem.media && mem.media.src) {
+          setTimeout(() => {
+            const mImg = card.querySelector(".memory-media-frame img");
+            const mUnavail = card.querySelector(".memory-media-frame .photo-unavailable-box");
+            if (mImg) {
+              const mSources = mem.media.sources || [mem.media.src];
+              loadImgWithFallbacks(mImg, mSources, () => {
+                mImg.style.display = 'none';
+                if (mUnavail) mUnavail.style.display = 'block';
+              });
+            }
+          }, 0);
+        }
+
         card.innerHTML = `
           <span class="memory-tag">${mem.number} • ${mem.tag || "Memory"}</span>
           <div class="memory-date">
@@ -2455,6 +2534,24 @@ Sahil ❤️`,
     /* ==========================================================================
        5. DEDICATED SECTION: OUR PHOTOS ❤️ (7 Permanent Real Photos)
        ========================================================================== */
+
+    // Helper to try multiple fallback paths for an image
+    function loadImgWithFallbacks(imgEl, sourceList, onFail) {
+      let idx = 0;
+      function attempt() {
+        if (idx < sourceList.length) {
+          const s = sourceList[idx++];
+          imgEl.src = s;
+        } else if (onFail) {
+          onFail();
+        }
+      }
+      imgEl.onerror = () => {
+        attempt();
+      };
+      attempt();
+    }
+
     function renderPhotosSection() {
       const grid = document.getElementById("photosGrid");
       grid.innerHTML = "";
@@ -2466,7 +2563,7 @@ Sahil ❤️`,
         card.className = "photo-card";
         card.innerHTML = `
           <div class="photo-img-wrap">
-            <img src="${photo.src}" alt="${photo.title}" loading="lazy">
+            <img alt="${photo.title}" loading="lazy">
             <div class="photo-unavailable-box" style="display:none;">
               <span class="ph-unavailable-icon">📷</span>
               <span class="ph-unavailable-text">Memory unavailable</span>
@@ -2486,11 +2583,12 @@ Sahil ❤️`,
         const img = card.querySelector("img");
         const unavailBox = card.querySelector(".photo-unavailable-box");
 
-        img.onerror = () => {
-          console.error("Failed to load photo at path:", photo.src);
+        const sources = photo.sources || [photo.src];
+        loadImgWithFallbacks(img, sources, () => {
+          console.error("Failed to load photo after all fallbacks:", photo.src);
           img.style.display = "none";
           unavailBox.style.display = "flex";
-        };
+        });
 
         card.addEventListener("click", () => {
           openLightboxAtIndex(idx);
@@ -2510,10 +2608,13 @@ Sahil ❤️`,
       videos.forEach((video) => {
         const card = document.createElement("div");
         card.className = "video-card";
+        const sources = video.sources || [video.src];
+        const sourcesHtml = sources.map(s => `<source src="${s}" type="video/mp4">`).join("\n              ");
+
         card.innerHTML = `
           <div class="video-player-container">
             <video controls playsinline preload="metadata" poster="${video.poster || ''}">
-              <source src="${video.src}" type="video/mp4">
+              ${sourcesHtml}
               Your browser does not support HTML5 video.
             </video>
           </div>
@@ -2528,7 +2629,6 @@ Sahil ❤️`,
         `;
 
         const v = card.querySelector("video");
-        const source = card.querySelector("source");
         let hasErrored = false;
 
         const handleVideoError = () => {
@@ -2546,7 +2646,6 @@ Sahil ❤️`,
         };
 
         v.addEventListener("error", handleVideoError);
-        if (source) source.addEventListener("error", handleVideoError);
 
         grid.appendChild(card);
       });
@@ -2626,8 +2725,8 @@ Sahil ❤️`,
       if (priorUnavail) priorUnavail.remove();
 
       img.style.display = "block";
-      img.src = item.src;
-      img.onerror = () => {
+      const sources = item.sources || [item.src];
+      loadImgWithFallbacks(img, sources, () => {
         console.error("Failed to load photo in lightbox at path:", item.src);
         img.style.display = "none";
         if (!imgHolder.querySelector(".lightbox-unavailable-box")) {
@@ -2640,7 +2739,7 @@ Sahil ❤️`,
           `;
           imgHolder.appendChild(errBox);
         }
-      };
+      });
 
       title.textContent = item.title || "Our Memory";
       caption.textContent = item.caption || "";
