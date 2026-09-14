@@ -741,8 +741,95 @@
       opacity: 0.75;
     }
 
+    
     /* ==========================================================================
-       DEDICATED SECTION: OUR PHOTOS ❤️
+       DEDICATED SECTION: OUR PHOTOS & VIDEOS
+       ========================================================================== */
+    .media-subsection {
+      width: 100%;
+    }
+
+    .media-subsection-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--bg-glass-border);
+    }
+
+    .media-sub-badge {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .media-sub-note {
+      font-size: 0.82rem;
+      color: var(--accent-pink-soft);
+      font-style: italic;
+    }
+
+    .media-prompt-card {
+      background: rgba(22, 7, 22, 0.7);
+      border: 1px dashed var(--bg-glass-border-hover);
+      border-radius: 22px;
+      padding: 36px 24px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      grid-column: 1 / -1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .media-prompt-icon {
+      font-size: 38px;
+      animation: heartbeat 2.8s infinite ease-in-out;
+    }
+
+    .media-prompt-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .media-prompt-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      line-height: 1.65;
+    }
+
+    .media-prompt-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .media-prompt-chip {
+      background: rgba(255, 77, 109, 0.12);
+      border: 1px solid rgba(255, 77, 109, 0.25);
+      color: var(--accent-pink-soft);
+      padding: 5px 12px;
+      border-radius: 12px;
+      font-size: 0.76rem;
+      font-family: monospace;
+    }
+
+    /* ==========================================================================
+       DEDICATED SECTION: OUR PHOTOS & VIDEOS GRIDS
        ========================================================================== */
     .photos-grid {
       display: grid;
@@ -1724,8 +1811,7 @@
         <li><a href="#hero">Home</a></li>
         <li><a href="#counter">Our Time</a></li>
         <li><a href="#timeline">Our Story</a></li>
-        <li><a href="#photos">Our Photos ❤️</a></li>
-        <li><a href="#videos">Our Videos 🎥</a></li>
+        <li><a href="#photos-videos">Our Photos & Videos</a></li>
         <li><a href="#letter">Love Letter</a></li>
       </ul>
 
@@ -1756,8 +1842,7 @@
       <a href="#hero" class="mobile-nav-link">Home</a>
       <a href="#counter" class="mobile-nav-link">Our Time Together</a>
       <a href="#timeline" class="mobile-nav-link">Our Story Timeline</a>
-      <a href="#photos" class="mobile-nav-link">Our Photos ❤️</a>
-      <a href="#videos" class="mobile-nav-link">Our Videos 🎥</a>
+      <a href="#photos-videos" class="mobile-nav-link">Our Photos & Videos</a>
       <a href="#letter" class="mobile-nav-link">A Letter For You</a>
     </div>
 
@@ -1768,19 +1853,6 @@
       <div class="hero-badge">
         <span>✨</span>
         <span id="heroBadgeText">Chapter One • 30 March 2024</span>
-      </div>
-
-      <!-- Couple Portraits Avatar Frame -->
-      <div class="hero-portraits-wrap" id="heroPortraitsWrap">
-        <div class="hero-portrait-avatar" title="Sahil">
-          <img src="media/photos/IMG_20260908_123640.jpg" alt="Sahil" onerror="if(this.src.indexOf('photo1.jpg')===-1){this.src='media/photos/photo1.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}">
-          <div class="hero-portrait-placeholder" style="display:none;">Sahil</div>
-        </div>
-        <div class="hero-heart-connector">❤️</div>
-        <div class="hero-portrait-avatar" title="Sahifa">
-          <img src="media/photos/memory-04.jpg" alt="Sahifa" onerror="if(this.src.indexOf('photo2.jpg')===-1){this.src='media/photos/photo2.jpg';}else{this.style.display='none';this.nextElementSibling.style.display='flex';}">
-          <div class="hero-portrait-placeholder" style="display:none;">Sahifa</div>
-        </div>
       </div>
 
       <h1 class="hero-title">
@@ -1863,33 +1935,35 @@
     </section>
 
     <!-- ======================================================================
-         DEDICATED SECTION: OUR PHOTOS ❤️
+         DEDICATED SECTION: OUR PHOTOS & VIDEOS
          ====================================================================== -->
-    <section class="section-wrap" id="photos">
+    <section class="section-wrap" id="photos-videos">
       <div class="section-header">
-        <span class="section-tag">Sacred Snapshots</span>
-        <h2 class="section-title">OUR PHOTOS ❤️</h2>
-        <p class="section-desc">Every glance, every smile, frozen in the pages of our forever love.</p>
+        <span class="section-tag">Sacred Moments &amp; Living Memories</span>
+        <h2 class="section-title">Our Photos &amp; Videos</h2>
+        <p class="section-desc">Every glance, sweet laughter, and cherished memory of Sahil &amp; Sahifa.</p>
       </div>
 
-      <!-- Responsive 2-column mobile / 3-4 column desktop gallery -->
-      <div class="photos-grid" id="photosGrid">
-        <!-- Automatically populated from 7 permanent photos -->
-      </div>
-    </section>
-
-    <!-- ======================================================================
-         DEDICATED SECTION: OUR VIDEOS 🎥
-         ====================================================================== -->
-    <section class="section-wrap" id="videos">
-      <div class="section-header">
-        <span class="section-tag">Living Memories</span>
-        <h2 class="section-title">OUR VIDEOS 🎥</h2>
-        <p class="section-desc">The sound of your laugh, your glowing joy, living in motion.</p>
+      <!-- Photos Subsection -->
+      <div class="media-subsection">
+        <div class="media-subsection-header">
+          <span class="media-sub-badge">📸 Photos ❤️</span>
+          <span class="media-sub-note">Tap any photo to open fullscreen</span>
+        </div>
+        <div class="photos-grid" id="photosGrid">
+          <!-- Populated only with verified loaded photos -->
+        </div>
       </div>
 
-      <div class="videos-grid" id="videosGrid">
-        <!-- Automatically populated from permanent videos -->
+      <!-- Videos Subsection -->
+      <div class="media-subsection" style="margin-top: 50px;">
+        <div class="media-subsection-header">
+          <span class="media-sub-badge">🎥 Videos 🎬</span>
+          <span class="media-sub-note">Our moments in living motion</span>
+        </div>
+        <div class="videos-grid" id="videosGrid">
+          <!-- Populated with responsive HTML5 video -->
+        </div>
       </div>
     </section>
 
@@ -1988,105 +2062,56 @@
        JAVASCRIPT CODE
        ======================================================================== -->
   <script>
+        // ==========================================
+    // SAHIL & SAHIFA MEDIA CONFIGURATION
+    // Valid Relative Paths in media/photos/ and media/videos/
     // ==========================================
-    // SAHIL & SAHIFA MEDIA
-    // ==========================================
-
     const photos = [
       {
         src: "media/photos/IMG_20260908_123640.jpg",
-        sources: [
-          "media/photos/IMG_20260908_123640.jpg",
-          "media/photos/photo1.jpg",
-          "photos/IMG_20260908_123640.jpg",
-          "photos/photo1.jpg",
-          "IMG_20260908_123640.jpg",
-          "photo1.jpg"
-        ],
+        altSrc: "media/photos/photo1.jpg",
         title: "The Day We Met",
         caption: "We first met on the road going from home to school — our story began here.",
         date: "30 March 2024"
       },
       {
         src: "media/photos/memory-04.jpg",
-        sources: [
-          "media/photos/memory-04.jpg",
-          "media/photos/photo2.jpg",
-          "photos/memory-04.jpg",
-          "photos/photo2.jpg",
-          "memory-04.jpg",
-          "photo2.jpg"
-        ],
+        altSrc: "media/photos/photo2.jpg",
         title: "Sahifa's Gentle Radiance",
         caption: "A flower in her hair, bringing soft light and warmth to every moment.",
         date: "Sweet Memory"
       },
       {
         src: "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
-        sources: [
-          "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
-          "media/photos/photo3.jpg",
-          "photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
-          "photos/photo3.jpg",
-          "Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
-          "photo3.jpg"
-        ],
+        altSrc: "media/photos/photo3.jpg",
         title: "Our Video Calls",
         caption: "Miles away but never apart, laughing and talking for hours.",
         date: "Cherished Calls"
       },
       {
         src: "media/photos/memory-03.jpg",
-        sources: [
-          "media/photos/memory-03.jpg",
-          "media/photos/photo4.jpg",
-          "photos/memory-03.jpg",
-          "photos/photo4.jpg",
-          "memory-03.jpg",
-          "photo4.jpg"
-        ],
+        altSrc: "media/photos/photo4.jpg",
         title: "Late Night Whispers",
         caption: "Quiet conversations under starlight that brought our souls close together.",
         date: "Endless Talks"
       },
       {
         src: "media/photos/IMG_20260628_114036.jpg",
-        sources: [
-          "media/photos/IMG_20260628_114036.jpg",
-          "media/photos/photo5.jpg",
-          "photos/IMG_20260628_114036.jpg",
-          "photos/photo5.jpg",
-          "IMG_20260628_114036.jpg",
-          "photo5.jpg"
-        ],
+        altSrc: "media/photos/photo5.jpg",
         title: "When Our Eyes Met",
         caption: "In your eyes, our souls recognized each other in a single tender heartbeat.",
         date: "28 June 2024"
       },
       {
         src: "media/photos/memory-05.jpg",
-        sources: [
-          "media/photos/memory-05.jpg",
-          "media/photos/photo6.jpg",
-          "photos/memory-05.jpg",
-          "photos/photo6.jpg",
-          "memory-05.jpg",
-          "photo6.jpg"
-        ],
+        altSrc: "media/photos/photo6.jpg",
         title: "Reflections of Our Love",
         caption: "A shared gaze holding all our promises and quiet dreams for the future.",
         date: "28 June 2024"
       },
       {
         src: "media/photos/memory-02.jpg",
-        sources: [
-          "media/photos/memory-02.jpg",
-          "media/photos/photo7.jpg",
-          "photos/memory-02.jpg",
-          "photos/photo7.jpg",
-          "memory-02.jpg",
-          "photo7.jpg"
-        ],
+        altSrc: "media/photos/photo7.jpg",
         title: "Sahil & Sahifa Forever",
         caption: "Two souls, one heart, walking hand in hand into eternity.",
         date: "Forever & Always"
@@ -2096,23 +2121,212 @@
     const videos = [
       {
         src: "media/videos/video1.mp4",
-        sources: [
-          "media/videos/video1.mp4",
-          "videos/video1.mp4",
-          "video1.mp4"
-        ],
-        poster: "media/photos/memory-04.jpg",
         title: "Laughter, Joy & Twirling Smiles",
         caption: "Her joyful laughter and radiant happiness lighting up the screen.",
         date: "Living Memory"
       }
     ];
 
+    let currentLightboxIndex = 0;
+    let currentLightboxList = [];
+
+    /* ==========================================================================
+       DEDICATED SECTION: OUR PHOTOS & VIDEOS RENDERING
+       (No broken images, no 'Memory unavailable' cards)
+       ========================================================================== */
+    function renderPhotosSection() {
+      const grid = document.getElementById("photosGrid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      let loadedPhotos = [];
+      let pendingCount = photos.length;
+
+      photos.forEach((photo, idx) => {
+        const testImg = new Image();
+        const primarySrc = photo.src;
+        const fallbackSrc = photo.altSrc;
+
+        function onPhotoSuccess(resolvedSrc) {
+          loadedPhotos.push({
+            ...photo,
+            src: resolvedSrc,
+            originalIndex: idx
+          });
+
+          // Sort loaded photos by original order
+          loadedPhotos.sort((a, b) => a.originalIndex - b.originalIndex);
+          updatePhotosUI();
+        }
+
+        testImg.onload = () => {
+          onPhotoSuccess(primarySrc);
+        };
+
+        testImg.onerror = () => {
+          if (fallbackSrc && fallbackSrc !== primarySrc) {
+            const fallbackImg = new Image();
+            fallbackImg.onload = () => onPhotoSuccess(fallbackSrc);
+            fallbackImg.onerror = () => checkCompletion();
+            fallbackImg.src = fallbackSrc;
+          } else {
+            checkCompletion();
+          }
+        };
+
+        function checkCompletion() {
+          pendingCount--;
+          if (pendingCount <= 0 && loadedPhotos.length === 0) {
+            renderPhotosPrompt();
+          }
+        }
+
+        testImg.src = primarySrc;
+      });
+
+      function updatePhotosUI() {
+        grid.innerHTML = "";
+        currentLightboxList = loadedPhotos;
+
+        loadedPhotos.forEach((item, lIdx) => {
+          const card = document.createElement("div");
+          card.className = "photo-card";
+          card.innerHTML = `
+            <div class="photo-img-wrap">
+              <img src="${item.src}" alt="${item.title}" loading="lazy">
+              <div class="photo-overlay-tap" title="View Fullscreen">🔍</div>
+            </div>
+            <div class="photo-card-info">
+              <div class="photo-card-header">
+                <h4 class="photo-card-title">${item.title}</h4>
+                <span class="photo-card-date">${item.date}</span>
+              </div>
+              ${item.caption ? `<p class="photo-card-caption">${item.caption}</p>` : ""}
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            openLightboxAtIndex(lIdx);
+          });
+
+          grid.appendChild(card);
+        });
+      }
+
+      function renderPhotosPrompt() {
+        grid.innerHTML = `
+          <div class="media-prompt-card">
+            <span class="media-prompt-icon">📸</span>
+            <h3 class="media-prompt-title">Our 7 Love Diary Photos</h3>
+            <p class="media-prompt-desc">
+              To display Sahil &amp; Sahifa's photos in this gallery, copy the 7 photos into the <strong>media/photos/</strong> folder.
+            </p>
+            <div class="media-prompt-list">
+              <span class="media-prompt-chip">IMG_20260908_123640.jpg</span>
+              <span class="media-prompt-chip">memory-04.jpg</span>
+              <span class="media-prompt-chip">Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg</span>
+              <span class="media-prompt-chip">memory-03.jpg</span>
+              <span class="media-prompt-chip">IMG_20260628_114036.jpg</span>
+              <span class="media-prompt-chip">memory-05.jpg</span>
+              <span class="media-prompt-chip">memory-02.jpg</span>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    function renderVideosSection() {
+      const grid = document.getElementById("videosGrid");
+      if (!grid) return;
+      grid.innerHTML = "";
+
+      videos.forEach((video) => {
+        const card = document.createElement("div");
+        card.className = "video-card";
+        card.innerHTML = `
+          <div class="video-player-container">
+            <video controls playsinline preload="metadata">
+              <source src="${video.src}" type="video/mp4">
+              Your browser does not support HTML5 video.
+            </video>
+          </div>
+          <div class="video-card-body">
+            <div class="video-card-meta">
+              <span class="video-card-tag">Living Memory</span>
+              <span class="video-card-date">${video.date}</span>
+            </div>
+            <h3 class="video-card-title">${video.title}</h3>
+            <p class="video-card-caption">${video.caption}</p>
+          </div>
+        `;
+
+        const v = card.querySelector("video");
+        const source = card.querySelector("source");
+
+        let videoFailed = false;
+        const handleErr = () => {
+          if (videoFailed) return;
+          videoFailed = true;
+          // Clean prompt message instead of broken frame
+          const container = card.querySelector(".video-player-container");
+          container.innerHTML = `
+            <div class="media-prompt-card" style="box-shadow:none; border:none; padding: 24px 16px;">
+              <span style="font-size:32px;">🎥</span>
+              <p style="font-family:'Playfair Display', serif; font-size:1.1rem; color:var(--text-main); font-weight:600;">Living Memory Video</p>
+              <p style="font-size:0.82rem; color:var(--text-muted); line-height:1.5;">
+                To play our memory video here, place <strong>video1.mp4</strong> into the <strong>media/videos/</strong> folder.
+              </p>
+            </div>
+          `;
+        };
+
+        v.addEventListener("error", handleErr);
+        if (source) source.addEventListener("error", handleErr);
+
+        grid.appendChild(card);
+      });
+    }
+
+    function openLightboxAtIndex(index) {
+      if (!currentLightboxList || currentLightboxList.length === 0) return;
+
+      if (index < 0) index = currentLightboxList.length - 1;
+      if (index >= currentLightboxList.length) index = 0;
+
+      currentLightboxIndex = index;
+
+      const modal = document.getElementById("lightboxModal");
+      const img = document.getElementById("lightboxImg");
+      const title = document.getElementById("lightboxTitle");
+      const caption = document.getElementById("lightboxCaption");
+      const counter = document.getElementById("lightboxCounter");
+
+      const item = currentLightboxList[currentLightboxIndex];
+
+      img.style.display = "block";
+      img.src = item.src;
+
+      title.textContent = item.title || "Our Memory";
+      caption.textContent = item.caption || "";
+      counter.textContent = `Photo ${currentLightboxIndex + 1} of ${currentLightboxList.length}`;
+
+      modal.classList.add("active");
+    }
+
+    function navigateLightbox(direction) {
+      if (!currentLightboxList || currentLightboxList.length === 0) return;
+      openLightboxAtIndex(currentLightboxIndex + direction);
+    }
+
+    function closeLightbox() {
+      const modal = document.getElementById("lightboxModal");
+      modal.classList.remove("active");
+    }
+
     // ==========================================
     // LOVE STORY CONFIGURATION
     // ==========================================
     const LOVE_STORY_CONFIG = {
-      // Couple Names & Identity
       title: "Sahil & Sahifa — Our Love Diary",
       opening: "Sahil ❤️ Sahifa",
       subtitle: "Our story, our memories, our forever.",
@@ -2144,7 +2358,7 @@ Thank you for choosing me, for your sweet laughter, and for being the gentlest p
 Forever yours,
 Sahil ❤️`,
 
-      // Memories for the Interactive Vertical Timeline
+      // Memories for the Interactive Vertical Timeline (Text-only, no images)
       memories: [
         {
           id: "memory-01",
@@ -2154,14 +2368,7 @@ Sahil ❤️`,
           icon: "✨",
           description: "We first met on the road going from home to school. Both of us were nervous when our eyes met for the very first time. A simple exchange of words turned an ordinary morning into the beginning of our forever.",
           quote: "The quiet road where our forever began.",
-          tag: "The Beginning",
-          media: {
-            type: "image",
-            src: "media/photos/IMG_20260908_123640.jpg",
-            sources: ["media/photos/IMG_20260908_123640.jpg", "media/photos/photo1.jpg", "IMG_20260908_123640.jpg", "photo1.jpg"],
-            title: "Sahil & Sahifa — The Morning We Met",
-            caption: "Our eyes met on the road — our forever began here."
-          }
+          tag: "The Beginning"
         },
         {
           id: "memory-02",
@@ -2181,14 +2388,7 @@ Sahil ❤️`,
           icon: "🤍",
           description: "Wrapping my arms around you felt like finding home after a lifetime of wandering. It was a warm, unforgettable embrace that whispered: you are safe here, always and forever.",
           quote: "Where all the storms outside turned into quiet peace.",
-          tag: "Safe Haven",
-          media: {
-            type: "image",
-            src: "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
-            sources: ["media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg", "media/photos/photo3.jpg", "Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg", "photo3.jpg"],
-            title: "Our Sweet Smiles",
-            caption: "Holding each other close across every distance on our video calls."
-          }
+          tag: "Safe Haven"
         },
         {
           id: "memory-04",
@@ -2208,14 +2408,7 @@ Sahil ❤️`,
           icon: "🎂",
           description: "Special days made infinite times brighter. From lighting candles together to sharing sweet wishes and planning surprise memories that we will smile about when we are old.",
           quote: "Every year older, a thousand times more in love.",
-          tag: "Celebrations",
-          media: {
-            type: "image",
-            src: "media/photos/memory-03.jpg",
-            sources: ["media/photos/memory-03.jpg", "media/photos/photo5.jpg", "memory-03.jpg", "photo5.jpg"],
-            title: "Late Night Moments",
-            caption: "Celebrating each milestone together across the screen and in our hearts."
-          }
+          tag: "Celebrations"
         },
         {
           id: "memory-06",
@@ -2225,168 +2418,42 @@ Sahil ❤️`,
           icon: "👀",
           description: "They say eyes are the windows to the soul. In your gaze, I found both my peace and my wild excitement. Two souls seamlessly mirrored in one shared dream.",
           quote: "Looking into your eyes is looking into my future.",
-          tag: "Deep Connection",
-          media: {
-            type: "image",
-            src: "media/photos/IMG_20260628_114036.jpg",
-            sources: ["media/photos/IMG_20260628_114036.jpg", "media/photos/photo6.jpg", "IMG_20260628_114036.jpg", "photo6.jpg"],
-            title: "Our Eyes Side by Side",
-            caption: "The sacred moment our eyes met — 28 June 2024."
-          }
+          tag: "Deep Connection"
         }
       ]
     };
 
-    // State Variables
-    let currentLightboxIndex = 0;
-    let currentLightboxList = photos;
-
     /* ==========================================================================
-       APPLICATION INITIALIZATION
+       PASSCODE OVERLAY SETUP
        ========================================================================== */
-    document.addEventListener("DOMContentLoaded", () => {
-      initApp();
-    });
-
-    function initApp() {
-      setupLockScreen();
-      setupAmbientCanvas();
-      setupRelationshipCounter();
-      renderTimeline();
-      renderPhotosSection();
-      renderVideosSection();
-      setupTypewriterLetter();
-      setupNightMode();
-      setupMusicPlayer();
-      setupMobileMenu();
-      setupFinalChapterCelebration();
-      setupLightbox();
-    }
-
-    /* ==========================================================================
-       1. PRIVATE LOCK SCREEN
-       ========================================================================== */
-    function setupLockScreen() {
+    function setupPasscodeOverlay() {
       const overlay = document.getElementById("lockOverlay");
       const input = document.getElementById("diaryPasscodeInput");
       const btn = document.getElementById("enterDiaryBtn");
-      const errorMsg = document.getElementById("lockErrorMsg");
-      const passcodeGroup = document.getElementById("passcodeGroup");
+      const err = document.getElementById("lockErrorMsg");
 
-      if (sessionStorage.getItem("diary_unlocked") === "true") {
-        overlay.classList.add("unlocked");
-      }
+      if (!overlay || !input || !btn) return;
 
-      if (!LOVE_STORY_CONFIG.diaryPasscode) {
-        passcodeGroup.style.display = "none";
-      }
-
-      const attemptUnlock = () => {
-        const requiredPass = (LOVE_STORY_CONFIG.diaryPasscode || "").trim();
-        const userPass = input.value.trim();
-
-        if (!requiredPass || userPass === requiredPass || userPass.toLowerCase() === "love" || userPass === "0330") {
+      function unlock() {
+        const val = input.value.trim();
+        if (val === "0330" || val === "3003" || val === "30" || val === "03" || val === "" || val === LOVE_STORY_CONFIG.diaryPasscode) {
           overlay.classList.add("unlocked");
-          sessionStorage.setItem("diary_unlocked", "true");
-          showHeartBurst(window.innerWidth / 2, window.innerHeight / 2, 25);
-          showToast("Welcome to Sahil & Sahifa's diary ❤️");
+          showToast("Welcome to our diary, my love ❤️");
         } else {
-          errorMsg.textContent = "That's not the secret code, my love (hint: 0330)";
+          if (err) err.textContent = "Hint: Our anniversary 0330 ❤️";
           input.classList.add("shake");
           setTimeout(() => input.classList.remove("shake"), 500);
         }
-      };
+      }
 
-      btn.addEventListener("click", attemptUnlock);
+      btn.addEventListener("click", unlock);
       input.addEventListener("keydown", (e) => {
-        if (e.key === "Enter") attemptUnlock();
+        if (e.key === "Enter") unlock();
       });
     }
 
     /* ==========================================================================
-       2. AMBIENT FLOATING HEARTS & PARTICLES CANVAS
-       ========================================================================== */
-    function setupAmbientCanvas() {
-      const canvas = document.getElementById("ambientCanvas");
-      const ctx = canvas.getContext("2d");
-      let width = (canvas.width = window.innerWidth);
-      let height = (canvas.height = window.innerHeight);
-
-      window.addEventListener("resize", () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-      });
-
-      const particles = [];
-      const particleCount = Math.min(width < 768 ? 20 : 36, 42);
-
-      class Particle {
-        constructor() {
-          this.reset(true);
-        }
-        reset(initial = false) {
-          this.x = Math.random() * width;
-          this.y = initial ? Math.random() * height : height + 20;
-          this.size = Math.random() * 12 + 6;
-          this.speedY = Math.random() * 0.7 + 0.3;
-          this.speedX = (Math.random() - 0.5) * 0.4;
-          this.opacity = Math.random() * 0.35 + 0.15;
-          this.isHeart = Math.random() > 0.45;
-          this.hue = Math.random() > 0.3 ? 345 : 280;
-          this.rot = Math.random() * Math.PI * 2;
-          this.rotSpeed = (Math.random() - 0.5) * 0.02;
-        }
-        update() {
-          this.y -= this.speedY;
-          this.x += this.speedX;
-          this.rot += this.rotSpeed;
-          if (this.y < -30) this.reset();
-        }
-        draw() {
-          ctx.save();
-          ctx.translate(this.x, this.y);
-          ctx.rotate(this.rot);
-          ctx.globalAlpha = this.opacity;
-
-          if (this.isHeart) {
-            ctx.fillStyle = `hsl(${this.hue}, 100%, 75%)`;
-            const s = this.size * 0.5;
-            ctx.beginPath();
-            ctx.moveTo(0, s / 4);
-            ctx.quadraticCurveTo(0, 0, s / 2, 0);
-            ctx.quadraticCurveTo(s, 0, s, s / 2);
-            ctx.quadraticCurveTo(s, s, 0, s * 1.5);
-            ctx.quadraticCurveTo(-s, s, -s, s / 2);
-            ctx.quadraticCurveTo(-s, 0, -s / 2, 0);
-            ctx.quadraticCurveTo(0, 0, 0, s / 4);
-            ctx.fill();
-          } else {
-            ctx.fillStyle = `hsl(${this.hue}, 90%, 80%)`;
-            ctx.beginPath();
-            ctx.arc(0, 0, this.size * 0.25, 0, Math.PI * 2);
-            ctx.fill();
-          }
-          ctx.restore();
-        }
-      }
-
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-      }
-
-      function animate() {
-        ctx.clearRect(0, 0, width, height);
-        for (let p of particles) {
-          p.update();
-          p.draw();
-        }
-        requestAnimationFrame(animate);
-      }
-      animate();
-    }
-
-    /* ==========================================================================
-       3. LIVE RELATIONSHIP COUNTER
+       RELATIONSHIP COUNTER
        ========================================================================== */
     function setupRelationshipCounter() {
       const startDate = new Date(LOVE_STORY_CONFIG.startDate);
@@ -2434,12 +2501,12 @@ Sahil ❤️`,
           hours += 24;
         }
 
-        elYears.textContent = years;
-        elMonths.textContent = months;
-        elDays.textContent = days;
-        elHours.textContent = hours < 10 ? "0" + hours : hours;
-        elMinutes.textContent = minutes < 10 ? "0" + minutes : minutes;
-        elSeconds.textContent = seconds < 10 ? "0" + seconds : seconds;
+        if (elYears) elYears.textContent = years;
+        if (elMonths) elMonths.textContent = months;
+        if (elDays) elDays.textContent = days;
+        if (elHours) elHours.textContent = hours < 10 ? "0" + hours : hours;
+        if (elMinutes) elMinutes.textContent = minutes < 10 ? "0" + minutes : minutes;
+        if (elSeconds) elSeconds.textContent = seconds < 10 ? "0" + seconds : seconds;
       }
 
       updateCounter();
@@ -2447,10 +2514,11 @@ Sahil ❤️`,
     }
 
     /* ==========================================================================
-       4. OUR STORY TIMELINE
+       OUR STORY TIMELINE (Clean, Text-Only, No Media)
        ========================================================================== */
     function renderTimeline() {
       const container = document.getElementById("timelineContainer");
+      if (!container) return;
       container.innerHTML = "";
 
       LOVE_STORY_CONFIG.memories.forEach((mem) => {
@@ -2465,36 +2533,6 @@ Sahil ❤️`,
         const card = document.createElement("div");
         card.className = "memory-card";
 
-        let mediaHtml = "";
-        if (mem.media && mem.media.src) {
-          mediaHtml = `
-            <div class="memory-media-frame">
-              <img src="${mem.media.src}" alt="${mem.media.title || mem.title}" loading="lazy" 
-                   onerror="console.error('Failed to load timeline image at path:', this.src); this.style.display='none'; this.nextElementSibling.style.display='block';">
-              <div class="photo-unavailable-box" style="display:none; padding:18px;">
-                <span class="ph-unavailable-icon">📷</span>
-                <span class="ph-unavailable-text">Memory unavailable</span>
-                <span class="ph-unavailable-path">${mem.media.src}</span>
-              </div>
-              ${mem.media.caption ? `<div class="memory-media-caption">${mem.media.caption}</div>` : ""}
-            </div>
-          `;
-        }
-
-        if (mem.media && mem.media.src) {
-          setTimeout(() => {
-            const mImg = card.querySelector(".memory-media-frame img");
-            const mUnavail = card.querySelector(".memory-media-frame .photo-unavailable-box");
-            if (mImg) {
-              const mSources = mem.media.sources || [mem.media.src];
-              loadImgWithFallbacks(mImg, mSources, () => {
-                mImg.style.display = 'none';
-                if (mUnavail) mUnavail.style.display = 'block';
-              });
-            }
-          }, 0);
-        }
-
         card.innerHTML = `
           <span class="memory-tag">${mem.number} • ${mem.tag || "Memory"}</span>
           <div class="memory-date">
@@ -2503,7 +2541,6 @@ Sahil ❤️`,
           </div>
           <h3 class="memory-title">${mem.title}</h3>
           <p class="memory-body">${mem.description}</p>
-          ${mediaHtml}
           ${mem.quote ? `<div class="memory-highlight">"${mem.quote}"</div>` : ""}
           <div class="tap-heart-hint">
             <span>Tap to send love</span>
@@ -2532,230 +2569,109 @@ Sahil ❤️`,
     }
 
     /* ==========================================================================
-       5. DEDICATED SECTION: OUR PHOTOS ❤️ (7 Permanent Real Photos)
-       ========================================================================== */
-
-    // Helper to try multiple fallback paths for an image
-    function loadImgWithFallbacks(imgEl, sourceList, onFail) {
-      let idx = 0;
-      function attempt() {
-        if (idx < sourceList.length) {
-          const s = sourceList[idx++];
-          imgEl.src = s;
-        } else if (onFail) {
-          onFail();
-        }
-      }
-      imgEl.onerror = () => {
-        attempt();
-      };
-      attempt();
-    }
-
-    function renderPhotosSection() {
-      const grid = document.getElementById("photosGrid");
-      grid.innerHTML = "";
-
-      currentLightboxList = photos;
-
-      photos.forEach((photo, idx) => {
-        const card = document.createElement("div");
-        card.className = "photo-card";
-        card.innerHTML = `
-          <div class="photo-img-wrap">
-            <img alt="${photo.title}" loading="lazy">
-            <div class="photo-unavailable-box" style="display:none;">
-              <span class="ph-unavailable-icon">📷</span>
-              <span class="ph-unavailable-text">Memory unavailable</span>
-              <span class="ph-unavailable-path">${photo.src}</span>
-            </div>
-            <div class="photo-overlay-tap" title="View Fullscreen">🔍</div>
-          </div>
-          <div class="photo-card-info">
-            <div class="photo-card-header">
-              <h4 class="photo-card-title">${photo.title}</h4>
-              <span class="photo-card-date">${photo.date || "30 March 2024"}</span>
-            </div>
-            ${photo.caption ? `<p class="photo-card-caption">${photo.caption}</p>` : ""}
-          </div>
-        `;
-
-        const img = card.querySelector("img");
-        const unavailBox = card.querySelector(".photo-unavailable-box");
-
-        const sources = photo.sources || [photo.src];
-        loadImgWithFallbacks(img, sources, () => {
-          console.error("Failed to load photo after all fallbacks:", photo.src);
-          img.style.display = "none";
-          unavailBox.style.display = "flex";
-        });
-
-        card.addEventListener("click", () => {
-          openLightboxAtIndex(idx);
-        });
-
-        grid.appendChild(card);
-      });
-    }
-
-    /* ==========================================================================
-       6. DEDICATED SECTION: OUR VIDEOS 🎥 (Permanent Real Videos)
-       ========================================================================== */
-    function renderVideosSection() {
-      const grid = document.getElementById("videosGrid");
-      grid.innerHTML = "";
-
-      videos.forEach((video) => {
-        const card = document.createElement("div");
-        card.className = "video-card";
-        const sources = video.sources || [video.src];
-        const sourcesHtml = sources.map(s => `<source src="${s}" type="video/mp4">`).join("\n              ");
-
-        card.innerHTML = `
-          <div class="video-player-container">
-            <video controls playsinline preload="metadata" poster="${video.poster || ''}">
-              ${sourcesHtml}
-              Your browser does not support HTML5 video.
-            </video>
-          </div>
-          <div class="video-card-body">
-            <div class="video-card-meta">
-              <span class="video-card-tag">Living Memory</span>
-              <span class="video-card-date">${video.date}</span>
-            </div>
-            <h3 class="video-card-title">${video.title}</h3>
-            <p class="video-card-caption">${video.caption}</p>
-          </div>
-        `;
-
-        const v = card.querySelector("video");
-        let hasErrored = false;
-
-        const handleVideoError = () => {
-          if (hasErrored) return;
-          hasErrored = true;
-          console.error("Failed to load video at path:", video.src);
-          const container = card.querySelector(".video-player-container");
-          container.innerHTML = `
-            <div class="video-unavailable-box">
-              <span class="video-unavailable-icon">🎥</span>
-              <span class="video-unavailable-text">This memory couldn't be loaded.</span>
-              <span class="video-unavailable-path">${video.src}</span>
-            </div>
-          `;
-        };
-
-        v.addEventListener("error", handleVideoError);
-
-        grid.appendChild(card);
-      });
-    }
-
-    /* ==========================================================================
-       7. FULLSCREEN LIGHTBOX WITH SWIPE / PREV / NEXT GESTURES
+       LIGHTBOX EVENT CONTROLS
        ========================================================================== */
     function setupLightbox() {
       const modal = document.getElementById("lightboxModal");
-      const content = document.getElementById("lightboxContent");
       const closeBtn = document.getElementById("lightboxCloseBtn");
       const prevBtn = document.getElementById("lightboxPrevBtn");
       const nextBtn = document.getElementById("lightboxNextBtn");
 
-      closeBtn.addEventListener("click", closeLightbox);
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeLightbox();
-      });
+      if (closeBtn) closeBtn.addEventListener("click", closeLightbox);
+      if (prevBtn) prevBtn.addEventListener("click", () => navigateLightbox(-1));
+      if (nextBtn) nextBtn.addEventListener("click", () => navigateLightbox(1));
 
-      prevBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navigateLightbox(-1);
-      });
+      if (modal) {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeLightbox();
+        });
+      }
 
-      nextBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        navigateLightbox(1);
-      });
-
-      window.addEventListener("keydown", (e) => {
-        if (!modal.classList.contains("active")) return;
+      document.addEventListener("keydown", (e) => {
+        if (!modal || !modal.classList.contains("active")) return;
         if (e.key === "Escape") closeLightbox();
         if (e.key === "ArrowLeft") navigateLightbox(-1);
         if (e.key === "ArrowRight") navigateLightbox(1);
       });
 
-      // Mobile Touch Swipe Detection (Left/Right)
+      // Mobile swipe gesture support
       let touchStartX = 0;
-      let touchStartY = 0;
-      content.addEventListener("touchstart", (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-        touchStartY = e.changedTouches[0].screenY;
-      }, { passive: true });
-
-      content.addEventListener("touchend", (e) => {
-        const touchEndX = e.changedTouches[0].screenX;
-        const touchEndY = e.changedTouches[0].screenY;
-        const diffX = touchEndX - touchStartX;
-        const diffY = touchEndY - touchStartY;
-
-        if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY)) {
-          if (diffX < 0) {
-            navigateLightbox(1); // Swiped left -> next photo
-          } else {
-            navigateLightbox(-1); // Swiped right -> prev photo
+      let touchEndX = 0;
+      if (modal) {
+        modal.addEventListener("touchstart", (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        modal.addEventListener("touchend", (e) => {
+          touchEndX = e.changedTouches[0].screenX;
+          if (touchStartX - touchEndX > 50) {
+            navigateLightbox(1);
+          } else if (touchEndX - touchStartX > 50) {
+            navigateLightbox(-1);
           }
-        }
-      }, { passive: true });
+        }, { passive: true });
+      }
     }
 
-    function openLightboxAtIndex(index) {
-      if (!currentLightboxList || currentLightboxList.length === 0) return;
-      currentLightboxIndex = (index + currentLightboxList.length) % currentLightboxList.length;
+    /* ==========================================================================
+       AMBIENT FLOATING PARTICLES CANVAS
+       ========================================================================== */
+    function initAmbientCanvas() {
+      const canvas = document.getElementById("ambientCanvas");
+      if (!canvas) return;
+      const ctx = canvas.getContext("2d");
+      let width = canvas.width = window.innerWidth;
+      let height = canvas.height = window.innerHeight;
 
-      const modal = document.getElementById("lightboxModal");
-      const img = document.getElementById("lightboxImg");
-      const imgHolder = document.getElementById("lightboxImgHolder");
-      const title = document.getElementById("lightboxTitle");
-      const caption = document.getElementById("lightboxCaption");
-      const counter = document.getElementById("lightboxCounter");
-
-      const item = currentLightboxList[currentLightboxIndex];
-
-      // Reset prior unavailable message in holder if any
-      const priorUnavail = imgHolder.querySelector(".lightbox-unavailable-box");
-      if (priorUnavail) priorUnavail.remove();
-
-      img.style.display = "block";
-      const sources = item.sources || [item.src];
-      loadImgWithFallbacks(img, sources, () => {
-        console.error("Failed to load photo in lightbox at path:", item.src);
-        img.style.display = "none";
-        if (!imgHolder.querySelector(".lightbox-unavailable-box")) {
-          const errBox = document.createElement("div");
-          errBox.className = "lightbox-unavailable-box";
-          errBox.innerHTML = `
-            <span style="font-size:42px; color:var(--accent-pink);">📷</span>
-            <p style="font-family:'Playfair Display', serif; font-size:1.25rem; font-weight:700; color:var(--text-main); margin-top:8px;">Memory unavailable</p>
-            <p style="font-size:0.78rem; color:var(--accent-pink-soft); font-family:monospace; margin-top:4px;">${item.src}</p>
-          `;
-          imgHolder.appendChild(errBox);
-        }
+      window.addEventListener("resize", () => {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
       });
 
-      title.textContent = item.title || "Our Memory";
-      caption.textContent = item.caption || "";
-      counter.textContent = `Photo ${currentLightboxIndex + 1} of ${currentLightboxList.length}`;
+      const particles = [];
+      const particleCount = 38;
+      const symbols = ["✨", "❤️", "🌸", "⭐", "💕"];
 
-      modal.classList.add("active");
-    }
+      for (let i = 0; i < particleCount; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          speedY: Math.random() * 0.4 + 0.15,
+          speedX: (Math.random() - 0.5) * 0.3,
+          symbol: symbols[Math.floor(Math.random() * symbols.length)],
+          size: Math.random() * 8 + 12,
+          opacity: Math.random() * 0.4 + 0.2,
+          fadeSpeed: (Math.random() - 0.5) * 0.008
+        });
+      }
 
-    function navigateLightbox(direction) {
-      if (!currentLightboxList || currentLightboxList.length === 0) return;
-      openLightboxAtIndex(currentLightboxIndex + direction);
-    }
+      function animate() {
+        ctx.clearRect(0, 0, width, height);
 
-    function closeLightbox() {
-      const modal = document.getElementById("lightboxModal");
-      modal.classList.remove("active");
+        particles.forEach(p => {
+          p.y -= p.speedY;
+          p.x += p.speedX;
+          p.opacity += p.fadeSpeed;
+
+          if (p.opacity > 0.65 || p.opacity < 0.15) {
+            p.fadeSpeed = -p.fadeSpeed;
+          }
+
+          if (p.y < -30) {
+            p.y = height + 20;
+            p.x = Math.random() * width;
+          }
+          if (p.x < -30) p.x = width + 20;
+          if (p.x > width + 30) p.x = -20;
+
+          ctx.font = `${p.size}px serif`;
+          ctx.globalAlpha = Math.max(0, Math.min(1, p.opacity));
+          ctx.fillText(p.symbol, p.x, p.y);
+        });
+
+        requestAnimationFrame(animate);
+      }
+
+      animate();
     }
 
     /* ==========================================================================
@@ -2995,6 +2911,28 @@ Sahil ❤️`,
         toast.classList.remove("show");
       }, 3000);
     }
+
+    /* ==========================================================================
+       APP INITIALIZATION
+       ========================================================================== */
+    function initApp() {
+      setupPasscodeOverlay();
+      setupRelationshipCounter();
+      renderTimeline();
+      renderPhotosSection();
+      renderVideosSection();
+      setupLightbox();
+      setupTypewriterLetter();
+      setupNightMode();
+      setupMusicPlayer();
+      setupMobileMenu();
+      setupFinalChapterCelebration();
+      initAmbientCanvas();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      initApp();
+    });
   </script>
 </body>
 </html>
