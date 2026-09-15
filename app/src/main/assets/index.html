@@ -1140,6 +1140,643 @@
     }
 
     /* ==========================================================================
+       DEDICATED SECTION: ROMANTIC GAMES (Aim For The Heart & Whose Mistake)
+       ========================================================================== */
+    .romantic-game-card {
+      background: var(--bg-card);
+      border: 1px solid var(--bg-glass-border);
+      border-radius: 28px;
+      padding: 36px 24px;
+      box-shadow: var(--shadow-glow);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 40px;
+    }
+
+    .romantic-game-card:hover {
+      border-color: var(--bg-glass-border-hover);
+    }
+
+    .game-card-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .game-badge-wrap {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 77, 109, 0.12);
+      border: 1px solid rgba(255, 77, 109, 0.25);
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .game-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent-pink);
+    }
+
+    .game-badge-title {
+      font-size: 0.78rem;
+      color: var(--accent-pink-soft);
+      font-weight: 600;
+    }
+
+    .game-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3.8vw, 2.3rem);
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 8px;
+    }
+
+    .game-instruction {
+      font-size: 0.92rem;
+      color: var(--text-secondary);
+      max-width: 580px;
+      margin: 0 auto;
+      line-height: 1.55;
+    }
+
+    /* --------------------------------------------------------------------------
+       GAME 1: AIM FOR THE HEART
+       -------------------------------------------------------------------------- */
+    .aim-game-arena {
+      position: relative;
+      width: 100%;
+      height: 330px;
+      background: radial-gradient(ellipse at 70% 50%, rgba(201, 24, 74, 0.22) 0%, rgba(18, 5, 20, 0.92) 80%);
+      border: 1px solid rgba(255, 77, 109, 0.2);
+      border-radius: 22px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 30px;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      box-shadow: inset 0 0 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .aim-effects-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    /* Cupid Bow Container */
+    .cupid-bow-container {
+      position: relative;
+      width: 110px;
+      height: 170px;
+      z-index: 5;
+      cursor: grab;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s ease-out;
+    }
+
+    .cupid-bow-container:active {
+      cursor: grabbing;
+    }
+
+    .cupid-bow-svg {
+      filter: drop-shadow(0 0 10px rgba(255, 183, 3, 0.5));
+      position: absolute;
+      left: 0;
+      top: 10px;
+    }
+
+    /* The Bowstring */
+    .bow-string {
+      transition: d 0.05s ease;
+    }
+
+    /* Game Arrow */
+    .game-arrow {
+      position: absolute;
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 90px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      pointer-events: none;
+      z-index: 6;
+      transition: transform 0.08s ease-out;
+    }
+
+    .arrow-shaft {
+      width: 65px;
+      height: 3px;
+      background: linear-gradient(90deg, #ffd166 0%, #fff 100%);
+      border-radius: 2px;
+      box-shadow: 0 0 8px #ff4d6d;
+    }
+
+    .arrow-head {
+      font-size: 22px;
+      margin-left: -6px;
+      filter: drop-shadow(0 0 6px rgba(255, 77, 109, 0.9));
+      animation: heartGlowPulse 1.6s infinite ease-in-out;
+    }
+
+    .arrow-fletch {
+      font-size: 16px;
+      position: absolute;
+      left: -12px;
+      transform: rotate(45deg);
+      opacity: 0.85;
+    }
+
+    /* Flying Arrow */
+    .game-arrow.flying {
+      position: absolute;
+      z-index: 12;
+      transition: none;
+    }
+
+    /* Heart Target */
+    .heart-target-wrapper {
+      position: relative;
+      width: 130px;
+      height: 130px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      animation: targetFloat 3.2s infinite ease-in-out;
+    }
+
+    @keyframes targetFloat {
+      0%, 100% {
+        transform: translateY(0) scale(1);
+      }
+      50% {
+        transform: translateY(-16px) scale(1.04);
+      }
+    }
+
+    .target-rings {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .target-ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px dashed rgba(255, 77, 109, 0.4);
+      animation: ringPulse 2.5s infinite ease-in-out;
+    }
+
+    .ring-1 { width: 70px; height: 70px; border-color: rgba(255, 179, 193, 0.6); }
+    .ring-2 { width: 100px; height: 100px; animation-delay: 0.4s; }
+    .ring-3 { width: 130px; height: 130px; animation-delay: 0.8s; opacity: 0.5; }
+
+    @keyframes ringPulse {
+      0%, 100% {
+        transform: scale(0.96);
+        opacity: 0.4;
+      }
+      50% {
+        transform: scale(1.04);
+        opacity: 0.8;
+      }
+    }
+
+    .heart-target-core {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ff758f 0%, #c9184a 60%, #590d22 100%);
+      box-shadow: 0 0 25px rgba(255, 77, 109, 0.7), inset 0 0 12px rgba(255, 255, 255, 0.4);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .heart-target-wrapper:hover .heart-target-core {
+      transform: scale(1.1);
+      box-shadow: 0 0 35px rgba(255, 77, 109, 0.95);
+    }
+
+    .target-heart-icon {
+      font-size: 28px;
+      line-height: 1;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+      animation: heartbeat 1.8s infinite ease-in-out;
+    }
+
+    .target-tap-guide {
+      font-size: 0.58rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: #fff;
+      text-transform: uppercase;
+      opacity: 0.95;
+      margin-top: 2px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* Heart Hit Shake Animation */
+    .heart-target-wrapper.shaking {
+      animation: heartHitShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    }
+
+    @keyframes heartHitShake {
+      10%, 90% { transform: translate3d(-3px, -2px, 0) scale(1.2); }
+      20%, 80% { transform: translate3d(4px, 3px, 0) scale(1.25); }
+      30%, 50%, 70% { transform: translate3d(-6px, -4px, 0) scale(1.3); }
+      40%, 60% { transform: translate3d(6px, 4px, 0) scale(1.25); }
+    }
+
+    /* Embedded Arrow on Heart */
+    .embedded-arrow {
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      transform: translateY(-50%) rotate(-5deg);
+      font-size: 28px;
+      z-index: 10;
+      animation: arrowEmbedVibrate 0.4s ease-out;
+    }
+
+    @keyframes arrowEmbedVibrate {
+      0% { transform: translateY(-50%) scale(1.4) rotate(15deg); }
+      40% { transform: translateY(-50%) scale(0.9) rotate(-10deg); }
+      70% { transform: translateY(-50%) scale(1.1) rotate(5deg); }
+      100% { transform: translateY(-50%) scale(1) rotate(-5deg); }
+    }
+
+    /* Reveal Overlay After Burst */
+    .heart-burst-reveal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(14, 4, 16, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.6s ease;
+      z-index: 20;
+    }
+
+    .heart-burst-reveal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .reveal-content-card {
+      background: linear-gradient(135deg, rgba(38, 12, 34, 0.95) 0%, rgba(20, 6, 22, 0.95) 100%);
+      border: 1px solid rgba(255, 77, 109, 0.4);
+      border-radius: 22px;
+      padding: 30px 24px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 77, 109, 0.35);
+      transform: scale(0.9);
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .heart-burst-reveal-overlay.active .reveal-content-card {
+      transform: scale(1);
+    }
+
+    .reveal-heart-sparkle {
+      font-size: 38px;
+      margin-bottom: 8px;
+      animation: heartbeat 2s infinite ease-in-out;
+    }
+
+    .reveal-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff 20%, #ffb3c1 60%, #ff4d6d 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      text-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
+    }
+
+    .reveal-message {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 3.2vw, 1.45rem);
+      font-style: italic;
+      color: #fff0f3;
+      line-height: 1.6;
+      margin-bottom: 22px;
+      min-height: 48px;
+    }
+
+    .game-reset-btn {
+      background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-rose) 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+      transition: var(--transition-smooth);
+    }
+
+    .game-reset-btn:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 8px 25px rgba(255, 77, 109, 0.6);
+    }
+
+    /* Game Controls Bar */
+    .game-controls-bar {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .shoot-btn {
+      background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
+      color: #fff;
+      border: none;
+      padding: 14px 34px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(255, 77, 109, 0.45);
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .shoot-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 28px rgba(255, 77, 109, 0.65);
+    }
+
+    .shoot-btn:active {
+      transform: translateY(1px);
+    }
+
+    .game-hint-text {
+      font-size: 0.8rem;
+      color: var(--accent-pink-soft);
+      opacity: 0.85;
+      font-style: italic;
+    }
+
+    /* --------------------------------------------------------------------------
+       GAME 2: WHOSE MISTAKE? (8-PART SPINNER)
+       -------------------------------------------------------------------------- */
+    .wheel-game-arena {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0 10px 0;
+    }
+
+    .wheel-pointer-wrap {
+      position: relative;
+      z-index: 15;
+      margin-bottom: -18px;
+      filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.8));
+    }
+
+    .wheel-pointer {
+      font-size: 36px;
+      color: #ffd166;
+      line-height: 1;
+      animation: pointerBob 1.6s infinite ease-in-out;
+    }
+
+    @keyframes pointerBob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    .wheel-canvas-container {
+      position: relative;
+      width: 340px;
+      height: 340px;
+      max-width: 90vw;
+      max-height: 90vw;
+      border-radius: 50%;
+      box-shadow: 0 0 35px rgba(255, 77, 109, 0.3), 0 12px 35px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #mistakeWheelCanvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .wheel-center-hub {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 35%, #ffd166 0%, #ff4d6d 60%, #590d22 100%);
+      border: 3px solid #fff;
+      box-shadow: 0 0 18px rgba(255, 77, 109, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    .wheel-action-bar {
+      margin-top: 28px;
+      text-align: center;
+    }
+
+    .spin-wheel-btn {
+      background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 50%, #800f2f 100%);
+      color: #fff;
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      padding: 16px 46px;
+      border-radius: 35px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(255, 77, 109, 0.5), inset 0 1px 2px rgba(255, 255, 255, 0.6);
+      transition: var(--transition-smooth);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .spin-wheel-btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.3) 50%, transparent 60%);
+      transform: rotate(25deg);
+      animation: buttonShine 3s infinite;
+    }
+
+    @keyframes buttonShine {
+      0% { transform: translateX(-100%) rotate(25deg); }
+      100% { transform: translateX(100%) rotate(25deg); }
+    }
+
+    .spin-wheel-btn:hover {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 12px 36px rgba(255, 77, 109, 0.7);
+    }
+
+    .spin-wheel-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    /* Rigged Popup Overlay */
+    .mistake-popup-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 2, 12, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .mistake-popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mistake-popup-card {
+      background: linear-gradient(135deg, rgba(42, 12, 38, 0.95) 0%, rgba(18, 5, 22, 0.98) 100%);
+      border: 2px solid rgba(255, 77, 109, 0.6);
+      border-radius: 30px;
+      padding: 40px 30px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 45px rgba(255, 77, 109, 0.45);
+      transform: scale(0.85);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+    }
+
+    .mistake-popup-overlay.active .mistake-popup-card {
+      transform: scale(1);
+    }
+
+    .popup-celebration-icons {
+      font-size: 42px;
+      margin-bottom: 12px;
+      animation: heartbeat 2s infinite ease-in-out;
+    }
+
+    .popup-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4.2vw, 1.9rem);
+      font-weight: 800;
+      color: #ffccd5;
+      letter-spacing: 0.02em;
+      margin-bottom: 14px;
+      text-shadow: 0 0 15px rgba(255, 77, 109, 0.6);
+    }
+
+    .popup-result-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
+      color: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+      font-weight: 700;
+      padding: 10px 24px;
+      border-radius: 20px;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+      animation: pulseGlow 2s infinite alternate;
+    }
+
+    @keyframes pulseGlow {
+      from { box-shadow: 0 0 15px rgba(255, 77, 109, 0.4); }
+      to { box-shadow: 0 0 30px rgba(255, 77, 109, 0.8); }
+    }
+
+    .popup-subtext {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 26px;
+    }
+
+    .popup-again-btn {
+      background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-rose) 100%);
+      color: #fff;
+      border: none;
+      padding: 14px 36px;
+      border-radius: 30px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(255, 77, 109, 0.45);
+      transition: var(--transition-smooth);
+    }
+
+    .popup-again-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 28px rgba(255, 77, 109, 0.7);
+    }
+
+    /* ==========================================================================
        LOVE LETTER SECTION
        ========================================================================== */
     .letter-container {
@@ -1812,6 +2449,7 @@
         <li><a href="#counter">Our Time</a></li>
         <li><a href="#timeline">Our Story</a></li>
         <li><a href="#photos-videos">Our Photos & Videos</a></li>
+        <li><a href="#games">Games ❤️</a></li>
         <li><a href="#letter">Love Letter</a></li>
       </ul>
 
@@ -1843,6 +2481,7 @@
       <a href="#counter" class="mobile-nav-link">Our Time Together</a>
       <a href="#timeline" class="mobile-nav-link">Our Story Timeline</a>
       <a href="#photos-videos" class="mobile-nav-link">Our Photos & Videos</a>
+      <a href="#games" class="mobile-nav-link">Our Games ❤️</a>
       <a href="#letter" class="mobile-nav-link">A Letter For You</a>
     </div>
 
@@ -1963,6 +2602,152 @@
         </div>
         <div class="videos-grid" id="videosGrid">
           <!-- Populated with responsive HTML5 video -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         DEDICATED SECTION: ROMANTIC GAMES ❤️
+         ====================================================================== -->
+    <section class="section-wrap" id="games">
+      <div class="section-header">
+        <span class="section-tag">Playful Love &amp; Sweet Smiles</span>
+        <h2 class="section-title">Our Romantic Games ❤️</h2>
+        <p class="section-desc">Interactive little moments crafted with all my love for you.</p>
+      </div>
+
+      <!-- ====================================================================
+           GAME 1 — AIM FOR THE HEART 🎯💘
+           ==================================================================== -->
+      <div class="romantic-game-card" id="aimGameCard">
+        <div class="game-card-header">
+          <div class="game-badge-wrap">
+            <span class="game-badge">Game 1</span>
+            <span class="game-badge-title">Cupid's Bow</span>
+          </div>
+          <h3 class="game-title">Aim For The Heart 🏹❤️</h3>
+          <p class="game-instruction">
+            Pull back Cupid's arrow or tap <strong>Shoot Arrow</strong> to strike the heart!
+          </p>
+        </div>
+
+        <div class="aim-game-arena" id="aimGameArena">
+          <!-- Canvas for cinematic rose petal and heart burst particles -->
+          <canvas class="aim-effects-canvas" id="aimEffectsCanvas"></canvas>
+
+          <!-- Cupid Bow Container -->
+          <div class="cupid-bow-container" id="cupidBowContainer">
+            <svg class="cupid-bow-svg" id="cupidBowSvg" viewBox="0 0 120 180" width="100" height="150">
+              <path class="bow-limb-shadow" d="M 35 15 Q 15 90 35 165" stroke="rgba(0,0,0,0.4)" stroke-width="8" fill="none" stroke-linecap="round"/>
+              <path class="bow-limb" d="M 35 15 Q 15 90 35 165" stroke="url(#goldBowGrad)" stroke-width="6" fill="none" stroke-linecap="round"/>
+              <path class="bow-string" id="bowStringPath" d="M 35 15 Q 35 90 35 165" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" fill="none"/>
+              <defs>
+                <linearGradient id="goldBowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#ffd166"/>
+                  <stop offset="50%" stop-color="#ff758f"/>
+                  <stop offset="100%" stop-color="#ffb703"/>
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <!-- Arrow resting on bow -->
+            <div class="game-arrow" id="gameArrow">
+              <div class="arrow-fletch">🪶</div>
+              <div class="arrow-shaft"></div>
+              <div class="arrow-head">💘</div>
+            </div>
+          </div>
+
+          <!-- Pulsing & Floating Heart Target -->
+          <div class="heart-target-wrapper" id="heartTargetWrapper" title="Click or tap to target!">
+            <div class="target-rings">
+              <div class="target-ring ring-3"></div>
+              <div class="target-ring ring-2"></div>
+              <div class="target-ring ring-1"></div>
+            </div>
+            <div class="heart-target-core" id="heartTargetCore">
+              <span class="target-heart-icon">💖</span>
+              <span class="target-tap-guide">HIT ME!</span>
+            </div>
+          </div>
+
+          <!-- Revealed Secret Message Box after Heart Burst -->
+          <div class="heart-burst-reveal-overlay" id="aimRevealOverlay">
+            <div class="reveal-content-card">
+              <div class="reveal-heart-sparkle">🌹✨</div>
+              <h3 class="reveal-title" id="revealTitle">I Love You ❤️</h3>
+              <p class="reveal-message" id="revealMessageText">
+                “No matter where life takes us, my heart will always find its way back to you. 🌹❤️”
+              </p>
+              <button class="game-reset-btn" id="aimPlayAgainBtn">
+                <span>Play Again ❤️</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile Controls Bar -->
+        <div class="game-controls-bar">
+          <button class="shoot-btn" id="shootArrowBtn">
+            <span>Shoot Arrow 🏹❤️</span>
+          </button>
+          <span class="game-hint-text">Tip: You can also drag the arrow or tap directly on the heart target!</span>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           GAME 2 — WHOSE MISTAKE? 🎡😂
+           ==================================================================== -->
+      <div class="romantic-game-card" id="wheelGameCard" style="margin-top: 50px;">
+        <div class="game-card-header">
+          <div class="game-badge-wrap">
+            <span class="game-badge">Game 2</span>
+            <span class="game-badge-title">Wheel of Truth</span>
+          </div>
+          <h3 class="game-title">This is the mistake of who? 😂❤️</h3>
+          <p class="game-instruction">
+            Spin the 8-part wheel to discover the truth! (4 × Sahil's Mistake • 4 × Sahifa's Mistake)
+          </p>
+        </div>
+
+        <div class="wheel-game-arena">
+          <!-- Wheel Pointer at Top (12 o'clock) -->
+          <div class="wheel-pointer-wrap">
+            <div class="wheel-pointer">🔻</div>
+          </div>
+
+          <!-- The 8-Segment Canvas Wheel -->
+          <div class="wheel-canvas-container" id="wheelCanvasContainer">
+            <canvas id="mistakeWheelCanvas" width="700" height="700"></canvas>
+            <div class="wheel-center-hub" id="wheelCenterHub">
+              <span>❤️</span>
+            </div>
+          </div>
+
+          <!-- Large SPIN Button -->
+          <div class="wheel-action-bar">
+            <button class="spin-wheel-btn" id="spinWheelBtn">
+              <span class="spin-btn-icon">🎡</span>
+              <span class="spin-btn-text">SPIN ❤️</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Rigged Result Modal / Popup -->
+        <div class="mistake-popup-overlay" id="mistakePopupOverlay">
+          <div class="mistake-popup-card">
+            <div class="popup-celebration-icons">👑 😂 🌹</div>
+            <h3 class="popup-heading">💗 SAHIFA IS ALWAYS RIGHT! 💗</h3>
+            <div class="popup-result-badge">
+              <span>“It's Sahil's mistake 😂❤️”</span>
+            </div>
+            <p class="popup-subtext">
+              Scientific law #1: Sahifa is never wrong. Sahil will gladly take all the blame forever and ever! 💍🥰
+            </p>
+            <button class="popup-again-btn" id="spinAgainBtn">
+              <span>Spin Again ❤️</span>
+            </button>
+          </div>
         </div>
       </div>
     </section>
@@ -2915,12 +3700,610 @@ Sahil ❤️`,
     /* ==========================================================================
        APP INITIALIZATION
        ========================================================================== */
+    /* ==========================================================================
+       ROMANTIC SYNTH SOUND EFFECTS (Web Audio API)
+       ========================================================================== */
+    let gameAudioCtx = null;
+    function getGameAudioContext() {
+      if (!gameAudioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext) gameAudioCtx = new AudioContext();
+      }
+      if (gameAudioCtx && gameAudioCtx.state === 'suspended') {
+        gameAudioCtx.resume();
+      }
+      return gameAudioCtx;
+    }
+
+    function playBowSound() {
+      try {
+        const ctx = getGameAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(320, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(140, ctx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.15);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.16);
+      } catch (e) {}
+    }
+
+    function playHeartHitSound() {
+      try {
+        const ctx = getGameAudioContext();
+        if (!ctx) return;
+        const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 chime
+        notes.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.08);
+          gain.gain.setValueAtTime(0.25, ctx.currentTime + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.08 + 0.55);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.08);
+          osc.stop(ctx.currentTime + idx * 0.08 + 0.6);
+        });
+      } catch (e) {}
+    }
+
+    function playWheelTickSound() {
+      try {
+        const ctx = getGameAudioContext();
+        if (!ctx) return;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "triangle";
+        osc.frequency.setValueAtTime(800, ctx.currentTime);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.04);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.05);
+      } catch (e) {}
+    }
+
+    function playCelebrationSound() {
+      try {
+        const ctx = getGameAudioContext();
+        if (!ctx) return;
+        const chord = [392.00, 493.88, 587.33, 783.99, 987.77];
+        chord.forEach((freq, idx) => {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "sine";
+          osc.frequency.setValueAtTime(freq, ctx.currentTime + idx * 0.09);
+          gain.gain.setValueAtTime(0.22, ctx.currentTime + idx * 0.09);
+          gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + idx * 0.09 + 0.85);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start(ctx.currentTime + idx * 0.09);
+          osc.stop(ctx.currentTime + idx * 0.09 + 0.9);
+        });
+      } catch (e) {}
+    }
+
+    /* ==========================================================================
+       GAME 1: AIM FOR THE HEART
+       ========================================================================== */
+    function setupAimGame() {
+      const arena = document.getElementById("aimGameArena");
+      const bowContainer = document.getElementById("cupidBowContainer");
+      const bowString = document.getElementById("bowStringPath");
+      const arrow = document.getElementById("gameArrow");
+      const targetWrapper = document.getElementById("heartTargetWrapper");
+      const targetCore = document.getElementById("heartTargetCore");
+      const shootBtn = document.getElementById("shootArrowBtn");
+      const revealOverlay = document.getElementById("aimRevealOverlay");
+      const playAgainBtn = document.getElementById("aimPlayAgainBtn");
+      const canvas = document.getElementById("aimEffectsCanvas");
+      const messageText = document.getElementById("revealMessageText");
+
+      if (!arena || !arrow || !targetWrapper) return;
+
+      const ctx = canvas.getContext("2d");
+      let isDragging = false;
+      let isShooting = false;
+      let hasHit = false;
+      let pullDistance = 0;
+      let particles = [];
+      let animFrameId = null;
+
+      function resizeCanvas() {
+        const rect = arena.getBoundingClientRect();
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      // Particle class for roses, petals, hearts, and sparkles
+      class BurstParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 7 + 3;
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed - (Math.random() * 3 + 1);
+          this.gravity = 0.18;
+          this.friction = 0.98;
+          this.opacity = 1;
+          this.decay = Math.random() * 0.015 + 0.01;
+          this.size = Math.random() * 14 + 16;
+          this.rotation = Math.random() * 360;
+          this.rotSpeed = (Math.random() - 0.5) * 8;
+          const types = ["🌹", "🌸", "❤️", "💖", "✨", "💕", "🥀"];
+          this.symbol = types[Math.floor(Math.random() * types.length)];
+        }
+
+        update() {
+          this.vx *= this.friction;
+          this.vy *= this.friction;
+          this.vy += this.gravity;
+          this.x += this.vx;
+          this.y += this.vy;
+          this.rotation += this.rotSpeed;
+          this.opacity -= this.decay;
+        }
+
+        draw(ctx) {
+          if (this.opacity <= 0) return;
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, this.opacity);
+          ctx.translate(this.x, this.y);
+          ctx.rotate((this.rotation * Math.PI) / 180);
+          ctx.font = `${this.size}px sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(this.symbol, 0, 0);
+          ctx.restore();
+        }
+      }
+
+      function startParticleAnimation() {
+        cancelAnimationFrame(animFrameId);
+        function loop() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles = particles.filter(p => p.opacity > 0);
+          particles.forEach(p => {
+            p.update();
+            p.draw(ctx);
+          });
+          if (particles.length > 0) {
+            animFrameId = requestAnimationFrame(loop);
+          }
+        }
+        loop();
+      }
+
+      function triggerCinematicBurst(originX, originY) {
+        particles = [];
+        for (let i = 0; i < 75; i++) {
+          particles.push(new BurstParticle(originX, originY));
+        }
+        startParticleAnimation();
+      }
+
+      // Drag bowstring physics
+      function updateBowPull(pull) {
+        pullDistance = Math.min(Math.max(pull, 0), 45);
+        // Deform SVG string path
+        bowString.setAttribute("d", `M 35 15 Q ${35 - pullDistance} 90 35 165`);
+        // Displace arrow back
+        arrow.style.transform = `translateY(-50%) translateX(${-pullDistance}px)`;
+      }
+
+      function resetBowString() {
+        pullDistance = 0;
+        bowString.setAttribute("d", "M 35 15 Q 35 90 35 165");
+        arrow.style.transform = "translateY(-50%) translateX(0px)";
+      }
+
+      let startX = 0;
+      function onPointerDown(e) {
+        if (isShooting || hasHit) return;
+        isDragging = true;
+        startX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+      }
+
+      function onPointerMove(e) {
+        if (!isDragging || isShooting || hasHit) return;
+        const currentX = e.clientX || (e.touches && e.touches[0].clientX) || 0;
+        const delta = startX - currentX;
+        updateBowPull(delta);
+      }
+
+      function onPointerUp() {
+        if (!isDragging) return;
+        isDragging = false;
+        if (pullDistance > 12) {
+          shootArrow();
+        } else {
+          resetBowString();
+        }
+      }
+
+      bowContainer.addEventListener("mousedown", onPointerDown);
+      window.addEventListener("mousemove", onPointerMove);
+      window.addEventListener("mouseup", onPointerUp);
+
+      bowContainer.addEventListener("touchstart", onPointerDown, { passive: true });
+      window.addEventListener("touchmove", onPointerMove, { passive: true });
+      window.addEventListener("touchend", onPointerUp, { passive: true });
+
+      // Core Shooting Mechanism
+      function shootArrow() {
+        if (isShooting || hasHit) return;
+        isShooting = true;
+        playBowSound();
+
+        // Snap bowstring
+        bowString.setAttribute("d", "M 35 15 Q 35 90 35 165");
+
+        const arenaRect = arena.getBoundingClientRect();
+        const arrowRect = arrow.getBoundingClientRect();
+        const targetRect = targetCore.getBoundingClientRect();
+
+        // Arrow start coordinates relative to arena
+        const startLeft = arrowRect.left - arenaRect.left;
+        const startTop = arrowRect.top - arenaRect.top;
+
+        // Target center coordinates relative to arena
+        const targetCenterX = (targetRect.left + targetRect.width / 2) - arenaRect.left;
+        const targetCenterY = (targetRect.top + targetRect.height / 2) - arenaRect.top;
+
+        // Clone arrow for projectile animation
+        arrow.style.opacity = "0";
+
+        const flyingArrow = document.createElement("div");
+        flyingArrow.className = "game-arrow flying";
+        flyingArrow.innerHTML = `
+          <div class="arrow-fletch">🪶</div>
+          <div class="arrow-shaft" style="box-shadow:0 0 14px #ff4d6d;"></div>
+          <div class="arrow-head">💘</div>
+        `;
+        flyingArrow.style.left = `${startLeft}px`;
+        flyingArrow.style.top = `${startTop}px`;
+        arena.appendChild(flyingArrow);
+
+        const startTime = performance.now();
+        const flightDuration = 380; // ms
+
+        function fly(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / flightDuration, 1);
+          // Ease out curve
+          const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+          const curX = startLeft + (targetCenterX - startLeft - 25) * easeProgress;
+          const curY = startTop + (targetCenterY - startTop) * easeProgress;
+
+          flyingArrow.style.left = `${curX}px`;
+          flyingArrow.style.top = `${curY}px`;
+
+          if (progress < 1) {
+            requestAnimationFrame(fly);
+          } else {
+            // Arrow hit!
+            flyingArrow.remove();
+            onHeartHit(targetCenterX, targetCenterY);
+          }
+        }
+
+        requestAnimationFrame(fly);
+      }
+
+      function onHeartHit(hitX, hitY) {
+        hasHit = true;
+        isShooting = false;
+        playHeartHitSound();
+
+        // Visual Hit on Heart
+        targetWrapper.classList.add("shaking");
+        targetCore.style.boxShadow = "0 0 50px rgba(255, 77, 109, 1), 0 0 80px rgba(255, 215, 0, 0.9)";
+
+        // Embed visible arrow on the heart
+        const embeddedArrow = document.createElement("div");
+        embeddedArrow.className = "embedded-arrow";
+        embeddedArrow.id = "embeddedArrowEl";
+        embeddedArrow.textContent = "💘";
+        targetCore.appendChild(embeddedArrow);
+
+        // Cinematic burst of roses, petals, hearts
+        setTimeout(() => {
+          triggerCinematicBurst(hitX, hitY);
+          showHeartBurst(arena.getBoundingClientRect().left + hitX, arena.getBoundingClientRect().top + hitY, 30);
+        }, 120);
+
+        // Reveal the secret love message with typewriter animation
+        setTimeout(() => {
+          revealOverlay.classList.add("active");
+          playCelebrationSound();
+          runTypewriterReveal();
+        }, 850);
+      }
+
+      const fullMessage = "“No matter where life takes us, my heart will always find its way back to you. 🌹❤️”";
+      let typeTimer = null;
+      function runTypewriterReveal() {
+        clearTimeout(typeTimer);
+        messageText.textContent = "";
+        let charIdx = 0;
+        function typeChar() {
+          if (charIdx < fullMessage.length) {
+            messageText.textContent += fullMessage.charAt(charIdx);
+            charIdx++;
+            typeTimer = setTimeout(typeChar, 35);
+          }
+        }
+        typeChar();
+      }
+
+      function resetGame() {
+        hasHit = false;
+        isShooting = false;
+        resetBowString();
+        arrow.style.opacity = "1";
+        targetWrapper.classList.remove("shaking");
+        targetCore.style.boxShadow = "";
+        const embedded = document.getElementById("embeddedArrowEl");
+        if (embedded) embedded.remove();
+        revealOverlay.classList.remove("active");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      shootBtn.addEventListener("click", () => {
+        if (!isShooting && !hasHit) shootArrow();
+      });
+
+      targetWrapper.addEventListener("click", () => {
+        if (!isShooting && !hasHit) shootArrow();
+      });
+
+      playAgainBtn.addEventListener("click", resetGame);
+    }
+
+    /* ==========================================================================
+       GAME 2: WHOSE MISTAKE? (8-PART SPINNER)
+       ========================================================================== */
+    function setupWheelGame() {
+      const canvas = document.getElementById("mistakeWheelCanvas");
+      const spinBtn = document.getElementById("spinWheelBtn");
+      const popup = document.getElementById("mistakePopupOverlay");
+      const spinAgainBtn = document.getElementById("spinAgainBtn");
+
+      if (!canvas || !spinBtn) return;
+
+      const ctx = canvas.getContext("2d");
+      const numSegments = 8;
+      const segmentAngle = (2 * Math.PI) / numSegments; // 45 degrees in radians
+
+      // 8 slices alternating exactly:
+      // Even slices (0, 2, 4, 6) = Sahil's Mistake
+      // Odd slices (1, 3, 5, 7) = Sahifa's Mistake
+      const segments = [
+        { label: "Sahil's Mistake", owner: "Sahil", icon: "🙋‍♂️", bg: "#9e1136", bg2: "#590d22", text: "#fff0f3" },
+        { label: "Sahifa's Mistake", owner: "Sahifa", icon: "👑", bg: "#531238", bg2: "#350821", text: "#ffb3c1" },
+        { label: "Sahil's Mistake", owner: "Sahil", icon: "🙋‍♂️", bg: "#b51744", bg2: "#6b0f2a", text: "#fff0f3" },
+        { label: "Sahifa's Mistake", owner: "Sahifa", icon: "👑", bg: "#460f30", bg2: "#2d061c", text: "#ffb3c1" },
+        { label: "Sahil's Mistake", owner: "Sahil", icon: "🙋‍♂️", bg: "#9e1136", bg2: "#590d22", text: "#fff0f3" },
+        { label: "Sahifa's Mistake", owner: "Sahifa", icon: "👑", bg: "#531238", bg2: "#350821", text: "#ffb3c1" },
+        { label: "Sahil's Mistake", owner: "Sahil", icon: "🙋‍♂️", bg: "#b51744", bg2: "#6b0f2a", text: "#fff0f3" },
+        { label: "Sahifa's Mistake", owner: "Sahifa", icon: "👑", bg: "#460f30", bg2: "#2d061c", text: "#ffb3c1" },
+      ];
+
+      let currentRotation = 0; // in radians
+      let isSpinning = false;
+      let lastTickAngle = 0;
+
+      // Draw the crisp wheel
+      function drawWheel(rotation = 0) {
+        const width = canvas.width;
+        const height = canvas.height;
+        const cx = width / 2;
+        const cy = height / 2;
+        const radius = width / 2 - 16;
+
+        ctx.clearRect(0, 0, width, height);
+
+        // Outer glow
+        ctx.save();
+        ctx.shadowColor = "rgba(255, 77, 109, 0.4)";
+        ctx.shadowBlur = 20;
+
+        // Draw segments
+        for (let i = 0; i < numSegments; i++) {
+          const seg = segments[i];
+          const startAngle = rotation + i * segmentAngle;
+          const endAngle = startAngle + segmentAngle;
+
+          // Slice background gradient
+          const grad = ctx.createRadialGradient(cx, cy, radius * 0.2, cx, cy, radius);
+          grad.addColorStop(0, seg.bg);
+          grad.addColorStop(1, seg.bg2);
+
+          ctx.beginPath();
+          ctx.moveTo(cx, cy);
+          ctx.arc(cx, cy, radius, startAngle, endAngle);
+          ctx.closePath();
+          ctx.fillStyle = grad;
+          ctx.fill();
+
+          // Slice separator line
+          ctx.strokeStyle = "rgba(255, 215, 0, 0.4)";
+          ctx.lineWidth = 3;
+          ctx.stroke();
+
+          // Slice Text and Icon
+          ctx.save();
+          ctx.translate(cx, cy);
+          ctx.rotate(startAngle + segmentAngle / 2);
+          ctx.textAlign = "right";
+          ctx.fillStyle = seg.text;
+
+          // Text label
+          ctx.font = "bold 26px 'Playfair Display', serif";
+          ctx.shadowColor = "rgba(0, 0, 0, 0.8)";
+          ctx.shadowBlur = 6;
+          ctx.fillText(seg.label, radius - 45, 8);
+
+          // Icon near edge
+          ctx.font = "28px sans-serif";
+          ctx.fillText(seg.icon, radius - 12, 9);
+          ctx.restore();
+        }
+        ctx.restore();
+
+        // Outer decorative golden ring with studs
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+        ctx.lineWidth = 14;
+        ctx.strokeStyle = "#ffd166";
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius + 7, 0, 2 * Math.PI);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = "rgba(255, 77, 109, 0.8)";
+        ctx.stroke();
+
+        // 16 golden studs around the rim
+        const numStuds = 16;
+        for (let s = 0; s < numStuds; s++) {
+          const sAngle = rotation + (s * (2 * Math.PI / numStuds));
+          const sx = cx + Math.cos(sAngle) * radius;
+          const sy = cy + Math.sin(sAngle) * radius;
+          ctx.beginPath();
+          ctx.arc(sx, sy, 5, 0, 2 * Math.PI);
+          ctx.fillStyle = "#fff";
+          ctx.shadowColor = "#ffd166";
+          ctx.shadowBlur = 8;
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+
+      drawWheel(currentRotation);
+
+      // RIGGED LOGIC: Always land on Sahil's Mistake (slices 0, 2, 4, or 6)
+      let sahilSliceIndexCounter = 0;
+      const sahilSlices = [0, 2, 4, 6];
+
+      function spinWheel() {
+        if (isSpinning) return;
+        isSpinning = true;
+        spinBtn.disabled = true;
+        spinBtn.style.opacity = "0.7";
+
+        // Alternate or cycle among the 4 Sahil slices so it stops at varied positions on the wheel
+        const chosenSahilSlice = sahilSlices[sahilSliceIndexCounter % sahilSlices.length];
+        sahilSliceIndexCounter++;
+
+        // Pointer is at the TOP (12 o'clock, which is -PI/2 or 3*PI/2 or 270 degrees)
+        // Center angle of slice k is (k * 45 + 22.5) degrees
+        // Pointer angle in degrees = 270 deg
+        // Target base rotation in degrees: (270 - (chosenSahilSlice * 45 + 22.5)) mod 360
+        const sliceCenterDeg = chosenSahilSlice * 45 + 22.5;
+        let targetAngleDeg = (270 - sliceCenterDeg) % 360;
+        if (targetAngleDeg < 0) targetAngleDeg += 360;
+
+        // Add a gentle natural jitter within [-6, +6] degrees (well inside the 45-deg slice)
+        const jitterDeg = (Math.random() - 0.5) * 12;
+        targetAngleDeg += jitterDeg;
+
+        const targetAngleRad = (targetAngleDeg * Math.PI) / 180;
+
+        // Current angle normalized to [0, 2*PI]
+        const currentNormRad = currentRotation % (2 * Math.PI);
+        let deltaRad = targetAngleRad - currentNormRad;
+        if (deltaRad < 0) deltaRad += 2 * Math.PI;
+
+        // Add 6 to 8 full spins (2160 to 2880 degrees)
+        const fullSpins = 6 + Math.floor(Math.random() * 3);
+        const totalRotationRad = currentRotation + (fullSpins * 2 * Math.PI) + deltaRad;
+
+        const startRotation = currentRotation;
+        const startTime = performance.now();
+        const spinDuration = 4800; // ms
+
+        lastTickAngle = startRotation;
+
+        function animateWheel(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / spinDuration, 1);
+
+          // Realistic cubic-bezier deceleration curve: starts fast, smoothly glides to a stop
+          // 1 - pow(1 - p, 3.5)
+          const ease = 1 - Math.pow(1 - progress, 3.5);
+
+          currentRotation = startRotation + (totalRotationRad - startRotation) * ease;
+          drawWheel(currentRotation);
+
+          // Audio ticking when pegs pass pointer
+          const anglePassed = Math.abs(currentRotation - lastTickAngle);
+          if (anglePassed >= (Math.PI / 8)) {
+            playWheelTickSound();
+            lastTickAngle = currentRotation;
+          }
+
+          if (progress < 1) {
+            requestAnimationFrame(animateWheel);
+          } else {
+            // Spin complete!
+            currentRotation = totalRotationRad;
+            drawWheel(currentRotation);
+            onWheelStopped();
+          }
+        }
+
+        requestAnimationFrame(animateWheel);
+      }
+
+      function onWheelStopped() {
+        isSpinning = false;
+        spinBtn.disabled = false;
+        spinBtn.style.opacity = "1";
+
+        playCelebrationSound();
+
+        // Launch celebratory hearts and confetti
+        const arenaRect = canvas.getBoundingClientRect();
+        showHeartBurst(arenaRect.left + arenaRect.width / 2, arenaRect.top + 30, 35);
+
+        setTimeout(() => {
+          popup.classList.add("active");
+        }, 400);
+      }
+
+      spinBtn.addEventListener("click", spinWheel);
+
+      spinAgainBtn.addEventListener("click", () => {
+        popup.classList.remove("active");
+        showToast("Spin again! Let's see who was wrong this time 😂❤️");
+      });
+
+      popup.addEventListener("click", (e) => {
+        if (e.target === popup) popup.classList.remove("active");
+      });
+    }
+
     function initApp() {
       setupPasscodeOverlay();
       setupRelationshipCounter();
       renderTimeline();
       renderPhotosSection();
       renderVideosSection();
+      setupAimGame();
+      setupWheelGame();
       setupLightbox();
       setupTypewriterLetter();
       setupNightMode();
