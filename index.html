@@ -2420,7 +2420,7 @@
       <p class="lock-subtitle">"A little corner of the internet that belongs to us."</p>
 
       <div class="lock-input-group" id="passcodeGroup">
-        <input type="password" id="diaryPasscodeInput" class="lock-input" placeholder="Enter anniversary or pass (0330)" maxlength="12" autocomplete="off">
+        <input type="password" id="diaryPasscodeInput" class="lock-input" placeholder="Enter password" maxlength="20" autocomplete="off">
         <div class="lock-error" id="lockErrorMsg"></div>
       </div>
 
@@ -2428,8 +2428,6 @@
         <span>Enter Our Story</span>
         <span>❤️</span>
       </button>
-
-      <p class="lock-hint">Protected with love • Begins 30 March 2024</p>
     </div>
   </div>
 
@@ -3124,8 +3122,8 @@
       // Beginning of the relationship: 30 March 2024
       startDate: "2024-03-30T08:30:00",
 
-      // Optional front-end privacy passcode (0330)
-      diaryPasscode: "0330",
+      // Privacy passcode
+      diaryPasscode: "24127",
 
       // Optional background music URL (empty uses our built-in romantic acoustic piano synth)
       musicUrl: "",
@@ -3221,11 +3219,11 @@ Sahil ❤️`,
 
       function unlock() {
         const val = input.value.trim();
-        if (val === "0330" || val === "3003" || val === "30" || val === "03" || val === "" || val === LOVE_STORY_CONFIG.diaryPasscode) {
+        if (val === LOVE_STORY_CONFIG.diaryPasscode || val === "24127") {
           overlay.classList.add("unlocked");
           showToast("Welcome to our diary, my love ❤️");
         } else {
-          if (err) err.textContent = "Hint: Our anniversary 0330 ❤️";
+          if (err) err.textContent = "Incorrect password. Please try again ❤️";
           input.classList.add("shake");
           setTimeout(() => input.classList.remove("shake"), 500);
         }
