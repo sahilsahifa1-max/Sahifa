@@ -126,7 +126,7 @@
     }
 
     /* ==========================================================================
-       NAVIGATION BAR
+       PREMIUM FLOATING GLASS NAVIGATION BAR (love-header-*)
        ========================================================================== */
     .navbar {
       position: sticky;
@@ -135,253 +135,347 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 24px;
-      border-radius: 40px;
-      background: rgba(var(--bg-dark-rgb), 0.72);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid var(--bg-glass-border);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
-      margin-bottom: 24px;
-      transition: var(--transition-smooth);
+      max-width: 980px;
+      width: calc(100% - 32px);
+      margin: 0 auto 16px auto;
+      height: 54px;
+      padding: 0 18px;
+      border-radius: 9999px;
+      background: rgba(18, 7, 20, 0.68);
+      backdrop-filter: blur(22px) saturate(180%);
+      -webkit-backdrop-filter: blur(22px) saturate(180%);
+      border: 1px solid rgba(255, 182, 193, 0.18);
+      box-shadow: 0 10px 36px -4px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.04) inset;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-wrap: nowrap;
+      gap: 12px;
     }
 
     .nav-brand {
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.95rem;
-      color: var(--accent-pink-soft);
-      text-decoration: none;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
-      text-shadow: 0 0 18px rgba(255, 77, 109, 0.5);
-      transition: var(--transition-smooth);
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+      flex-shrink: 0;
     }
 
     .nav-brand:hover {
-      color: #fff;
       transform: scale(1.02);
+      opacity: 0.95;
     }
 
     .nav-brand .heart-badge {
-      font-size: 1.25rem;
+      font-size: 1.05rem;
       animation: heartbeat 2.2s infinite ease-in-out;
       display: inline-block;
+      filter: drop-shadow(0 0 8px rgba(255, 77, 109, 0.6));
+    }
+
+    .nav-brand .brand-amp {
+      color: var(--accent-pink);
+      display: inline-block;
+      margin: 0 1px;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 18px;
+      gap: 6px;
       list-style: none;
+      margin: 0;
+      padding: 0;
     }
 
     .nav-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
       color: var(--text-secondary);
       text-decoration: none;
-      font-size: 0.88rem;
+      font-size: 0.84rem;
       font-weight: 500;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      transition: all 0.25s ease;
       letter-spacing: 0.02em;
-      transition: var(--transition-smooth);
-      padding: 6px 12px;
-      border-radius: 20px;
     }
 
     .nav-links a:hover {
-      color: var(--accent-pink-soft);
-      background: rgba(255, 77, 109, 0.12);
+      color: #fff;
+      background: rgba(255, 77, 109, 0.15);
+      box-shadow: 0 0 14px rgba(255, 77, 109, 0.25);
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-shrink: 0;
     }
 
     .nav-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--bg-glass-border);
-      color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 182, 193, 0.18);
+      color: #fff;
+      padding: 6px 13px;
+      border-radius: 9999px;
       cursor: pointer;
-      font-size: 0.82rem;
-      font-weight: 600;
-      display: flex;
+      font-size: 0.8rem;
+      font-weight: 500;
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      transition: var(--transition-smooth);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      white-space: nowrap;
     }
 
     .nav-btn:hover {
-      background: rgba(255, 77, 109, 0.2);
-      border-color: var(--accent-pink);
+      background: rgba(255, 77, 109, 0.22);
+      border-color: rgba(255, 77, 109, 0.45);
+      box-shadow: 0 0 16px rgba(255, 77, 109, 0.35);
       transform: translateY(-1px);
     }
 
     .nav-btn.active-music {
-      background: rgba(255, 77, 109, 0.3);
+      background: linear-gradient(135deg, rgba(255, 77, 109, 0.35), rgba(193, 18, 61, 0.35));
       border-color: var(--accent-pink);
       color: #fff;
-      box-shadow: 0 0 16px rgba(255, 77, 109, 0.4);
+      box-shadow: 0 0 18px rgba(255, 77, 109, 0.5);
     }
 
-    /* Mobile Hamburger Menu */
+    /* Modern Animated Hamburger Button */
     .hamburger-btn {
       display: none;
-      background: transparent;
-      border: none;
-      color: var(--text-main);
-      font-size: 1.5rem;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 182, 193, 0.18);
+      border-radius: 9999px;
+      width: 36px;
+      height: 36px;
+      padding: 0;
       cursor: pointer;
-      padding: 6px;
+      align-items: center;
+      justify-content: center;
       flex-direction: column;
-      gap: 5px;
+      gap: 4px;
+      transition: all 0.25s ease;
+    }
+
+    .hamburger-btn:hover {
+      background: rgba(255, 77, 109, 0.2);
+      border-color: rgba(255, 77, 109, 0.4);
     }
 
     .hamburger-btn span {
       display: block;
-      width: 22px;
-      height: 2px;
-      background: var(--text-main);
+      width: 16px;
+      height: 1.5px;
+      background: #fff;
       border-radius: 2px;
-      transition: var(--transition-smooth);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
     }
 
+    .hamburger-btn.active span:nth-child(1) {
+      transform: translateY(5.5px) rotate(45deg);
+    }
+
+    .hamburger-btn.active span:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .hamburger-btn.active span:nth-child(3) {
+      transform: translateY(-5.5px) rotate(-45deg);
+    }
+
+    /* Mobile Floating Glass Panel Menu */
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 80px;
-      left: 20px;
-      right: 20px;
-      background: rgba(20, 7, 20, 0.96);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border: 1px solid var(--bg-glass-border);
+      top: 66px;
+      left: 14px;
+      right: 14px;
+      background: rgba(16, 6, 18, 0.88);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 182, 193, 0.22);
       border-radius: 24px;
-      padding: 24px;
+      padding: 16px;
       z-index: 999;
-      box-shadow: var(--shadow-glow-strong);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(255, 77, 109, 0.2);
       flex-direction: column;
-      gap: 16px;
+      gap: 6px;
+      transform-origin: top center;
     }
 
     .mobile-menu.open {
       display: flex;
-      animation: fadeInDown 0.3s ease forwards;
+      animation: drawerReveal 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes drawerReveal {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.97);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .love-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 12px 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 4px;
+    }
+
+    .love-drawer-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255, 255, 255, 0.45);
+      font-weight: 600;
+    }
+
+    .love-drawer-tag {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.86rem;
+      color: var(--accent-pink-soft);
     }
 
     .mobile-menu a {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       color: var(--text-main);
       text-decoration: none;
-      font-size: 1.1rem;
-      font-family: 'Playfair Display', serif;
+      font-size: 0.96rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
       padding: 10px 14px;
-      border-radius: 12px;
-      transition: var(--transition-smooth);
+      border-radius: 14px;
+      transition: all 0.2s ease;
+      background: transparent;
     }
 
-    .mobile-menu a:hover {
-      background: rgba(255, 77, 109, 0.15);
-      color: var(--accent-pink);
+    .mobile-menu a:hover,
+    .mobile-menu a:active {
+      background: rgba(255, 77, 109, 0.16);
+      color: #fff;
+      transform: translateX(4px);
+    }
+
+    .mobile-menu a .drawer-icon {
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 860px) {
+      .nav-links {
+        display: none !important;
+      }
+      .hamburger-btn {
+        display: flex !important;
+      }
+      .navbar {
+        height: 48px;
+        padding: 0 14px;
+        top: 10px;
+        margin-bottom: 12px;
+        width: calc(100% - 24px);
+      }
+      .nav-brand {
+        font-size: 1.02rem;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .navbar {
+        height: 44px;
+        padding: 0 12px;
+        top: 8px;
+        margin-bottom: 8px;
+        width: calc(100% - 20px);
+      }
+      .nav-brand {
+        font-size: 0.92rem;
+        gap: 5px;
+      }
+      #musicLabel, #nightModeLabel {
+        display: none !important;
+      }
+      .nav-btn {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+      }
+      .hamburger-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .mobile-menu {
+        top: 56px;
+        left: 10px;
+        right: 10px;
+        padding: 12px;
+      }
     }
 
     /* ==========================================================================
-       HERO SECTION (Cinematic Welcome)
+       HERO SECTION (Luxury Proportion & Spacing)
        ========================================================================== */
     .hero-section {
-      min-height: 85vh;
+      min-height: calc(100vh - 84px);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 50px 16px 70px 16px;
+      padding: 16px 16px 32px 16px;
       position: relative;
+      margin: 0 auto;
+      max-width: 960px;
     }
 
     .hero-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      border-radius: 30px;
+      gap: 6px;
+      padding: 6px 16px;
+      border-radius: 9999px;
       background: rgba(255, 77, 109, 0.12);
-      border: 1px solid var(--bg-glass-border);
-      font-size: 0.84rem;
+      border: 1px solid rgba(255, 182, 193, 0.2);
+      font-size: 0.8rem;
       color: var(--accent-pink-soft);
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 24px;
-      backdrop-filter: blur(8px);
+      margin-bottom: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       animation: fadeInDown 0.8s ease backwards;
-    }
-
-    .hero-portraits-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 18px;
-      margin-bottom: 28px;
-      animation: zoomIn 1s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-    }
-
-    .hero-portrait-avatar {
-      width: 86px;
-      height: 86px;
-      border-radius: 50%;
-      padding: 4px;
-      background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-deep-wine) 100%);
-      box-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.4s ease;
-    }
-
-    .hero-portrait-avatar:hover {
-      transform: scale(1.08);
-    }
-
-    .hero-portrait-avatar img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-portrait-placeholder {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background: rgba(26, 9, 24, 0.9);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Great Vibes', cursive;
-      font-size: 1.8rem;
-      color: var(--accent-pink-soft);
-    }
-
-    .hero-heart-connector {
-      font-size: 1.8rem;
-      color: var(--accent-pink);
-      animation: heartbeat 1.8s infinite ease-in-out;
-      text-shadow: 0 0 20px rgba(255, 77, 109, 0.7);
     }
 
     .hero-title {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.6rem, 7vw, 4.8rem);
+      font-size: clamp(2.2rem, 5.5vw, 4.2rem);
       font-weight: 700;
       color: var(--text-main);
-      line-height: 1.15;
+      line-height: 1.14;
       letter-spacing: -0.02em;
-      margin-bottom: 18px;
-      animation: fadeInUp 0.9s ease 0.2s backwards;
+      margin: 0 0 10px 0;
+      animation: fadeInUp 0.9s ease 0.15s backwards;
     }
 
     .hero-title .accent-text {
@@ -393,48 +487,22 @@
 
     .hero-subtitle {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-size: clamp(1.05rem, 2.4vw, 1.45rem);
       font-style: italic;
       color: var(--text-secondary);
-      max-width: 680px;
-      margin: 0 auto 36px auto;
-      line-height: 1.5;
-      animation: fadeInUp 0.9s ease 0.35s backwards;
+      max-width: 620px;
+      margin: 0 auto 10px auto;
+      line-height: 1.4;
+      animation: fadeInUp 0.9s ease 0.25s backwards;
     }
 
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px 36px;
-      border-radius: 40px;
-      background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-rose) 100%);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.96rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      box-shadow: 0 10px 30px rgba(255, 77, 109, 0.45);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: var(--transition-smooth);
-      animation: fadeInUp 0.9s ease 0.5s backwards;
-    }
-
-    .hero-cta:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 0 14px 40px rgba(255, 77, 109, 0.65);
-    }
-
-    /* ==========================================================================
-       HERO 3D CARTOON COUPLE (Sahil & Sahifa)
-       Scoped strictly under .love3d-couple-*
-       ========================================================================== */
+    /* 3D Couple Wrap */
     .love3d-couple-wrap {
       position: relative;
       width: 100%;
-      max-width: 360px;
-      height: 240px;
-      margin: 0 auto 24px auto;
+      max-width: 380px;
+      height: 270px;
+      margin: 0 auto 16px auto;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -444,7 +512,7 @@
       -webkit-user-select: none;
       -webkit-tap-highlight-color: transparent;
       touch-action: pan-y;
-      animation: fadeInUp 1s ease 0.4s backwards;
+      animation: zoomIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.35s backwards;
     }
 
     .love3d-couple-canvas {
@@ -453,22 +521,74 @@
       display: block;
       outline: none;
       background: transparent;
-      filter: drop-shadow(0 12px 30px rgba(255, 77, 109, 0.28));
+      filter: drop-shadow(0 14px 36px rgba(255, 77, 109, 0.28));
     }
 
-    @media (max-width: 768px) {
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 32px;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, var(--accent-pink) 0%, var(--accent-rose) 100%);
+      color: #fff;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      box-shadow: 0 10px 30px rgba(255, 77, 109, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: fadeInUp 0.9s ease 0.45s backwards;
+      margin-bottom: 8px;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 14px 40px rgba(255, 77, 109, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+    }
+
+    @media (max-width: 600px) {
+      .hero-section {
+        min-height: auto;
+        padding: 8px 12px 24px 12px;
+      }
+      .hero-badge {
+        padding: 4px 12px;
+        font-size: 0.72rem;
+        margin-bottom: 8px;
+      }
+      .hero-title {
+        font-size: 2.1rem;
+        margin-bottom: 6px;
+      }
+      .hero-subtitle {
+        font-size: 0.88rem;
+        margin-bottom: 8px;
+        max-width: 320px;
+      }
       .love3d-couple-wrap {
         max-width: 310px;
-        height: 210px;
-        margin: 0 auto 20px auto;
+        height: 240px;
+        margin: 0 auto 12px auto;
+      }
+      .hero-cta {
+        padding: 11px 26px;
+        font-size: 0.9rem;
+      }
+      .scroll-hint {
+        display: none !important;
       }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 380px) {
+      .hero-title {
+        font-size: 1.85rem;
+      }
       .love3d-couple-wrap {
         max-width: 270px;
-        height: 185px;
-        margin: 0 auto 16px auto;
+        height: 210px;
+        margin: 0 auto 10px auto;
       }
     }
 
@@ -477,6 +597,7 @@
         animation: none !important;
       }
     }
+
 
     .scroll-hint {
       position: absolute;
@@ -3775,38 +3896,35 @@
   <div class="app-container">
 
     <!-- ======================================================================
-         TOP NAVIGATION
+         TOP NAVIGATION (Floating Glass Capsule Navbar)
          ====================================================================== -->
     <nav class="navbar" id="navbar">
-      <a href="#hero" class="nav-brand">
+      <a href="#hero" class="nav-brand" title="Sahil ❤️ Sahifa">
         <span class="heart-badge">❤️</span>
-        <span id="navBrandName">Sahil ❤️ Sahifa</span>
+        <span id="navBrandName">Sahil <span class="brand-amp">❤️</span> Sahifa</span>
       </a>
 
       <ul class="nav-links">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#counter">Our Time</a></li>
-        <li><a href="#timeline">Our Story</a></li>
-        <li><a href="#photos-videos">Our Photos & Videos</a></li>
-        <li><a href="#games">Games ❤️</a></li>
-        <li><a href="#letter">Love Letter</a></li>
+        <li><a href="#timeline"><span>📖</span> Our Story</a></li>
+        <li><a href="#photos-videos"><span>📸</span> Memories</a></li>
+        <li><a href="#games"><span>🎮</span> Games</a></li>
       </ul>
 
       <div class="nav-actions">
+        <!-- Music Button -->
+        <button class="nav-btn" id="musicToggleBtn" title="Play our romantic song">
+          <span id="musicIcon">♪</span>
+          <span id="musicLabel">Music</span>
+        </button>
+
         <!-- Night Mode Toggle -->
         <button class="nav-btn" id="nightModeBtn" title="Toggle Starlight Night Diary Mode">
           <span id="nightModeIcon">🌙</span>
           <span id="nightModeLabel">Night</span>
         </button>
 
-        <!-- Music Button -->
-        <button class="nav-btn" id="musicToggleBtn" title="Play our romantic song">
-          <span id="musicIcon">♪</span>
-          <span id="musicLabel">Our Song</span>
-        </button>
-
         <!-- Mobile Hamburger Button -->
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu">
+        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Toggle Navigation Menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -3814,14 +3932,36 @@
       </div>
     </nav>
 
-    <!-- Mobile Drawer Menu -->
+    <!-- Mobile Floating Glass Panel Menu -->
     <div class="mobile-menu" id="mobileMenu">
-      <a href="#hero" class="mobile-nav-link">Home</a>
-      <a href="#counter" class="mobile-nav-link">Our Time Together</a>
-      <a href="#timeline" class="mobile-nav-link">Our Story Timeline</a>
-      <a href="#photos-videos" class="mobile-nav-link">Our Photos & Videos</a>
-      <a href="#games" class="mobile-nav-link">Our Games ❤️</a>
-      <a href="#letter" class="mobile-nav-link">A Letter For You</a>
+      <div class="love-drawer-header">
+        <span class="love-drawer-title">Navigation</span>
+        <span class="love-drawer-tag">Sahil ❤️ Sahifa</span>
+      </div>
+      <a href="#hero" class="mobile-nav-link">
+        <span class="drawer-icon">🏠</span>
+        <span>Home</span>
+      </a>
+      <a href="#counter" class="mobile-nav-link">
+        <span class="drawer-icon">⏳</span>
+        <span>Our Time Together</span>
+      </a>
+      <a href="#timeline" class="mobile-nav-link">
+        <span class="drawer-icon">📖</span>
+        <span>Our Story</span>
+      </a>
+      <a href="#photos-videos" class="mobile-nav-link">
+        <span class="drawer-icon">📸</span>
+        <span>Memories &amp; Photos</span>
+      </a>
+      <a href="#games" class="mobile-nav-link">
+        <span class="drawer-icon">🎁</span>
+        <span>Games &amp; Surprises</span>
+      </a>
+      <a href="#letter" class="mobile-nav-link">
+        <span class="drawer-icon">💌</span>
+        <span>A Letter For You</span>
+      </a>
     </div>
 
     <!-- ======================================================================
@@ -3843,7 +3983,7 @@
 
       <!-- 3D CARTOON COUPLE: Sahil & Sahifa -->
       <div class="love3d-couple-wrap" id="love3d-couple-wrap" title="Sahil & Sahifa ❤️ Tap us!">
-        <canvas class="love3d-couple-canvas" id="love3d-couple-canvas" role="img" aria-label="Cute 3D cartoon couple of Sahil and Sahifa sharing a tender kiss with floating hearts"></canvas>
+        <canvas class="love3d-couple-canvas" id="love3d-couple-canvas" role="img" aria-label="Cute 3D cartoon couple of Sahil and Sahifa holding hands with floating hearts and rose petals"></canvas>
       </div>
 
       <a href="#timeline" class="hero-cta" id="openDiaryBtn">
@@ -5228,17 +5368,39 @@ Sahil ❤️`,
       const btn = document.getElementById("hamburgerBtn");
       const menu = document.getElementById("mobileMenu");
       const links = document.querySelectorAll(".mobile-nav-link");
+      if (!btn || !menu) return;
 
-      btn.addEventListener("click", () => {
-        btn.classList.toggle("active");
-        menu.classList.toggle("open");
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        const isOpen = menu.classList.toggle("open");
+        btn.classList.toggle("active", isOpen);
+        btn.setAttribute("aria-expanded", isOpen ? "true" : "false");
       });
 
       links.forEach(link => {
         link.addEventListener("click", () => {
           btn.classList.remove("active");
           menu.classList.remove("open");
+          btn.setAttribute("aria-expanded", "false");
         });
+      });
+
+      // Close mobile menu when clicking outside
+      document.addEventListener("click", (e) => {
+        if (menu.classList.contains("open") && !menu.contains(e.target) && !btn.contains(e.target)) {
+          btn.classList.remove("active");
+          menu.classList.remove("open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      // Close mobile menu on Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && menu.classList.contains("open")) {
+          btn.classList.remove("active");
+          menu.classList.remove("open");
+          btn.setAttribute("aria-expanded", "false");
+        }
       });
     }
 
@@ -6938,8 +7100,8 @@ No matter how far we travel or where the roads of life lead us, my heart will al
     });
 
     /* ==========================================================================
-       HERO 3D CARTOON COUPLE — SAHIL & SAHIFA
-       Rendered with Three.js as pure 3D cartoon models
+       HERO 3D CARTOON COUPLE — SAHIL & SAHIFA (UPGRADED STYLIZED 3D MODELS)
+       Rendered with Three.js as pure 3D cartoon characters
        ========================================================================== */
     (function initLove3DCouple() {
       function start() {
@@ -6971,277 +7133,62 @@ No matter how far we travel or where the roads of life lead us, my heart will al
         renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
         const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(35, wrap.clientWidth / wrap.clientHeight, 0.1, 50);
-        camera.position.set(0, 0.1, 3.4);
+        const camera = new THREE.PerspectiveCamera(32, wrap.clientWidth / wrap.clientHeight, 0.1, 50);
+        camera.position.set(0, 0.06, 3.2);
 
-        const ambientLight = new THREE.AmbientLight(0xffe8f0, 0.92);
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffe8f0, 0.9);
         scene.add(ambientLight);
 
-        const keyLight = new THREE.DirectionalLight(0xfff7ee, 1.15);
-        keyLight.position.set(2.2, 3.5, 2.5);
-        keyLight.castShadow = true;
-        keyLight.shadow.mapSize.width = 512;
-        keyLight.shadow.mapSize.height = 512;
-        keyLight.shadow.bias = -0.001;
+        const keyLight = new THREE.DirectionalLight(0xfffaed, 1.25);
+        keyLight.position.set(2.2, 3.0, 2.5);
         scene.add(keyLight);
 
-        const rimLight = new THREE.DirectionalLight(0xff85a1, 0.95);
-        rimLight.position.set(-2.2, 2.8, -2.5);
+        const rimLight = new THREE.DirectionalLight(0xff758f, 1.45);
+        rimLight.position.set(-2.4, 2.4, -2.4);
         scene.add(rimLight);
 
-        const heartGlow = new THREE.PointLight(0xff4d6d, 0.85, 3.2);
-        heartGlow.position.set(0, 0.4, 0.5);
+        const heartGlow = new THREE.PointLight(0xff4d6d, 0.85, 2.5);
+        heartGlow.position.set(0, 0.2, 0.4);
         scene.add(heartGlow);
 
+        // Ground Contact Shadow (Soft Radial Texture)
         const shadowCanvas = document.createElement('canvas');
         shadowCanvas.width = 128;
         shadowCanvas.height = 128;
         const sCtx = shadowCanvas.getContext('2d');
-        const gradient = sCtx.createRadialGradient(64, 64, 0, 64, 64, 60);
-        gradient.addColorStop(0, 'rgba(10, 2, 10, 0.45)');
-        gradient.addColorStop(0.5, 'rgba(10, 2, 10, 0.2)');
-        gradient.addColorStop(1, 'rgba(10, 2, 10, 0)');
-        sCtx.fillStyle = gradient;
+        const sGrad = sCtx.createRadialGradient(64, 64, 10, 64, 64, 60);
+        sGrad.addColorStop(0, 'rgba(10, 3, 12, 0.55)');
+        sGrad.addColorStop(0.5, 'rgba(10, 3, 12, 0.22)');
+        sGrad.addColorStop(1, 'rgba(10, 3, 12, 0)');
+        sCtx.fillStyle = sGrad;
         sCtx.fillRect(0, 0, 128, 128);
 
-        const shadowTex = new THREE.CanvasTexture(shadowCanvas);
-        const shadowPlane = new THREE.Mesh(
-          new THREE.PlaneGeometry(1.7, 0.85),
-          new THREE.MeshBasicMaterial({ map: shadowTex, transparent: true, opacity: 0.85, depthWrite: false })
+        const shadowTexture = new THREE.CanvasTexture(shadowCanvas);
+        const groundShadow = new THREE.Mesh(
+          new THREE.PlaneGeometry(1.5, 1.0),
+          new THREE.MeshBasicMaterial({ map: shadowTexture, transparent: true, opacity: 0.85, depthWrite: false })
         );
-        shadowPlane.rotation.x = -Math.PI / 2;
-        shadowPlane.position.set(0, -0.64, 0);
-        scene.add(shadowPlane);
+        groundShadow.rotation.x = -Math.PI / 2;
+        groundShadow.position.set(0, -0.68, 0);
+        scene.add(groundShadow);
 
-        const skinMat = new THREE.MeshStandardMaterial({ color: 0xffdfd0, roughness: 0.52, metalness: 0.04 });
-        const blushMat = new THREE.MeshStandardMaterial({ color: 0xff758f, roughness: 0.6, transparent: true, opacity: 0.72 });
-        const eyeMat = new THREE.MeshStandardMaterial({ color: 0x221310, roughness: 0.3 });
-        const boyHairMat = new THREE.MeshStandardMaterial({ color: 0x241814, roughness: 0.68, metalness: 0.08 });
-        const girlHairMat = new THREE.MeshStandardMaterial({ color: 0x2a1914, roughness: 0.68, metalness: 0.08 });
-        const boySweaterMat = new THREE.MeshStandardMaterial({ color: 0x6e1b32, roughness: 0.72 });
-        const boyPantsMat = new THREE.MeshStandardMaterial({ color: 0x232d3f, roughness: 0.82 });
-        const boyShoeMat = new THREE.MeshStandardMaterial({ color: 0xf5f5f7, roughness: 0.5 });
-        const girlDressMat = new THREE.MeshStandardMaterial({ color: 0xd9597a, roughness: 0.62 });
-        const girlTopMat = new THREE.MeshStandardMaterial({ color: 0xffeef2, roughness: 0.72 });
-        const girlShoeMat = new THREE.MeshStandardMaterial({ color: 0xc44569, roughness: 0.52 });
-        const heartMat = new THREE.MeshStandardMaterial({ color: 0xff4d6d, roughness: 0.3, metalness: 0.15, emissive: 0x660a22, emissiveIntensity: 0.45 });
-        const goldMat = new THREE.MeshStandardMaterial({ color: 0xffd166, roughness: 0.28, metalness: 0.6, emissive: 0x553300, emissiveIntensity: 0.25 });
-
-        const coupleGroup = new THREE.Group();
-        coupleGroup.position.set(0, -0.05, 0);
-        scene.add(coupleGroup);
-
-        // --- BOY (Sahil) ---
-        const boy = new THREE.Group();
-        boy.position.set(-0.35, -0.65, 0);
-        boy.rotation.y = 0.32;
-        coupleGroup.add(boy);
-
-        const legGeo = new THREE.CylinderGeometry(0.055, 0.048, 0.42, 16);
-        const bLegL = new THREE.Mesh(legGeo, boyPantsMat);
-        bLegL.position.set(-0.08, 0.21, 0);
-        const bLegR = new THREE.Mesh(legGeo, boyPantsMat);
-        bLegR.position.set(0.08, 0.21, 0);
-        boy.add(bLegL, bLegR);
-
-        const shoeGeo = new THREE.SphereGeometry(0.07, 16, 12);
-        shoeGeo.scale(0.85, 0.55, 1.3);
-        const bShoeL = new THREE.Mesh(shoeGeo, boyShoeMat);
-        bShoeL.position.set(-0.08, 0.04, 0.03);
-        const bShoeR = new THREE.Mesh(shoeGeo, boyShoeMat);
-        bShoeR.position.set(0.08, 0.04, 0.03);
-        boy.add(bShoeL, bShoeR);
-
-        const boyTorso = new THREE.Group();
-        boyTorso.position.set(0, 0.42, 0);
-        boy.add(boyTorso);
-
-        const bSweater = new THREE.Mesh(new THREE.CylinderGeometry(0.145, 0.13, 0.36, 20), boySweaterMat);
-        bSweater.position.y = 0.18;
-        boyTorso.add(bSweater);
-
-        const bCollar = new THREE.Mesh(new THREE.TorusGeometry(0.08, 0.02, 8, 20), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.6 }));
-        bCollar.rotation.x = Math.PI / 2;
-        bCollar.position.set(0, 0.36, 0);
-        boyTorso.add(bCollar);
-
-        const bArmL = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.038, 0.30, 12), boySweaterMat);
-        bArmL.position.set(-0.17, 0.18, -0.02);
-        bArmL.rotation.z = 0.3;
-        boyTorso.add(bArmL);
-
-        const bArmR = new THREE.Group();
-        bArmR.position.set(0.14, 0.26, 0);
-        bArmR.rotation.z = -0.55;
-        bArmR.rotation.y = -0.35;
-        const bArmRMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.038, 0.28, 12), boySweaterMat);
-        bArmRMesh.position.y = -0.14;
-        bArmR.add(bArmRMesh);
-        const bHandR = new THREE.Mesh(new THREE.SphereGeometry(0.045, 14, 12), skinMat);
-        bHandR.position.set(0, -0.28, 0);
-        bArmR.add(bHandR);
-        boyTorso.add(bArmR);
-
-        const boyHead = new THREE.Group();
-        boyHead.position.set(0, 0.42, 0);
-        boyTorso.add(boyHead);
-
-        const bNeck = new THREE.Mesh(new THREE.CylinderGeometry(0.055, 0.055, 0.08, 14), skinMat);
-        bNeck.position.y = 0.04;
-        boyHead.add(bNeck);
-
-        const headGeo = new THREE.SphereGeometry(0.24, 32, 24);
-        headGeo.scale(1, 1.05, 0.98);
-        const bHeadMesh = new THREE.Mesh(headGeo, skinMat);
-        bHeadMesh.position.y = 0.24;
-        boyHead.add(bHeadMesh);
-
-        const blushGeo = new THREE.SphereGeometry(0.055, 16, 12);
-        blushGeo.scale(1, 0.65, 0.25);
-        const bBlushL = new THREE.Mesh(blushGeo, blushMat);
-        bBlushL.position.set(-0.12, 0.21, 0.21);
-        const bBlushR = new THREE.Mesh(blushGeo, blushMat);
-        bBlushR.position.set(0.12, 0.21, 0.21);
-        boyHead.add(bBlushL, bBlushR);
-
-        const bNose = new THREE.Mesh(new THREE.SphereGeometry(0.024, 12, 12), skinMat);
-        bNose.position.set(0, 0.23, 0.24);
-        boyHead.add(bNose);
-
-        const eyeGeo = new THREE.TorusGeometry(0.032, 0.007, 8, 16, Math.PI * 0.75);
-        const bEyeL = new THREE.Mesh(eyeGeo, eyeMat);
-        bEyeL.position.set(-0.085, 0.26, 0.22);
-        bEyeL.rotation.set(0.1, 0.1, Math.PI * 0.12);
-        const bEyeR = new THREE.Mesh(eyeGeo, eyeMat);
-        bEyeR.position.set(0.085, 0.26, 0.22);
-        bEyeR.rotation.set(0.1, -0.1, Math.PI * 0.12);
-        boyHead.add(bEyeL, bEyeR);
-
-        const bHairCrown = new THREE.Mesh(new THREE.SphereGeometry(0.258, 24, 20), boyHairMat);
-        bHairCrown.position.set(0, 0.26, -0.02);
-        bHairCrown.scale.set(1.02, 1.04, 1.02);
-        boyHead.add(bHairCrown);
-
-        const tuftGeo = new THREE.SphereGeometry(0.09, 14, 12);
-        tuftGeo.scale(1, 0.7, 1.3);
-        for (let i = 0; i < 5; i++) {
-          const tuft = new THREE.Mesh(tuftGeo, boyHairMat);
-          const ang = (i - 2) * 0.22;
-          tuft.position.set(Math.sin(ang) * 0.18, 0.44 + Math.cos(ang) * 0.04, Math.cos(ang) * 0.14);
-          tuft.rotation.set(0.4, ang * 0.8, -ang * 0.5);
-          boyHead.add(tuft);
-        }
-
-        // --- GIRL (Sahifa) ---
-        const girl = new THREE.Group();
-        girl.position.set(0.35, -0.65, 0);
-        girl.rotation.y = -0.32;
-        coupleGroup.add(girl);
-
-        const gLegL = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.04, 0.38, 16), skinMat);
-        gLegL.position.set(-0.07, 0.19, 0);
-        const gLegR = new THREE.Mesh(new THREE.CylinderGeometry(0.045, 0.04, 0.38, 16), skinMat);
-        gLegR.position.set(0.07, 0.19, 0);
-        girl.add(gLegL, gLegR);
-
-        const gShoeGeo = new THREE.SphereGeometry(0.065, 16, 12);
-        gShoeGeo.scale(0.8, 0.5, 1.25);
-        const gShoeL = new THREE.Mesh(gShoeGeo, girlShoeMat);
-        gShoeL.position.set(-0.07, 0.03, 0.02);
-        const gShoeR = new THREE.Mesh(gShoeGeo, girlShoeMat);
-        gShoeR.position.set(0.07, 0.03, 0.02);
-        girl.add(gShoeL, gShoeR);
-
-        const girlTorso = new THREE.Group();
-        girlTorso.position.set(0, 0.40, 0);
-        girl.add(girlTorso);
-
-        const gSkirt = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.23, 0.24, 20), girlDressMat);
-        gSkirt.position.y = 0.06;
-        girlTorso.add(gSkirt);
-
-        const gTop = new THREE.Mesh(new THREE.CylinderGeometry(0.12, 0.11, 0.28, 18), girlTopMat);
-        gTop.position.y = 0.22;
-        girlTorso.add(gTop);
-
-        const gArmL = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.034, 0.28, 12), girlTopMat);
-        gArmL.position.set(0.15, 0.18, -0.02);
-        gArmL.rotation.z = -0.25;
-        girlTorso.add(gArmL);
-
-        const gArmR = new THREE.Group();
-        gArmR.position.set(-0.13, 0.24, 0);
-        gArmR.rotation.z = 0.55;
-        gArmR.rotation.y = 0.35;
-        const gArmRMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.038, 0.034, 0.26, 12), girlTopMat);
-        gArmRMesh.position.y = -0.13;
-        gArmR.add(gArmRMesh);
-        const gHandR = new THREE.Mesh(new THREE.SphereGeometry(0.042, 14, 12), skinMat);
-        gHandR.position.set(0, -0.26, 0);
-        gArmR.add(gHandR);
-        girlTorso.add(gArmR);
-
-        const girlHead = new THREE.Group();
-        girlHead.position.set(0, 0.40, 0);
-        girlTorso.add(girlHead);
-
-        const gNeck = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.048, 0.08, 14), skinMat);
-        gNeck.position.y = 0.04;
-        girlHead.add(gNeck);
-
-        const gHeadGeo = new THREE.SphereGeometry(0.225, 32, 24);
-        gHeadGeo.scale(1, 1.04, 0.98);
-        const gHeadMesh = new THREE.Mesh(gHeadGeo, skinMat);
-        gHeadMesh.position.y = 0.23;
-        girlHead.add(gHeadMesh);
-
-        const gBlushL = new THREE.Mesh(blushGeo, blushMat);
-        gBlushL.position.set(-0.11, 0.20, 0.20);
-        const gBlushR = new THREE.Mesh(blushGeo, blushMat);
-        gBlushR.position.set(0.11, 0.20, 0.20);
-        girlHead.add(gBlushL, gBlushR);
-
-        const gNose = new THREE.Mesh(new THREE.SphereGeometry(0.022, 12, 12), skinMat);
-        gNose.position.set(0, 0.22, 0.23);
-        girlHead.add(gNose);
-
-        const gEyeL = new THREE.Mesh(eyeGeo, eyeMat);
-        gEyeL.position.set(-0.075, 0.25, 0.21);
-        gEyeL.rotation.set(0.1, 0.1, Math.PI * 0.12);
-        const gEyeR = new THREE.Mesh(eyeGeo, eyeMat);
-        gEyeR.position.set(0.075, 0.25, 0.21);
-        gEyeR.rotation.set(0.1, -0.1, Math.PI * 0.12);
-        girlHead.add(gEyeL, gEyeR);
-
-        const gHairCrown = new THREE.Mesh(new THREE.SphereGeometry(0.245, 24, 20), girlHairMat);
-        gHairCrown.position.set(0, 0.25, -0.02);
-        gHairCrown.scale.set(1.03, 1.04, 1.03);
-        girlHead.add(gHairCrown);
-
-        const lockGeo = new THREE.CylinderGeometry(0.07, 0.045, 0.45, 14);
-        const lockBack = new THREE.Mesh(lockGeo, girlHairMat);
-        lockBack.position.set(0, 0.08, -0.15);
-        lockBack.rotation.x = -0.15;
-        girlHead.add(lockBack);
-
-        const lockL = new THREE.Mesh(lockGeo, girlHairMat);
-        lockL.position.set(0.17, 0.10, -0.02);
-        lockL.rotation.z = -0.2;
-        girlHead.add(lockL);
-
-        const lockR = new THREE.Mesh(lockGeo, girlHairMat);
-        lockR.position.set(-0.16, 0.10, -0.02);
-        lockR.rotation.z = 0.2;
-        girlHead.add(lockR);
-
-        const starClip = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 12), goldMat);
-        starClip.position.set(0.19, 0.35, 0.14);
-        girlHead.add(starClip);
-
-        boyHead.rotation.z = -0.18;
-        boyHead.rotation.y = 0.20;
-        girlHead.rotation.z = 0.18;
-        girlHead.rotation.y = -0.20;
+        // Materials
+        const skinMat = new THREE.MeshStandardMaterial({ color: 0xffdfd2, roughness: 0.46, metalness: 0.02 });
+        const blushMat = new THREE.MeshStandardMaterial({ color: 0xff6b8b, roughness: 0.6, transparent: true, opacity: 0.72 });
+        const eyeMat = new THREE.MeshStandardMaterial({ color: 0x1f1412, roughness: 0.18, metalness: 0.1 });
+        const highlightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const boyHairMat = new THREE.MeshStandardMaterial({ color: 0x241714, roughness: 0.65, metalness: 0.06 });
+        const girlHairMat = new THREE.MeshStandardMaterial({ color: 0x2b1813, roughness: 0.65, metalness: 0.06 });
+        const boySweaterMat = new THREE.MeshStandardMaterial({ color: 0x5a1526, roughness: 0.72 });
+        const boyPantsMat = new THREE.MeshStandardMaterial({ color: 0x242d38, roughness: 0.82 });
+        const boyShoeMat = new THREE.MeshStandardMaterial({ color: 0xf6f6f8, roughness: 0.45 });
+        const girlTopMat = new THREE.MeshStandardMaterial({ color: 0xfff0f4, roughness: 0.68 });
+        const girlSkirtMat = new THREE.MeshStandardMaterial({ color: 0xdc5879, roughness: 0.62 });
+        const girlShoeMat = new THREE.MeshStandardMaterial({ color: 0xc8466b, roughness: 0.5 });
+        const goldMat = new THREE.MeshStandardMaterial({ color: 0xffd166, roughness: 0.25, metalness: 0.65 });
+        const heartMat = new THREE.MeshStandardMaterial({ color: 0xff4d6d, roughness: 0.28, metalness: 0.15, emissive: 0x550a1e, emissiveIntensity: 0.4 });
+        const petalMat = new THREE.MeshStandardMaterial({ color: 0xe63946, roughness: 0.5, side: THREE.DoubleSide });
 
         function createHeartGeometry(size) {
           const shape = new THREE.Shape();
@@ -7261,19 +7208,303 @@ No matter how far we travel or where the roads of life lead us, my heart will al
           });
         }
 
-        const kissHeartMesh = new THREE.Mesh(createHeartGeometry(0.13), heartMat);
-        kissHeartMesh.position.set(0, 0.32, 0.16);
-        kissHeartMesh.rotation.z = Math.PI;
-        coupleGroup.add(kissHeartMesh);
+        function createPetalGeometry(size) {
+          const shape = new THREE.Shape();
+          shape.moveTo(0, -size * 0.5);
+          shape.bezierCurveTo(size * 0.4, -size * 0.3, size * 0.45, size * 0.3, 0, size * 0.5);
+          shape.bezierCurveTo(-size * 0.45, size * 0.3, -size * 0.4, -size * 0.3, 0, -size * 0.5);
+          const geo = new THREE.ShapeGeometry(shape, 8);
+          const pos = geo.attributes.position;
+          for (let i = 0; i < pos.count; i++) {
+            const y = pos.getY(i);
+            pos.setZ(i, Math.sin((y / size) * Math.PI) * size * 0.2);
+          }
+          geo.computeVertexNormals();
+          return geo;
+        }
 
+        const coupleGroup = new THREE.Group();
+        coupleGroup.position.set(0, -0.04, 0);
+        scene.add(coupleGroup);
+
+        // Helper for Eye with Catchlights & Blinking Eyelid
+        function createStylizedEye(isGirl) {
+          const eyeGroup = new THREE.Group();
+          const iris = new THREE.Mesh(new THREE.SphereGeometry(0.042, 20, 16), eyeMat);
+          iris.scale.set(0.9, 1.15, 0.45);
+          eyeGroup.add(iris);
+
+          const spark1 = new THREE.Mesh(new THREE.SphereGeometry(0.012, 10, 8), highlightMat);
+          spark1.position.set(-0.012, 0.018, 0.016);
+          eyeGroup.add(spark1);
+
+          const spark2 = new THREE.Mesh(new THREE.SphereGeometry(0.006, 8, 6), highlightMat);
+          spark2.position.set(0.012, -0.012, 0.016);
+          eyeGroup.add(spark2);
+
+          if (isGirl) {
+            const lashGeo = new THREE.TorusGeometry(0.046, 0.007, 8, 14, Math.PI * 0.75);
+            const lash = new THREE.Mesh(lashGeo, eyeMat);
+            lash.position.set(0, 0.016, 0.01);
+            lash.rotation.set(-0.1, 0, Math.PI * 0.12);
+            eyeGroup.add(lash);
+          }
+
+          const lidGeo = new THREE.SphereGeometry(0.045, 18, 14, 0, Math.PI * 2, 0, Math.PI * 0.55);
+          const eyelid = new THREE.Mesh(lidGeo, skinMat);
+          eyelid.position.set(0, 0.005, 0.002);
+          eyelid.rotation.x = -Math.PI * 0.48;
+          eyelid.visible = false;
+          eyeGroup.add(eyelid);
+
+          return { eyeGroup, eyelid };
+        }
+
+        // ==========================================
+        // BUILD SAHIL (Boy)
+        // ==========================================
+        const boy = new THREE.Group();
+        boy.position.set(-0.33, -0.62, 0);
+        boy.rotation.y = 0.38; // turned towards Sahifa
+        coupleGroup.add(boy);
+
+        const legGeo = new THREE.CylinderGeometry(0.052, 0.045, 0.42, 16);
+        const bLegL = new THREE.Mesh(legGeo, boyPantsMat);
+        bLegL.position.set(-0.08, 0.21, -0.01);
+        const bLegR = new THREE.Mesh(legGeo, boyPantsMat);
+        bLegR.position.set(0.08, 0.21, 0.01);
+        boy.add(bLegL, bLegR);
+
+        const sneakerGeo = new THREE.SphereGeometry(0.068, 16, 12);
+        sneakerGeo.scale(0.85, 0.55, 1.35);
+        const bShoeL = new THREE.Mesh(sneakerGeo, boyShoeMat);
+        bShoeL.position.set(-0.08, 0.035, 0.035);
+        const bShoeR = new THREE.Mesh(sneakerGeo, boyShoeMat);
+        bShoeR.position.set(0.08, 0.035, 0.035);
+        boy.add(bShoeL, bShoeR);
+
+        const boyTorso = new THREE.Group();
+        boyTorso.position.set(0, 0.42, 0);
+        boy.add(boyTorso);
+
+        const bSweater = new THREE.Mesh(new THREE.CylinderGeometry(0.142, 0.125, 0.36, 24), boySweaterMat);
+        bSweater.position.y = 0.18;
+        boyTorso.add(bSweater);
+
+        const bCollar = new THREE.Mesh(new THREE.TorusGeometry(0.076, 0.02, 10, 24), new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.55 }));
+        bCollar.rotation.x = Math.PI / 2;
+        bCollar.position.set(0, 0.36, 0);
+        boyTorso.add(bCollar);
+
+        const bArmL = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.036, 0.30, 14), boySweaterMat);
+        bArmL.position.set(-0.165, 0.18, -0.02);
+        bArmL.rotation.z = 0.25;
+        boyTorso.add(bArmL);
+        const bHandL = new THREE.Mesh(new THREE.SphereGeometry(0.042, 14, 12), skinMat);
+        bHandL.position.set(-0.20, 0.03, -0.02);
+        boyTorso.add(bHandL);
+
+        // Boy Right Arm (holding Sahifa's hand)
+        const bArmRGroup = new THREE.Group();
+        bArmRGroup.position.set(0.13, 0.26, 0);
+        bArmRGroup.rotation.z = -0.58;
+        bArmRGroup.rotation.y = -0.32;
+        const bArmRMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.042, 0.036, 0.28, 14), boySweaterMat);
+        bArmRMesh.position.y = -0.14;
+        bArmRGroup.add(bArmRMesh);
+        const bHandR = new THREE.Mesh(new THREE.SphereGeometry(0.044, 14, 12), skinMat);
+        bHandR.position.set(0, -0.28, 0.01);
+        bArmRGroup.add(bHandR);
+        boyTorso.add(bArmRGroup);
+
+        const boyHead = new THREE.Group();
+        boyHead.position.set(0, 0.42, 0);
+        boyTorso.add(boyHead);
+
+        const bNeck = new THREE.Mesh(new THREE.CylinderGeometry(0.054, 0.054, 0.08, 16), skinMat);
+        bNeck.position.y = 0.04;
+        boyHead.add(bNeck);
+
+        const headGeo = new THREE.SphereGeometry(0.235, 32, 26);
+        headGeo.scale(1, 1.05, 0.98);
+        const bHeadMesh = new THREE.Mesh(headGeo, skinMat);
+        bHeadMesh.position.y = 0.24;
+        boyHead.add(bHeadMesh);
+
+        const blushGeo = new THREE.SphereGeometry(0.052, 16, 12);
+        blushGeo.scale(1, 0.6, 0.25);
+        const bBlushL = new THREE.Mesh(blushGeo, blushMat);
+        bBlushL.position.set(-0.115, 0.205, 0.21);
+        const bBlushR = new THREE.Mesh(blushGeo, blushMat);
+        bBlushR.position.set(0.115, 0.205, 0.21);
+        boyHead.add(bBlushL, bBlushR);
+
+        const bNose = new THREE.Mesh(new THREE.SphereGeometry(0.022, 14, 12), skinMat);
+        bNose.position.set(0, 0.225, 0.238);
+        boyHead.add(bNose);
+
+        const smileGeo = new THREE.TorusGeometry(0.026, 0.006, 8, 16, Math.PI * 0.7);
+        const bSmile = new THREE.Mesh(smileGeo, new THREE.MeshBasicMaterial({ color: 0x9e2a2b }));
+        bSmile.position.set(0, 0.175, 0.23);
+        bSmile.rotation.set(0.2, 0, Math.PI * 1.15);
+        boyHead.add(bSmile);
+
+        const bEyeLeft = createStylizedEye(false);
+        bEyeLeft.eyeGroup.position.set(-0.082, 0.255, 0.21);
+        bEyeLeft.eyeGroup.rotation.set(0.05, 0.08, 0);
+        const bEyeRight = createStylizedEye(false);
+        bEyeRight.eyeGroup.position.set(0.082, 0.255, 0.21);
+        bEyeRight.eyeGroup.rotation.set(0.05, -0.08, 0);
+        boyHead.add(bEyeLeft.eyeGroup, bEyeRight.eyeGroup);
+
+        const bHairBase = new THREE.Mesh(new THREE.SphereGeometry(0.252, 28, 22), boyHairMat);
+        bHairBase.position.set(0, 0.265, -0.02);
+        bHairBase.scale.set(1.02, 1.04, 1.02);
+        boyHead.add(bHairBase);
+
+        const tuftGeo = new THREE.SphereGeometry(0.088, 16, 12);
+        tuftGeo.scale(1, 0.7, 1.35);
+        for (let i = 0; i < 6; i++) {
+          const tuft = new THREE.Mesh(tuftGeo, boyHairMat);
+          const ang = (i - 2.5) * 0.21;
+          tuft.position.set(Math.sin(ang) * 0.175, 0.44 + Math.cos(ang) * 0.035, Math.cos(ang) * 0.145);
+          tuft.rotation.set(0.38, ang * 0.85, -ang * 0.45);
+          boyHead.add(tuft);
+        }
+
+        // ==========================================
+        // BUILD SAHIFA (Girl)
+        // ==========================================
+        const girl = new THREE.Group();
+        girl.position.set(0.33, -0.62, 0);
+        girl.rotation.y = -0.38; // turned towards Sahil
+        coupleGroup.add(girl);
+
+        const gLegGeo = new THREE.CylinderGeometry(0.044, 0.038, 0.38, 16);
+        const gLegL = new THREE.Mesh(gLegGeo, skinMat);
+        gLegL.position.set(-0.07, 0.19, 0.01);
+        const gLegR = new THREE.Mesh(gLegGeo, skinMat);
+        gLegR.position.set(0.07, 0.19, -0.01);
+        girl.add(gLegL, gLegR);
+
+        const gShoeGeo = new THREE.SphereGeometry(0.062, 16, 12);
+        gShoeGeo.scale(0.82, 0.52, 1.25);
+        const gShoeL = new THREE.Mesh(gShoeGeo, girlShoeMat);
+        gShoeL.position.set(-0.07, 0.03, 0.025);
+        const gShoeR = new THREE.Mesh(gShoeGeo, girlShoeMat);
+        gShoeR.position.set(0.07, 0.03, 0.025);
+        girl.add(gShoeL, gShoeR);
+
+        const girlTorso = new THREE.Group();
+        girlTorso.position.set(0, 0.40, 0);
+        girl.add(girlTorso);
+
+        const gSkirt = new THREE.Mesh(new THREE.CylinderGeometry(0.115, 0.24, 0.24, 24), girlSkirtMat);
+        gSkirt.position.y = 0.06;
+        girlTorso.add(gSkirt);
+
+        const gTop = new THREE.Mesh(new THREE.CylinderGeometry(0.118, 0.108, 0.28, 20), girlTopMat);
+        gTop.position.y = 0.22;
+        girlTorso.add(gTop);
+
+        const gArmR = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.032, 0.28, 14), girlTopMat);
+        gArmR.position.set(0.145, 0.18, -0.02);
+        gArmR.rotation.z = -0.22;
+        girlTorso.add(gArmR);
+        const gHandRMesh = new THREE.Mesh(new THREE.SphereGeometry(0.038, 14, 12), skinMat);
+        gHandRMesh.position.set(0.175, 0.04, -0.02);
+        girlTorso.add(gHandRMesh);
+
+        // Girl Left Arm (holding Sahil's hand)
+        const gArmLGroup = new THREE.Group();
+        gArmLGroup.position.set(-0.12, 0.24, 0);
+        gArmLGroup.rotation.z = 0.58;
+        gArmLGroup.rotation.y = 0.32;
+        const gArmLMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.036, 0.032, 0.26, 14), girlTopMat);
+        gArmLMesh.position.y = -0.13;
+        gArmLGroup.add(gArmLMesh);
+        const gHandLMesh = new THREE.Mesh(new THREE.SphereGeometry(0.040, 14, 12), skinMat);
+        gHandLMesh.position.set(0, -0.26, 0.01);
+        gArmLGroup.add(gHandLMesh);
+        girlTorso.add(gArmLGroup);
+
+        const girlHead = new THREE.Group();
+        girlHead.position.set(0, 0.40, 0);
+        girlTorso.add(girlHead);
+
+        const gNeck = new THREE.Mesh(new THREE.CylinderGeometry(0.048, 0.048, 0.08, 16), skinMat);
+        gNeck.position.y = 0.04;
+        girlHead.add(gNeck);
+
+        const gHeadGeo = new THREE.SphereGeometry(0.22, 32, 26);
+        gHeadGeo.scale(1, 1.04, 0.98);
+        const gHeadMesh = new THREE.Mesh(gHeadGeo, skinMat);
+        gHeadMesh.position.y = 0.23;
+        girlHead.add(gHeadMesh);
+
+        const gBlushL = new THREE.Mesh(blushGeo, blushMat);
+        gBlushL.position.set(-0.11, 0.195, 0.20);
+        const gBlushR = new THREE.Mesh(blushGeo, blushMat);
+        gBlushR.position.set(0.11, 0.195, 0.20);
+        girlHead.add(gBlushL, gBlushR);
+
+        const gNose = new THREE.Mesh(new THREE.SphereGeometry(0.020, 14, 12), skinMat);
+        gNose.position.set(0, 0.215, 0.228);
+        girlHead.add(gNose);
+
+        const gSmile = new THREE.Mesh(smileGeo, new THREE.MeshBasicMaterial({ color: 0xb53150 }));
+        gSmile.position.set(0, 0.17, 0.22);
+        gSmile.rotation.set(0.2, 0, Math.PI * 1.15);
+        girlHead.add(gSmile);
+
+        const gEyeLeft = createStylizedEye(true);
+        gEyeLeft.eyeGroup.position.set(-0.075, 0.245, 0.20);
+        gEyeLeft.eyeGroup.rotation.set(0.05, 0.08, 0);
+        const gEyeRight = createStylizedEye(true);
+        gEyeRight.eyeGroup.position.set(0.075, 0.245, 0.20);
+        gEyeRight.eyeGroup.rotation.set(0.05, -0.08, 0);
+        girlHead.add(gEyeLeft.eyeGroup, gEyeRight.eyeGroup);
+
+        const gHairBase = new THREE.Mesh(new THREE.SphereGeometry(0.240, 28, 22), girlHairMat);
+        gHairBase.position.set(0, 0.25, -0.02);
+        gHairBase.scale.set(1.03, 1.04, 1.03);
+        girlHead.add(gHairBase);
+
+        const lockGeo = new THREE.CylinderGeometry(0.065, 0.042, 0.44, 16);
+        const lockBack = new THREE.Mesh(lockGeo, girlHairMat);
+        lockBack.position.set(0, 0.08, -0.15);
+        lockBack.rotation.x = -0.16;
+        girlHead.add(lockBack);
+
+        const lockL = new THREE.Mesh(lockGeo, girlHairMat);
+        lockL.position.set(0.165, 0.10, -0.02);
+        lockL.rotation.z = -0.22;
+        girlHead.add(lockL);
+
+        const lockR = new THREE.Mesh(lockGeo, girlHairMat);
+        lockR.position.set(-0.155, 0.10, -0.02);
+        lockR.rotation.z = 0.22;
+        girlHead.add(lockR);
+
+        const hairClip = new THREE.Mesh(new THREE.SphereGeometry(0.032, 14, 12), goldMat);
+        hairClip.position.set(0.18, 0.34, 0.14);
+        girlHead.add(hairClip);
+
+        // Affectionate tilt looking at each other
+        boyHead.rotation.z = -0.14;
+        boyHead.rotation.y = 0.18;
+        girlHead.rotation.z = 0.14;
+        girlHead.rotation.y = -0.18;
+
+        // Floating Hearts
         const floatingHearts = [];
         const heartColors = [0xff4d6d, 0xff758f, 0xff8fa3, 0xffd166, 0xc9184a];
-        for (let i = 0; i < 7; i++) {
-          const size = 0.055 + Math.random() * 0.045;
+        for (let i = 0; i < 8; i++) {
+          const size = 0.045 + Math.random() * 0.035;
           const hMat = new THREE.MeshStandardMaterial({
             color: heartColors[i % heartColors.length],
             roughness: 0.3,
-            metalness: 0.2,
+            metalness: 0.15,
             emissive: 0x440515,
             emissiveIntensity: 0.35
           });
@@ -7281,12 +7512,12 @@ No matter how far we travel or where the roads of life lead us, my heart will al
           hMesh.rotation.z = Math.PI;
           const hData = {
             mesh: hMesh,
-            x: (Math.random() - 0.5) * 1.1,
-            y: -0.4 + (i / 7) * 1.4,
-            z: (Math.random() - 0.5) * 0.6,
-            speedY: 0.0035 + Math.random() * 0.004,
-            rotSpeedX: (Math.random() - 0.5) * 0.03,
-            rotSpeedY: (Math.random() - 0.5) * 0.03,
+            x: (Math.random() - 0.5) * 1.0,
+            y: -0.4 + (i / 8) * 1.35,
+            z: (Math.random() - 0.5) * 0.5,
+            speedY: 0.0035 + Math.random() * 0.0035,
+            rotSpeedX: (Math.random() - 0.5) * 0.025,
+            rotSpeedY: (Math.random() - 0.5) * 0.025,
             wobbleSpeed: 1.5 + Math.random() * 2,
             wobbleOffset: Math.random() * Math.PI * 2
           };
@@ -7295,116 +7526,219 @@ No matter how far we travel or where the roads of life lead us, my heart will al
           floatingHearts.push(hData);
         }
 
-        let targetCamX = 0, targetCamY = 0.1;
-        let bounceY = 0, bounceVelocity = 0;
-
-        function updatePointer(e) {
-          const rect = wrap.getBoundingClientRect();
-          const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-          const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-          const normX = ((clientX - rect.left) / rect.width - 0.5) * 2;
-          const normY = ((clientY - rect.top) / rect.height - 0.5) * 2;
-          targetCamX = Math.max(-0.4, Math.min(0.4, normX * 0.45));
-          targetCamY = Math.max(-0.15, Math.min(0.35, 0.1 - normY * 0.25));
+        // Floating Rose Petals
+        const rosePetals = [];
+        for (let i = 0; i < 6; i++) {
+          const pSize = 0.045 + Math.random() * 0.03;
+          const pMesh = new THREE.Mesh(createPetalGeometry(pSize), petalMat);
+          const pData = {
+            mesh: pMesh,
+            x: (Math.random() - 0.5) * 1.1,
+            y: -0.3 + (i / 6) * 1.3,
+            z: (Math.random() - 0.5) * 0.6,
+            speedY: 0.0025 + Math.random() * 0.0025,
+            rotSpeedX: (Math.random() - 0.5) * 0.03,
+            rotSpeedY: (Math.random() - 0.5) * 0.03,
+            rotSpeedZ: (Math.random() - 0.5) * 0.02,
+            wobbleSpeed: 1.8 + Math.random() * 1.5,
+            wobbleOffset: Math.random() * Math.PI * 2
+          };
+          pMesh.position.set(pData.x, pData.y, pData.z);
+          coupleGroup.add(pMesh);
+          rosePetals.push(pData);
         }
 
-        wrap.addEventListener('mousemove', updatePointer, { passive: true });
-        wrap.addEventListener('touchmove', updatePointer, { passive: true });
-        wrap.addEventListener('mouseleave', () => {
-          targetCamX = 0;
-          targetCamY = 0.1;
+        // Central Pulsing Heart above hands
+        const centerHeart = new THREE.Mesh(createHeartGeometry(0.085), heartMat);
+        centerHeart.position.set(0, 0.16, 0.12);
+        centerHeart.rotation.z = Math.PI;
+        coupleGroup.add(centerHeart);
+
+        // Resize handling
+        function onResize() {
+          if (!wrap || !renderer || !camera) return;
+          const w = wrap.clientWidth;
+          const h = wrap.clientHeight;
+          if (w === 0 || h === 0) return;
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          renderer.setSize(w, h, false);
+        }
+        window.addEventListener('resize', onResize);
+
+        // Interactive Parallax
+        let targetCamX = 0;
+        let targetCamY = 0.06;
+
+        function updatePointerParallax(clientX, clientY) {
+          const rect = wrap.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = (clientX - cx) / (rect.width / 2 || 1);
+          const dy = (clientY - cy) / (rect.height / 2 || 1);
+          targetCamX = Math.max(-0.25, Math.min(0.25, dx * 0.22));
+          targetCamY = 0.06 + Math.max(-0.15, Math.min(0.15, -dy * 0.12));
+        }
+
+        wrap.addEventListener('mousemove', (e) => {
+          updatePointerParallax(e.clientX, e.clientY);
         });
 
-        function triggerKissBounce() {
-          bounceVelocity = 0.06;
-          for (let i = 0; i < 3; i++) {
-            const extraH = floatingHearts[i];
-            if (extraH) {
-              extraH.y = -0.1 + Math.random() * 0.1;
-              extraH.x = (Math.random() - 0.5) * 0.3;
-              extraH.speedY = 0.009 + Math.random() * 0.006;
-            }
+        wrap.addEventListener('touchmove', (e) => {
+          if (e.touches && e.touches[0]) {
+            updatePointerParallax(e.touches[0].clientX, e.touches[0].clientY);
+          }
+        }, { passive: true });
+
+        wrap.addEventListener('mouseleave', () => {
+          targetCamX = 0;
+          targetCamY = 0.06;
+        });
+
+        // Tap / Click Interaction: Move closer and burst hearts
+        let tapLean = 0;
+        function triggerTapInteraction() {
+          tapLean = 1.0;
+          // Burst hearts and petals upward
+          for (let i = 0; i < floatingHearts.length; i++) {
+            const fh = floatingHearts[i];
+            fh.y = 0.05 + Math.random() * 0.15;
+            fh.x = (Math.random() - 0.5) * 0.4;
+            fh.speedY = 0.009 + Math.random() * 0.006;
+          }
+          for (let i = 0; i < rosePetals.length; i++) {
+            const rp = rosePetals[i];
+            rp.y = 0.05 + Math.random() * 0.15;
+            rp.x = (Math.random() - 0.5) * 0.4;
+            rp.speedY = 0.008 + Math.random() * 0.005;
           }
         }
-        wrap.addEventListener('click', triggerKissBounce);
 
+        wrap.addEventListener('click', triggerTapInteraction);
+        wrap.addEventListener('touchend', (e) => {
+          triggerTapInteraction();
+        }, { passive: true });
+
+        // Animation Loop with Visibility Optimization
+        let animFrameId;
         let isVisible = true;
-        let animFrameId = null;
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        let lastTime = performance.now();
+        let blinkTimer = 0;
+        let nextBlinkDuration = 3.2 + Math.random() * 2.0;
+        let isBlinking = false;
+        let blinkProgress = 0;
 
         const observer = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             isVisible = entry.isIntersecting;
             if (isVisible && !animFrameId) {
+              lastTime = performance.now();
               animFrameId = requestAnimationFrame(animate);
             }
           });
-        }, { threshold: 0.05 });
+        }, { threshold: 0.1 });
         observer.observe(wrap);
 
-        function handleResize() {
-          const w = wrap.clientWidth;
-          const h = wrap.clientHeight;
-          if (!w || !h) return;
-          camera.aspect = w / h;
-          camera.updateProjectionMatrix();
-          renderer.setSize(w, h, false);
-        }
-        window.addEventListener('resize', handleResize);
-
-        let startTime = performance.now();
         function animate(now) {
           if (!isVisible) {
             animFrameId = null;
             return;
           }
 
-          const elapsed = (now - startTime) * 0.001;
-          const time = prefersReducedMotion ? elapsed * 0.25 : elapsed;
+          const delta = Math.min((now - lastTime) * 0.001, 0.1);
+          lastTime = now;
+          const time = now * 0.001;
 
-          const breath = Math.sin(time * 2.2) * 0.012;
+          // Gentle breathing
+          const breath = Math.sin(time * 2.0) * 0.012;
           boyTorso.position.y = 0.42 + breath;
           girlTorso.position.y = 0.40 + breath * 0.95;
 
-          const kissLean = Math.sin(time * 1.5) * 0.02;
-          boyHead.rotation.z = -0.18 - kissLean;
-          girlHead.rotation.z = 0.18 + kissLean;
+          // Heart pulse
+          const pulse = 1 + Math.sin(time * 3.2) * 0.08;
+          centerHeart.scale.set(pulse, pulse, pulse);
 
-          const pulse = 1 + Math.sin(time * 3.5) * 0.08 + kissLean * 1.8;
-          kissHeartMesh.scale.set(pulse, pulse, pulse);
+          // Tap Lean Interaction (move closer and tilt heads affectionately)
+          if (tapLean > 0) {
+            tapLean -= delta * 2.2;
+            if (tapLean < 0) tapLean = 0;
+          }
+          const currentLean = tapLean * 0.055;
+          boy.position.x = -0.33 + currentLean;
+          girl.position.x = 0.33 - currentLean;
+          boyHead.rotation.z = -0.14 - currentLean * 1.5;
+          girlHead.rotation.z = 0.14 + currentLean * 1.5;
 
-          lockBack.rotation.x = -0.15 + Math.sin(time * 2.0) * 0.03;
-          lockL.rotation.z = -0.2 + Math.sin(time * 1.8) * 0.025;
-          lockR.rotation.z = 0.2 - Math.sin(time * 1.8) * 0.025;
+          // Natural Blinking
+          blinkTimer += delta;
+          if (blinkTimer >= nextBlinkDuration && !isBlinking) {
+            isBlinking = true;
+            blinkProgress = 0;
+          }
+          if (isBlinking) {
+            blinkProgress += delta * 7.5;
+            if (blinkProgress >= Math.PI) {
+              isBlinking = false;
+              blinkTimer = 0;
+              nextBlinkDuration = 2.8 + Math.random() * 2.5;
+              bEyeLeft.eyelid.visible = false;
+              bEyeRight.eyelid.visible = false;
+              gEyeLeft.eyelid.visible = false;
+              gEyeRight.eyelid.visible = false;
+            } else {
+              const s = Math.sin(blinkProgress);
+              bEyeLeft.eyelid.visible = true;
+              bEyeRight.eyelid.visible = true;
+              gEyeLeft.eyelid.visible = true;
+              gEyeRight.eyelid.visible = true;
+              const angle = -Math.PI * 0.48 + s * Math.PI * 0.52;
+              bEyeLeft.eyelid.rotation.x = angle;
+              bEyeRight.eyelid.rotation.x = angle;
+              gEyeLeft.eyelid.rotation.x = angle;
+              gEyeRight.eyelid.rotation.x = angle;
+            }
+          }
 
+          // Hair movement (soft romantic breeze)
+          const hairWave = Math.sin(time * 2.4) * 0.02;
+          lockL.rotation.z = -0.22 + hairWave;
+          lockR.rotation.z = 0.22 - hairWave;
+
+          // Floating Hearts Animation
           for (let i = 0; i < floatingHearts.length; i++) {
             const fh = floatingHearts[i];
             fh.y += fh.speedY;
-            fh.x += Math.sin(time * fh.wobbleSpeed + fh.wobbleOffset) * 0.0018;
+            fh.x += Math.sin(time * fh.wobbleSpeed + fh.wobbleOffset) * 0.0016;
             fh.mesh.rotation.y += fh.rotSpeedY;
             fh.mesh.rotation.x += fh.rotSpeedX;
-
             if (fh.y > 0.95) {
               fh.y = -0.45;
               fh.x = (Math.random() - 0.5) * 0.9;
-              fh.z = (Math.random() - 0.5) * 0.5;
+              fh.speedY = 0.0035 + Math.random() * 0.0035;
             }
             fh.mesh.position.set(fh.x, fh.y, fh.z);
           }
 
-          if (bounceVelocity !== 0 || bounceY !== 0) {
-            bounceY += bounceVelocity;
-            bounceVelocity -= 0.004;
-            if (bounceY <= 0) {
-              bounceY = 0;
-              bounceVelocity = 0;
+          // Rose Petals Animation
+          for (let i = 0; i < rosePetals.length; i++) {
+            const rp = rosePetals[i];
+            rp.y += rp.speedY;
+            rp.x += Math.sin(time * rp.wobbleSpeed + rp.wobbleOffset) * 0.002;
+            rp.mesh.rotation.y += rp.rotSpeedY;
+            rp.mesh.rotation.x += rp.rotSpeedX;
+            rp.mesh.rotation.z += rp.rotSpeedZ;
+            if (rp.y > 0.95) {
+              rp.y = -0.45;
+              rp.x = (Math.random() - 0.5) * 1.0;
+              rp.speedY = 0.0025 + Math.random() * 0.0025;
             }
-            coupleGroup.position.y = -0.05 + bounceY;
+            rp.mesh.position.set(rp.x, rp.y, rp.z);
           }
 
+          // Camera Parallax
           camera.position.x += (targetCamX - camera.position.x) * 0.05;
           camera.position.y += (targetCamY - camera.position.y) * 0.05;
-          camera.lookAt(0, -0.05, 0);
+          camera.lookAt(0, -0.04, 0);
 
           renderer.render(scene, camera);
           animFrameId = requestAnimationFrame(animate);
@@ -7419,6 +7753,7 @@ No matter how far we travel or where the roads of life lead us, my heart will al
         start();
       }
     })();
+
   </script>
 </body>
 </html>
