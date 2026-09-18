@@ -2306,6 +2306,755 @@
     }
 
     /* ==========================================================================
+       DEDICATED GAME: MYSTERY BOX — “A SURPRISE FOR YOU ❤️”
+       Scoped strictly under .loveMysteryGame-*
+       ========================================================================== */
+    .loveMysteryGame-card {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, rgba(38, 12, 32, 0.88) 0%, rgba(20, 5, 20, 0.94) 100%);
+      border: 1px solid rgba(255, 77, 109, 0.35);
+      border-radius: 28px;
+      padding: clamp(24px, 4vw, 40px) clamp(16px, 3.5vw, 32px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 77, 109, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .loveMysteryGame-container {
+      position: relative;
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    .loveMysteryGame-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 25;
+    }
+
+    /* HUD Bar */
+    .loveMysteryGame-hud {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 26px;
+      padding: 12px 20px;
+      background: rgba(255, 77, 109, 0.08);
+      border: 1px solid rgba(255, 77, 109, 0.25);
+      border-radius: 20px;
+    }
+
+    .loveMysteryGame-hud-instruction {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+      font-weight: 700;
+      color: #fff0f3;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .loveMysteryGame-hud-icon {
+      font-size: 1.3rem;
+      animation: loveMysteryGame-float 3s ease-in-out infinite;
+    }
+
+    .loveMysteryGame-hud-badge {
+      background: linear-gradient(135deg, rgba(255, 77, 109, 0.25) 0%, rgba(201, 24, 74, 0.35) 100%);
+      border: 1px solid rgba(255, 77, 109, 0.5);
+      color: #ffd166;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 6px 16px;
+      border-radius: 14px;
+      letter-spacing: 0.03em;
+    }
+
+    .loveMysteryGame-hud-badge strong {
+      color: #fff;
+      font-size: 1.1rem;
+      margin-left: 4px;
+      text-shadow: 0 0 10px rgba(255, 77, 109, 0.8);
+    }
+
+    /* 5 Boxes Grid (Responsive mobile first, wrapping nicely without horizontal overflow) */
+    .loveMysteryGame-boxes-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+      margin-bottom: 24px;
+      perspective: 1000px;
+    }
+
+    @media (max-width: 680px) {
+      .loveMysteryGame-boxes-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 440px) {
+      .loveMysteryGame-boxes-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* Single Box Element */
+    .loveMysteryGame-box {
+      position: relative;
+      background: linear-gradient(145deg, rgba(50, 16, 42, 0.85) 0%, rgba(26, 6, 26, 0.95) 100%);
+      border: 1.5px solid rgba(255, 77, 109, 0.4);
+      border-radius: 20px;
+      padding: 16px 8px 14px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      min-height: 140px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+      animation: loveMysteryGame-boxFloat 4s ease-in-out infinite alternate;
+    }
+
+    .loveMysteryGame-box:nth-child(2) { animation-delay: 0.7s; }
+    .loveMysteryGame-box:nth-child(3) { animation-delay: 1.4s; }
+    .loveMysteryGame-box:nth-child(4) { animation-delay: 2.1s; }
+    .loveMysteryGame-box:nth-child(5) { animation-delay: 2.8s; }
+
+    @keyframes loveMysteryGame-boxFloat {
+      0% { transform: translateY(0px); }
+      100% { transform: translateY(-6px); }
+    }
+
+    .loveMysteryGame-box:hover:not(.opened):not(.disabled) {
+      transform: translateY(-8px) scale(1.04);
+      border-color: rgba(255, 77, 109, 0.9);
+      box-shadow: 0 14px 32px rgba(255, 77, 109, 0.45), 0 0 20px rgba(255, 209, 102, 0.25);
+    }
+
+    .loveMysteryGame-box:active:not(.opened):not(.disabled) {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    .loveMysteryGame-box.opened {
+      border-color: rgba(255, 255, 255, 0.2);
+      background: rgba(20, 5, 20, 0.5);
+      box-shadow: none;
+      opacity: 0.55;
+      cursor: default;
+      animation: none;
+      transform: none !important;
+    }
+
+    .loveMysteryGame-box.disabled:not(.opened) {
+      opacity: 0.4;
+      cursor: not-allowed;
+      animation: none;
+      filter: grayscale(0.5);
+    }
+
+    /* Number Tag */
+    .loveMysteryGame-box-num {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      color: var(--accent-pink-soft);
+      letter-spacing: 0.08em;
+      opacity: 0.75;
+    }
+
+    /* Box Body & 3D Visual */
+    .loveMysteryGame-box-body {
+      position: relative;
+      width: 58px;
+      height: 58px;
+      margin: 10px 0 8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loveMysteryGame-box-chest {
+      position: relative;
+      width: 52px;
+      height: 44px;
+      background: linear-gradient(135deg, #c9184a 0%, #800f2f 100%);
+      border-radius: 8px;
+      border: 1px solid rgba(255, 209, 102, 0.6);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loveMysteryGame-box.opened .loveMysteryGame-box-chest {
+      background: #3a1020;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Ribbons on box */
+    .loveMysteryGame-box-ribbon-v {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 8px;
+      transform: translateX(-50%);
+      background: linear-gradient(180deg, #ffd166 0%, #f39c12 100%);
+    }
+
+    .loveMysteryGame-box-ribbon-h {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 50%;
+      height: 8px;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg, #ffd166 0%, #f39c12 100%);
+    }
+
+    /* Heart Seal / Question Mark */
+    .loveMysteryGame-box-heart {
+      position: absolute;
+      font-size: 16px;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      filter: drop-shadow(0 0 6px rgba(255, 77, 109, 0.8));
+      z-index: 2;
+    }
+
+    .loveMysteryGame-box-mark {
+      position: relative;
+      z-index: 3;
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: #fff;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 209, 102, 0.7);
+    }
+
+    .loveMysteryGame-box.opened .loveMysteryGame-box-mark {
+      opacity: 0.3;
+    }
+
+    .loveMysteryGame-box-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #ffccd5;
+      letter-spacing: 0.03em;
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .loveMysteryGame-box.opened .loveMysteryGame-box-label {
+      color: var(--text-muted);
+    }
+
+    /* Bottom prompt when 3 are opened */
+    .loveMysteryGame-completed-prompt {
+      text-align: center;
+      padding: 16px;
+      background: rgba(45, 14, 38, 0.6);
+      border: 1px solid rgba(255, 77, 109, 0.4);
+      border-radius: 20px;
+      animation: loveMysteryGame-fadeUp 0.5s ease-out forwards;
+    }
+
+    .loveMysteryGame-opened-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.15rem, 3.5vw, 1.4rem);
+      font-weight: 700;
+      color: #fff0f3;
+      margin-bottom: 14px;
+      text-shadow: 0 0 12px rgba(255, 77, 109, 0.5);
+    }
+
+    .loveMysteryGame-action-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .loveMysteryGame-btn-surprise {
+      background: linear-gradient(135deg, #ffd166 0%, #ff758f 50%, #ff4d6d 100%);
+      color: #1a0515;
+      font-family: 'Playfair Display', serif;
+      font-weight: 800;
+      font-size: clamp(0.95rem, 2.8vw, 1.08rem);
+      padding: 13px 30px;
+      border-radius: 30px;
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      cursor: pointer;
+      box-shadow: 0 6px 25px rgba(255, 209, 102, 0.45);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .loveMysteryGame-btn-surprise:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 32px rgba(255, 209, 102, 0.7);
+    }
+
+    .loveMysteryGame-btn-surprise:active {
+      transform: translateY(1px);
+    }
+
+    .loveMysteryGame-btn-secondary {
+      background: rgba(255, 77, 109, 0.15);
+      border: 1px solid rgba(255, 77, 109, 0.35);
+      color: #ffccd5;
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 12px 24px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .loveMysteryGame-btn-secondary:hover {
+      background: rgba(255, 77, 109, 0.28);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    /* --------------------------------------------------------------------------
+       SURPRISE MODAL / POPUP
+       -------------------------------------------------------------------------- */
+    .loveMysteryGame-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 3, 14, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+
+    .loveMysteryGame-modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .loveMysteryGame-modal-card {
+      position: relative;
+      background: linear-gradient(145deg, rgba(42, 12, 36, 0.96) 0%, rgba(20, 5, 22, 0.98) 100%);
+      border: 2px solid rgba(255, 77, 109, 0.5);
+      border-radius: 26px;
+      padding: clamp(24px, 4.5vw, 36px) clamp(18px, 4vw, 30px);
+      max-width: 520px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 77, 109, 0.35);
+      transform: scale(0.92);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .loveMysteryGame-modal-overlay.active .loveMysteryGame-modal-card {
+      transform: scale(1);
+    }
+
+    .loveMysteryGame-modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: rgba(255, 77, 109, 0.15);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      color: #ffccd5;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .loveMysteryGame-modal-close:hover {
+      background: rgba(255, 77, 109, 0.35);
+      transform: scale(1.1);
+      color: #fff;
+    }
+
+    /* Modal Content Styles per type */
+    .loveMysteryGame-item-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--accent-pink-soft);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .loveMysteryGame-item-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.25rem, 4vw, 1.65rem);
+      font-weight: 700;
+      color: #fff0f3;
+      margin-bottom: 16px;
+      line-height: 1.35;
+    }
+
+    /* 1. Letter styling */
+    .loveMysteryGame-letter-box {
+      background: rgba(255, 240, 243, 0.05);
+      border: 1px dashed rgba(255, 77, 109, 0.4);
+      border-radius: 18px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .loveMysteryGame-letter-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.1rem, 3.2vw, 1.35rem);
+      font-style: italic;
+      color: #fff0f3;
+      line-height: 1.7;
+      white-space: pre-line;
+      margin: 0;
+    }
+
+    /* 2. Memory photo styling */
+    .loveMysteryGame-photo-frame {
+      width: 100%;
+      max-height: 280px;
+      border-radius: 18px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      border: 2px solid rgba(255, 77, 109, 0.4);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+      background: #1a0515;
+    }
+
+    .loveMysteryGame-photo-img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .loveMysteryGame-photo-caption {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #ffccd5;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    /* 3. Rose explosion in modal */
+    .loveMysteryGame-rose-burst-banner {
+      padding: 24px 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3.6vw, 1.5rem);
+      color: #ffd166;
+      line-height: 1.5;
+    }
+
+    /* 4. Song surprise */
+    .loveMysteryGame-song-card {
+      padding: 20px 10px;
+    }
+
+    .loveMysteryGame-song-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+      animation: loveMysteryGame-pulse 2s infinite ease-in-out;
+    }
+
+    /* 5. Random Memory */
+    .loveMysteryGame-diary-page {
+      background: linear-gradient(145deg, rgba(50, 18, 40, 0.6) 0%, rgba(30, 8, 25, 0.8) 100%);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      border-radius: 16px;
+      padding: 20px 18px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .loveMysteryGame-diary-date {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #ffd166;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .loveMysteryGame-diary-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.15rem;
+      color: #fff0f3;
+      line-height: 1.6;
+    }
+
+    /* 6. Secret Question */
+    .loveMysteryGame-question-options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .loveMysteryGame-question-btn {
+      width: 100%;
+      background: linear-gradient(135deg, rgba(65, 18, 52, 0.9) 0%, rgba(35, 8, 35, 0.95) 100%);
+      border: 1.5px solid rgba(255, 77, 109, 0.4);
+      color: #fff;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 14px 20px;
+      border-radius: 18px;
+      cursor: pointer;
+      transition: transform 0.2s, border-color 0.2s, background 0.2s;
+    }
+
+    .loveMysteryGame-question-btn:hover {
+      border-color: rgba(255, 77, 109, 0.9);
+      transform: scale(1.02);
+    }
+
+    .loveMysteryGame-question-answer-reveal {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: #ffd166;
+      padding: 16px 10px;
+      display: none;
+      animation: loveMysteryGame-fadeUp 0.4s ease-out;
+    }
+
+    /* 7. Future Card 3D Flip */
+    .loveMysteryGame-future-flip {
+      perspective: 1000px;
+      width: 100%;
+      min-height: 180px;
+      margin-bottom: 20px;
+    }
+
+    .loveMysteryGame-future-inner {
+      position: relative;
+      width: 100%;
+      min-height: 180px;
+      text-align: center;
+      transition: transform 0.8s;
+      transform-style: preserve-3d;
+    }
+
+    .loveMysteryGame-future-inner.flipped {
+      transform: rotateY(180deg);
+    }
+
+    .loveMysteryGame-future-front,
+    .loveMysteryGame-future-back {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 18px;
+      padding: 24px 18px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loveMysteryGame-future-front {
+      background: linear-gradient(135deg, rgba(65, 18, 52, 0.85) 0%, rgba(35, 8, 35, 0.95) 100%);
+      border: 1.5px dashed rgba(255, 209, 102, 0.5);
+    }
+
+    .loveMysteryGame-future-back {
+      background: linear-gradient(135deg, rgba(80, 16, 45, 0.95) 0%, rgba(40, 6, 30, 0.98) 100%);
+      border: 2px solid rgba(255, 77, 109, 0.6);
+      transform: rotateY(180deg);
+      box-shadow: 0 0 25px rgba(255, 77, 109, 0.4);
+    }
+
+    .loveMysteryGame-future-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: #fff0f3;
+      line-height: 1.6;
+    }
+
+    /* --------------------------------------------------------------------------
+       FINAL SURPRISE SEQUENCE (Beating Heart -> Rose Burst -> Final Message)
+       -------------------------------------------------------------------------- */
+    .loveMysteryGame-final-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 3, 15, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .loveMysteryGame-final-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .loveMysteryGame-final-inner {
+      width: 100%;
+      max-width: 580px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .loveMysteryGame-final-heart-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .loveMysteryGame-final-heart {
+      font-size: 40px;
+      line-height: 1;
+      filter: drop-shadow(0 0 20px rgba(255, 77, 109, 0.8));
+      transition: font-size 1.5s ease, filter 1.5s ease;
+      animation: loveMysteryGame-pulse 1.2s infinite ease-in-out;
+    }
+
+    .loveMysteryGame-final-heart.growing {
+      font-size: clamp(80px, 20vw, 130px);
+      filter: drop-shadow(0 0 45px rgba(255, 77, 109, 1)) drop-shadow(0 0 70px rgba(255, 209, 102, 0.6));
+    }
+
+    .loveMysteryGame-final-heart.fast-beat {
+      animation: loveMysteryGame-fastBeat 0.35s infinite ease-in-out;
+    }
+
+    @keyframes loveMysteryGame-fastBeat {
+      0%, 100% { transform: scale(1); filter: drop-shadow(0 0 35px rgba(255, 77, 109, 0.9)); }
+      50% { transform: scale(1.35); filter: drop-shadow(0 0 65px rgba(255, 215, 0, 1)); }
+    }
+
+    .loveMysteryGame-final-caption {
+      margin-top: 24px;
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 3.4vw, 1.35rem);
+      color: #ffccd5;
+      text-shadow: 0 0 10px rgba(255, 77, 109, 0.6);
+      transition: opacity 0.3s;
+    }
+
+    .loveMysteryGame-final-card {
+      display: none;
+      background: linear-gradient(145deg, rgba(42, 12, 38, 0.96) 0%, rgba(20, 5, 24, 0.98) 100%);
+      border: 2px solid rgba(255, 77, 109, 0.6);
+      border-radius: 28px;
+      padding: clamp(30px, 5vw, 44px) clamp(20px, 4vw, 32px);
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 50px rgba(255, 77, 109, 0.45);
+      animation: loveMysteryGame-fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .loveMysteryGame-final-icons {
+      font-size: 38px;
+      margin-bottom: 16px;
+      animation: loveMysteryGame-pulse 2s infinite ease-in-out;
+    }
+
+    .loveMysteryGame-final-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3.8vw, 1.55rem);
+      font-weight: 700;
+      color: #fff0f3;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .loveMysteryGame-final-sign {
+      border-top: 1px solid rgba(255, 77, 109, 0.3);
+      padding-top: 20px;
+      margin-bottom: 26px;
+    }
+
+    .loveMysteryGame-final-names {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4vw, 1.8rem);
+      font-weight: 800;
+      color: #ffd166;
+      letter-spacing: 0.04em;
+      margin-bottom: 6px;
+    }
+
+    .loveMysteryGame-final-dates {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-pink-soft);
+      letter-spacing: 0.08em;
+    }
+
+    @keyframes loveMysteryGame-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    @keyframes loveMysteryGame-pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    @keyframes loveMysteryGame-fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .loveMysteryGame-box,
+      .loveMysteryGame-hud-icon,
+      .loveMysteryGame-final-heart,
+      .loveMysteryGame-future-inner {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
+    /* ==========================================================================
        LOVE LETTER SECTION
        ========================================================================== */
     .letter-container {
@@ -3373,6 +4122,162 @@
           </div>
         </div>
       </div>
+
+      <!-- ====================================================================
+           GAME 4: MYSTERY BOX — “A SURPRISE FOR YOU ❤️”
+           ==================================================================== -->
+      <div class="romantic-game-card loveMysteryGame-card" id="loveMysteryGameCard" style="margin-top: 50px;">
+        <div class="game-card-header">
+          <div class="game-badge-wrap">
+            <span class="game-badge">Mystery Box</span>
+            <span class="game-badge-title">A Surprise For You</span>
+          </div>
+          <h3 class="game-title">A Surprise For You ❤️</h3>
+          <p class="game-instruction">
+            “You never know what you'll find…”
+          </p>
+        </div>
+
+        <div class="loveMysteryGame-container">
+          <!-- Particles canvas -->
+          <canvas class="loveMysteryGame-canvas" id="loveMysteryGame-canvas"></canvas>
+
+          <!-- Top HUD: Choice instructions & Counter -->
+          <div class="loveMysteryGame-hud" id="loveMysteryGame-hud">
+            <div class="loveMysteryGame-hud-instruction">
+              <span class="loveMysteryGame-hud-icon">🎁</span>
+              <span class="loveMysteryGame-hud-title">Choose 3 surprises ❤️</span>
+            </div>
+            <div class="loveMysteryGame-hud-badge" id="loveMysteryGame-remainingBadge">
+              Surprises remaining: <strong id="loveMysteryGame-remainingCount">3</strong>
+            </div>
+          </div>
+
+          <!-- The 5 Mystery Boxes -->
+          <div class="loveMysteryGame-boxes-grid" id="loveMysteryGame-boxesGrid">
+            <!-- Box 1 -->
+            <div class="loveMysteryGame-box" data-box-index="0" id="loveMysteryGame-box-0" tabindex="0" role="button" aria-label="Open Mystery Box 1">
+              <div class="loveMysteryGame-box-num">01</div>
+              <div class="loveMysteryGame-box-body">
+                <div class="loveMysteryGame-box-chest">
+                  <div class="loveMysteryGame-box-ribbon-v"></div>
+                  <div class="loveMysteryGame-box-ribbon-h"></div>
+                  <div class="loveMysteryGame-box-heart">❤️</div>
+                  <div class="loveMysteryGame-box-mark">?</div>
+                </div>
+              </div>
+              <div class="loveMysteryGame-box-label">Tap to Open</div>
+            </div>
+
+            <!-- Box 2 -->
+            <div class="loveMysteryGame-box" data-box-index="1" id="loveMysteryGame-box-1" tabindex="0" role="button" aria-label="Open Mystery Box 2">
+              <div class="loveMysteryGame-box-num">02</div>
+              <div class="loveMysteryGame-box-body">
+                <div class="loveMysteryGame-box-chest">
+                  <div class="loveMysteryGame-box-ribbon-v"></div>
+                  <div class="loveMysteryGame-box-ribbon-h"></div>
+                  <div class="loveMysteryGame-box-heart">❤️</div>
+                  <div class="loveMysteryGame-box-mark">?</div>
+                </div>
+              </div>
+              <div class="loveMysteryGame-box-label">Tap to Open</div>
+            </div>
+
+            <!-- Box 3 -->
+            <div class="loveMysteryGame-box" data-box-index="2" id="loveMysteryGame-box-2" tabindex="0" role="button" aria-label="Open Mystery Box 3">
+              <div class="loveMysteryGame-box-num">03</div>
+              <div class="loveMysteryGame-box-body">
+                <div class="loveMysteryGame-box-chest">
+                  <div class="loveMysteryGame-box-ribbon-v"></div>
+                  <div class="loveMysteryGame-box-ribbon-h"></div>
+                  <div class="loveMysteryGame-box-heart">❤️</div>
+                  <div class="loveMysteryGame-box-mark">?</div>
+                </div>
+              </div>
+              <div class="loveMysteryGame-box-label">Tap to Open</div>
+            </div>
+
+            <!-- Box 4 -->
+            <div class="loveMysteryGame-box" data-box-index="3" id="loveMysteryGame-box-3" tabindex="0" role="button" aria-label="Open Mystery Box 4">
+              <div class="loveMysteryGame-box-num">04</div>
+              <div class="loveMysteryGame-box-body">
+                <div class="loveMysteryGame-box-chest">
+                  <div class="loveMysteryGame-box-ribbon-v"></div>
+                  <div class="loveMysteryGame-box-ribbon-h"></div>
+                  <div class="loveMysteryGame-box-heart">❤️</div>
+                  <div class="loveMysteryGame-box-mark">?</div>
+                </div>
+              </div>
+              <div class="loveMysteryGame-box-label">Tap to Open</div>
+            </div>
+
+            <!-- Box 5 -->
+            <div class="loveMysteryGame-box" data-box-index="4" id="loveMysteryGame-box-4" tabindex="0" role="button" aria-label="Open Mystery Box 5">
+              <div class="loveMysteryGame-box-num">05</div>
+              <div class="loveMysteryGame-box-body">
+                <div class="loveMysteryGame-box-chest">
+                  <div class="loveMysteryGame-box-ribbon-v"></div>
+                  <div class="loveMysteryGame-box-ribbon-h"></div>
+                  <div class="loveMysteryGame-box-heart">❤️</div>
+                  <div class="loveMysteryGame-box-mark">?</div>
+                </div>
+              </div>
+              <div class="loveMysteryGame-box-label">Tap to Open</div>
+            </div>
+          </div>
+
+          <!-- Completed 3 Surprises Prompt -->
+          <div class="loveMysteryGame-completed-prompt" id="loveMysteryGame-completedPrompt" style="display: none;">
+            <p class="loveMysteryGame-opened-title">You opened 3 surprises… ❤️</p>
+            <div class="loveMysteryGame-action-row">
+              <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-btnMore">
+                <span>I think there's one more… 👀</span>
+              </button>
+              <button class="loveMysteryGame-btn-secondary" id="loveMysteryGame-btnResetEarly">
+                <span>Play Again 🔄</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- REVEAL MODAL OVERLAY -->
+          <div class="loveMysteryGame-modal-overlay" id="loveMysteryGame-modalOverlay">
+            <div class="loveMysteryGame-modal-card" id="loveMysteryGame-modalCard">
+              <button class="loveMysteryGame-modal-close" id="loveMysteryGame-modalClose" aria-label="Close modal">✕</button>
+              <div class="loveMysteryGame-modal-content" id="loveMysteryGame-modalContent">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- FINAL SURPRISE SEQUENCE OVERLAY -->
+          <div class="loveMysteryGame-final-overlay" id="loveMysteryGame-finalOverlay">
+            <div class="loveMysteryGame-final-inner" id="loveMysteryGame-finalInner">
+              <!-- Growing beating heart stage -->
+              <div class="loveMysteryGame-final-heart-stage" id="loveMysteryGame-finalHeartStage">
+                <div class="loveMysteryGame-final-heart" id="loveMysteryGame-finalHeart">❤️</div>
+                <p class="loveMysteryGame-final-caption" id="loveMysteryGame-finalCaption">Listening to a heartbeat that belongs to you...</p>
+              </div>
+
+              <!-- Revealed romantic final message -->
+              <div class="loveMysteryGame-final-card" id="loveMysteryGame-finalCard">
+                <div class="loveMysteryGame-final-icons">💍 🌹 ♾️</div>
+                <h3 class="loveMysteryGame-final-quote">
+                  “You thought the surprises were inside the boxes…<br><br>
+                  But the biggest surprise is that someone out there loves you more than you'll ever know. ❤️”
+                </h3>
+                <div class="loveMysteryGame-final-sign">
+                  <div class="loveMysteryGame-final-names">SAHIL ❤️ SAHIFA</div>
+                  <div class="loveMysteryGame-final-dates">30 MARCH 2024 → FOREVER ♾️</div>
+                </div>
+                <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-btnFinalRestart" style="margin: 0 auto;">
+                  <span>Play Again 🔄</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </section>
 
     <!-- ======================================================================
@@ -5321,6 +6226,626 @@ Sahil ❤️`,
       renderQuestion();
     }
 
+    /* ==========================================================================
+       DEDICATED GAME: MYSTERY BOX — “A SURPRISE FOR YOU ❤️”
+       Encapsulated in window.LoveMysteryGame
+       ========================================================================== */
+    window.LoveMysteryGame = (function() {
+      let boxesRemaining = 3;
+      let boxSurprises = [];
+      let openedCount = 0;
+      let animFrameId = null;
+      let particleList = [];
+      let autoCloseTimer = null;
+      let heartbeatTimer = null;
+
+      // Pool of Love Letters
+      const loveLetters = [
+        `Dear Sahifa ❤️
+
+If I could keep only one memory from my life, I would choose one of the moments where you were beside me.
+
+You aren't just a chapter in my story...
+You became part of the story itself.
+
+— Sahil ❤️`,
+        `My Dearest Sahifa ❤️
+
+Every morning I wake up grateful for 30 March 2024. Falling in love with you wasn't just a single moment — it's something I happily choose to do every single second.
+
+Thank you for being my dream come true.
+
+— Sahil ❤️`,
+        `To My Forever Sahifa ❤️
+
+In a world full of noise, your laughter is my peace. Thank you for holding my hand, for understanding my quiet moments, and for loving me so deeply.
+
+I will love you today, tomorrow, and forever.
+
+— Sahil ❤️`,
+        `Sweetheart Sahifa ❤️
+
+No matter how far we travel or where the roads of life lead us, my heart will always beat for only one person in this entire universe — you.
+
+— Sahil ❤️`
+      ];
+
+      // Pool of Future Messages
+      const futureMessages = [
+        "Years from now, we'll look back at this little website and laugh about how our story started. ❤️",
+        "Decades from now, I will still look at you with the exact same nervous, awe-struck smile I had on 30 March 2024. 💍❤️",
+        "In the future, our hair may turn grey, but our love will forever remain as sweet and playful as day one. 🌸❤️",
+        "Every tomorrow is beautiful simply because you are written into my future. ♾️❤️"
+      ];
+
+      // Pool of Gallery Photos (from existing site)
+      const galleryPhotos = [
+        { src: "media/photos/IMG_20260908_123640.jpg", alt: "media/photos/photo1.jpg", caption: "The road from home to school where our eyes met for the first time 🌹" },
+        { src: "media/photos/memory-04.jpg", alt: "media/photos/photo2.jpg", caption: "Walking side by side, dreaming of all our tomorrows ❤️" },
+        { src: "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg", alt: "media/photos/photo3.jpg", caption: "Every shared laugh is a sacred treasure I hold in my heart ✨" },
+        { src: "media/photos/memory-03.jpg", alt: "media/photos/photo4.jpg", caption: "The warmth of our hugs that makes the whole world fade away 🤍" },
+        { src: "media/photos/IMG_20260628_114036.jpg", alt: "media/photos/photo5.jpg", caption: "Sweet moments of togetherness that turn ordinary days into poetry 🌸" }
+      ];
+
+      // Pool of Timeline Memories
+      const diaryMemories = [
+        { date: "30 March 2024 ❤️", text: "When we first met on the road going from home to school… both of us were nervous when our eyes met for the very first time. A simple exchange of words turned an ordinary morning into forever." },
+        { date: "Our First Kiss 💋", text: "A gentle pause in time when the whole world went quiet. The air was soft, our hearts were pounding, and all our doubts melted into pure sweetness." },
+        { date: "Our First Hug 🤍", text: "Wrapping my arms around you felt like finding home after a lifetime of wandering. A warm embrace that whispered: you are safe here, always." },
+        { date: "Our Travels 🌍", text: "From spontaneous evening strolls along familiar paths to watching golden sunsets fade into starlight. Every journey is paradise beside you." },
+        { date: "Birthday Memories 🎂", text: "Special days made infinite times brighter. Lighting candles together and sharing wishes that we will smile about when we are old." },
+        { date: "When Our Eyes Met ✨", text: "In your gaze, I found both my peace and my wild excitement. Two souls seamlessly mirrored in one shared dream." }
+      ];
+
+      class MysteryParticle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 7 + 3;
+          this.vx = Math.cos(angle) * speed;
+          this.vy = Math.sin(angle) * speed - (Math.random() * 3 + 1);
+          this.gravity = 0.15;
+          this.friction = 0.98;
+          this.opacity = 1;
+          this.decay = Math.random() * 0.015 + 0.01;
+          this.size = Math.random() * 16 + 14;
+          this.rotation = Math.random() * 360;
+          this.rotSpeed = (Math.random() - 0.5) * 6;
+          const symbols = ["🌹", "🌸", "❤️", "💖", "✨", "💕", "💍"];
+          this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
+        }
+
+        update() {
+          this.vx *= this.friction;
+          this.vy *= this.friction;
+          this.vy += this.gravity;
+          this.x += this.vx;
+          this.y += this.vy;
+          this.rotation += this.rotSpeed;
+          this.opacity -= this.decay;
+        }
+
+        draw(ctx) {
+          if (this.opacity <= 0) return;
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, this.opacity);
+          ctx.translate(this.x, this.y);
+          ctx.rotate((this.rotation * Math.PI) / 180);
+          ctx.font = `${this.size}px sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(this.symbol, 0, 0);
+          ctx.restore();
+        }
+      }
+
+      function launchCanvasParticles(canvas, count = 50, customX, customY) {
+        if (!canvas) return;
+        const ctx = canvas.getContext("2d");
+        const originX = customX !== undefined ? customX : canvas.width / 2;
+        const originY = customY !== undefined ? customY : canvas.height / 2;
+
+        for (let i = 0; i < count; i++) {
+          particleList.push(new MysteryParticle(originX, originY));
+        }
+
+        cancelAnimationFrame(animFrameId);
+        function loop() {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particleList = particleList.filter(p => p.opacity > 0);
+          particleList.forEach(p => {
+            p.update();
+            p.draw(ctx);
+          });
+          if (particleList.length > 0) {
+            animFrameId = requestAnimationFrame(loop);
+          }
+        }
+        loop();
+      }
+
+      // Shuffle helper
+      function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      // Randomize contents for 5 boxes
+      function generateBoxSurprises() {
+        // 7 distinct types
+        const types = [
+          "letter",        // 1. Secret Love Letter
+          "memory_photo",  // 2. Memory Photo
+          "rose_explosion",// 3. Rose Explosion
+          "our_song",      // 4. Our Song
+          "diary_event",   // 5. Random Memory
+          "secret_question", // 6. Secret Question
+          "future_card"    // 7. Future Card
+        ];
+
+        const shuffledTypes = shuffleArray(types);
+        const selectedTypes = shuffledTypes.slice(0, 5);
+
+        // Small unexpected event chance (~25% on 1 random box)
+        const unexpectedIndex = Math.random() < 0.35 ? Math.floor(Math.random() * 5) : -1;
+
+        return selectedTypes.map((type, idx) => {
+          return {
+            type: type,
+            isUnexpected: idx === unexpectedIndex
+          };
+        });
+      }
+
+      function init() {
+        const card = document.getElementById("loveMysteryGameCard");
+        if (!card) return;
+
+        const boxesGrid = document.getElementById("loveMysteryGame-boxesGrid");
+        const remainingCountEl = document.getElementById("loveMysteryGame-remainingCount");
+        const completedPrompt = document.getElementById("loveMysteryGame-completedPrompt");
+        const modalOverlay = document.getElementById("loveMysteryGame-modalOverlay");
+        const modalCard = document.getElementById("loveMysteryGame-modalCard");
+        const modalContent = document.getElementById("loveMysteryGame-modalContent");
+        const modalClose = document.getElementById("loveMysteryGame-modalClose");
+        const btnMore = document.getElementById("loveMysteryGame-btnMore");
+        const btnResetEarly = document.getElementById("loveMysteryGame-btnResetEarly");
+        const finalOverlay = document.getElementById("loveMysteryGame-finalOverlay");
+        const finalHeart = document.getElementById("loveMysteryGame-finalHeart");
+        const finalCaption = document.getElementById("loveMysteryGame-finalCaption");
+        const finalHeartStage = document.getElementById("loveMysteryGame-finalHeartStage");
+        const finalCard = document.getElementById("loveMysteryGame-finalCard");
+        const btnFinalRestart = document.getElementById("loveMysteryGame-btnFinalRestart");
+        const canvas = document.getElementById("loveMysteryGame-canvas");
+
+        function updateCanvasSize() {
+          const rect = card.getBoundingClientRect();
+          canvas.width = rect.width;
+          canvas.height = rect.height;
+        }
+        updateCanvasSize();
+        window.addEventListener("resize", updateCanvasSize);
+
+        function resetGame() {
+          clearTimeout(autoCloseTimer);
+          clearTimeout(heartbeatTimer);
+          particleList = [];
+          boxesRemaining = 3;
+          openedCount = 0;
+          boxSurprises = generateBoxSurprises();
+
+          remainingCountEl.textContent = "3";
+          completedPrompt.style.display = "none";
+          modalOverlay.classList.remove("active");
+          finalOverlay.classList.remove("active");
+          finalHeartStage.style.display = "flex";
+          finalCard.style.display = "none";
+          finalHeart.className = "loveMysteryGame-final-heart";
+
+          // Reset box DOM
+          const boxes = boxesGrid.querySelectorAll(".loveMysteryGame-box");
+          boxes.forEach((box, idx) => {
+            box.classList.remove("opened", "disabled");
+            const mark = box.querySelector(".loveMysteryGame-box-mark");
+            if (mark) mark.textContent = "?";
+            const label = box.querySelector(".loveMysteryGame-box-label");
+            if (label) label.textContent = "Tap to Open";
+          });
+        }
+
+        // Handle box click
+        function openBox(index, boxEl) {
+          if (boxEl.classList.contains("opened") || boxEl.classList.contains("disabled")) return;
+          if (boxesRemaining <= 0) return;
+
+          boxesRemaining--;
+          openedCount++;
+          remainingCountEl.textContent = boxesRemaining;
+
+          boxEl.classList.add("opened");
+          const mark = boxEl.querySelector(".loveMysteryGame-box-mark");
+          if (mark) mark.textContent = "❤️";
+          const label = boxEl.querySelector(".loveMysteryGame-box-label");
+          if (label) label.textContent = "Opened ✨";
+
+          playBoxPopSound();
+
+          const cardRect = card.getBoundingClientRect();
+          const boxRect = boxEl.getBoundingClientRect();
+          const burstX = boxRect.left - cardRect.left + boxRect.width / 2;
+          const burstY = boxRect.top - cardRect.top + boxRect.height / 2;
+          launchCanvasParticles(canvas, 30, burstX, burstY);
+
+          // Get surprise info
+          const surprise = boxSurprises[index] || { type: "letter", isUnexpected: false };
+
+          if (surprise.isUnexpected) {
+            triggerUnexpectedEvent(() => renderSurpriseModal(surprise));
+          } else {
+            renderSurpriseModal(surprise);
+          }
+
+          // Check if 3 opened
+          if (boxesRemaining === 0) {
+            const boxes = boxesGrid.querySelectorAll(".loveMysteryGame-box");
+            boxes.forEach(b => {
+              if (!b.classList.contains("opened")) b.classList.add("disabled");
+            });
+            setTimeout(() => {
+              completedPrompt.style.display = "block";
+              completedPrompt.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }, 800);
+          }
+        }
+
+        // Render modal content
+        function renderSurpriseModal(surprise) {
+          clearTimeout(autoCloseTimer);
+          modalContent.innerHTML = "";
+
+          switch (surprise.type) {
+            case "letter": {
+              const letterText = loveLetters[Math.floor(Math.random() * loveLetters.length)];
+              modalContent.innerHTML = `
+                <span class="loveMysteryGame-item-tag">💌 Secret Love Letter</span>
+                <h3 class="loveMysteryGame-item-title">Words From My Heart</h3>
+                <div class="loveMysteryGame-letter-box">
+                  <p class="loveMysteryGame-letter-text">${letterText}</p>
+                </div>
+                <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-modalAction">
+                  <span>Keep In My Heart ❤️</span>
+                </button>
+              `;
+              break;
+            }
+
+            case "memory_photo": {
+              const photo = galleryPhotos[Math.floor(Math.random() * galleryPhotos.length)];
+              modalContent.innerHTML = `
+                <span class="loveMysteryGame-item-tag">📸 Memory Reveal</span>
+                <h3 class="loveMysteryGame-item-title">A memory worth keeping ❤️</h3>
+                <div class="loveMysteryGame-photo-frame">
+                  <img src="${photo.src}" onerror="this.onerror=null; this.src='${photo.alt}';" alt="Sahil and Sahifa memory" class="loveMysteryGame-photo-img" />
+                </div>
+                <p class="loveMysteryGame-photo-caption">${photo.caption}</p>
+                <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-modalAction">
+                  <span>So Precious ❤️</span>
+                </button>
+              `;
+              break;
+            }
+
+            case "rose_explosion": {
+              modalContent.innerHTML = `
+                <div style="font-size: 56px; margin-bottom: 12px; animation: loveMysteryGame-pulse 1s infinite alternate;">🌹 🌸 ❤️</div>
+                <span class="loveMysteryGame-item-tag">🌹 Rose Explosion</span>
+                <h3 class="loveMysteryGame-item-title" style="margin-bottom: 8px;">A Blossom For You</h3>
+                <div class="loveMysteryGame-rose-burst-banner">
+                  “You found a little piece of my heart. ❤️🌹”
+                </div>
+                <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-modalAction">
+                  <span>Continue ❤️</span>
+                </button>
+              `;
+              // Launch extra petals
+              setTimeout(() => {
+                const modalRect = modalCard.getBoundingClientRect();
+                launchCanvasParticles(canvas, 60, modalRect.left + modalRect.width / 2, modalRect.top + 80);
+              }, 150);
+
+              // Automatically return after 3 seconds if not closed
+              autoCloseTimer = setTimeout(() => {
+                modalOverlay.classList.remove("active");
+              }, 3200);
+              break;
+            }
+
+            case "our_song": {
+              modalContent.innerHTML = `
+                <div class="loveMysteryGame-song-card">
+                  <div class="loveMysteryGame-song-icon">🎵 ❤️</div>
+                  <span class="loveMysteryGame-item-tag">🎵 Our Song</span>
+                  <h3 class="loveMysteryGame-item-title">This one sounds like us 🎵❤️</h3>
+                  <p style="color: var(--text-secondary); margin-bottom: 24px; line-height: 1.5;">
+                    Every melody reminds me of the sweet conversations and laughter we share together.
+                  </p>
+                  <div class="loveMysteryGame-action-row">
+                    <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-playSongBtn">
+                      <span>Play Our Song 🎵❤️</span>
+                    </button>
+                    <button class="loveMysteryGame-btn-secondary" id="loveMysteryGame-modalAction">
+                      <span>Back to Boxes ❤️</span>
+                    </button>
+                  </div>
+                </div>
+              `;
+              setTimeout(() => {
+                const playBtn = document.getElementById("loveMysteryGame-playSongBtn");
+                if (playBtn) {
+                  playBtn.addEventListener("click", () => {
+                    const mainMusicBtn = document.getElementById("musicToggleBtn");
+                    if (mainMusicBtn) {
+                      mainMusicBtn.click();
+                      showToast("Playing our romantic music... 🎵❤️");
+                    } else {
+                      showToast("Our sweet romantic melody is playing ❤️");
+                    }
+                    playBtn.innerHTML = "<span>Playing Love Song 🎶</span>";
+                  });
+                }
+              }, 50);
+              break;
+            }
+
+            case "diary_event": {
+              const mem = diaryMemories[Math.floor(Math.random() * diaryMemories.length)];
+              modalContent.innerHTML = `
+                <span class="loveMysteryGame-item-tag">📖 Random Memory</span>
+                <h3 class="loveMysteryGame-item-title">Pages Of Our Story</h3>
+                <div class="loveMysteryGame-diary-page">
+                  <div class="loveMysteryGame-diary-date">
+                    <span>✨</span>
+                    <span>${mem.date}</span>
+                  </div>
+                  <p class="loveMysteryGame-diary-desc">${mem.text}</p>
+                </div>
+                <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-modalAction">
+                  <span>Treasured Forever 🌹</span>
+                </button>
+              `;
+              break;
+            }
+
+            case "secret_question": {
+              modalContent.innerHTML = `
+                <span class="loveMysteryGame-item-tag">🔐 Secret Question</span>
+                <h3 class="loveMysteryGame-item-title">A Question From My Heart</h3>
+                <p style="color: #fff0f3; font-size: 1.1rem; line-height: 1.5; margin-bottom: 20px;">
+                  “If you could go back to 30 March 2024… would you choose to meet Sahil again?”
+                </p>
+                <div class="loveMysteryGame-question-options" id="loveMysteryGame-qOptions">
+                  <button class="loveMysteryGame-question-btn" data-ans="1">YES ❤️</button>
+                  <button class="loveMysteryGame-question-btn" data-ans="2">A THOUSAND TIMES ❤️❤️</button>
+                </div>
+                <div class="loveMysteryGame-question-answer-reveal" id="loveMysteryGame-qAnswerReveal">
+                  Good. Because I would choose you again too. 🥹❤️
+                </div>
+                <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-modalAction" style="display: none; margin-top: 14px;">
+                  <span>Continue ❤️</span>
+                </button>
+              `;
+              setTimeout(() => {
+                const qOptions = document.getElementById("loveMysteryGame-qOptions");
+                const qReveal = document.getElementById("loveMysteryGame-qAnswerReveal");
+                const contBtn = document.getElementById("loveMysteryGame-modalAction");
+                if (qOptions) {
+                  qOptions.querySelectorAll(".loveMysteryGame-question-btn").forEach(btn => {
+                    btn.addEventListener("click", () => {
+                      qOptions.style.display = "none";
+                      qReveal.style.display = "block";
+                      contBtn.style.display = "inline-flex";
+                      playHeartSound();
+                      const cardRect = modalCard.getBoundingClientRect();
+                      launchCanvasParticles(canvas, 35, cardRect.left + cardRect.width / 2, cardRect.top + 100);
+                    });
+                  });
+                }
+              }, 50);
+              break;
+            }
+
+            case "future_card": {
+              const futureMsg = futureMessages[Math.floor(Math.random() * futureMessages.length)];
+              modalContent.innerHTML = `
+                <span class="loveMysteryGame-item-tag">🔮 Future Card</span>
+                <h3 class="loveMysteryGame-item-title">A Message From The Future…</h3>
+                <div class="loveMysteryGame-future-flip" id="loveMysteryGame-futureFlip">
+                  <div class="loveMysteryGame-future-inner" id="loveMysteryGame-futureInner">
+                    <div class="loveMysteryGame-future-front">
+                      <span style="font-size: 42px; margin-bottom: 8px;">🔮</span>
+                      <strong style="color: #ffd166; font-size: 1.15rem;">Tap Card to Reveal Future ✨</strong>
+                    </div>
+                    <div class="loveMysteryGame-future-back">
+                      <p class="loveMysteryGame-future-text">“${futureMsg}”</p>
+                    </div>
+                  </div>
+                </div>
+                <button class="loveMysteryGame-btn-surprise" id="loveMysteryGame-modalAction">
+                  <span>Our Future Is Bright ✨</span>
+                </button>
+              `;
+              setTimeout(() => {
+                const flipWrap = document.getElementById("loveMysteryGame-futureFlip");
+                const flipInner = document.getElementById("loveMysteryGame-futureInner");
+                if (flipWrap && flipInner) {
+                  flipWrap.addEventListener("click", () => {
+                    flipInner.classList.toggle("flipped");
+                    playHeartSound();
+                  });
+                  // Auto flip after 400ms for delightful experience
+                  setTimeout(() => flipInner.classList.add("flipped"), 450);
+                }
+              }, 50);
+              break;
+            }
+          }
+
+          // Modal close button handlers
+          modalOverlay.classList.add("active");
+          const actionBtn = document.getElementById("loveMysteryGame-modalAction");
+          if (actionBtn) {
+            actionBtn.addEventListener("click", () => {
+              clearTimeout(autoCloseTimer);
+              modalOverlay.classList.remove("active");
+            });
+          }
+        }
+
+        // Unexpected Event Flow
+        function triggerUnexpectedEvent(onDone) {
+          modalContent.innerHTML = `
+            <div style="font-size: 50px; margin-bottom: 12px; animation: loveMysteryGame-pulse 1s infinite alternate;">👀</div>
+            <h3 class="loveMysteryGame-item-title" id="loveMysteryGame-unexpTitle">WAIT… 👀</h3>
+            <p class="loveMysteryGame-diary-desc" id="loveMysteryGame-unexpText" style="text-align: center; margin-top: 14px; min-height: 48px;"></p>
+          `;
+          modalOverlay.classList.add("active");
+
+          setTimeout(() => {
+            const title = document.getElementById("loveMysteryGame-unexpTitle");
+            const text = document.getElementById("loveMysteryGame-unexpText");
+            if (title) title.textContent = "I found something you weren't supposed to see… ❤️";
+
+            setTimeout(() => {
+              if (text) {
+                text.innerHTML = `<span style="color: #ffd166; font-size: 1.25rem; font-weight: 700;">Sahil loves Sahifa more than this website can explain. ❤️</span>`;
+                playHeartSound();
+                const modalRect = modalCard.getBoundingClientRect();
+                launchCanvasParticles(canvas, 45, modalRect.left + modalRect.width / 2, modalRect.top + 80);
+              }
+
+              setTimeout(() => {
+                if (onDone) onDone();
+              }, 2200);
+            }, 1200);
+          }, 1000);
+        }
+
+        // Final surprise sequence
+        function startFinalSurprise() {
+          completedPrompt.style.display = "none";
+          finalOverlay.classList.add("active");
+          finalHeartStage.style.display = "flex";
+          finalCard.style.display = "none";
+          finalHeart.className = "loveMysteryGame-final-heart";
+          finalCaption.textContent = "A tiny heartbeat that belongs to you...";
+
+          playHeartSound();
+
+          // 1. Heart slowly grows
+          heartbeatTimer = setTimeout(() => {
+            finalHeart.classList.add("growing");
+            finalCaption.textContent = "Growing bigger with every breath I take...";
+
+            // 2. Heart beats faster
+            heartbeatTimer = setTimeout(() => {
+              finalHeart.classList.add("fast-beat");
+              finalCaption.textContent = "Beating faster whenever you are near... ❤️";
+
+              // 3. Rose petals and heart burst
+              heartbeatTimer = setTimeout(() => {
+                finalHeartStage.style.display = "none";
+
+                // Burst particles across screen
+                const overlayRect = finalOverlay.getBoundingClientRect();
+                launchCanvasParticles(canvas, 90, overlayRect.width / 2, overlayRect.height / 2);
+                if (typeof showHeartBurst === "function") {
+                  showHeartBurst(overlayRect.left + overlayRect.width / 2, overlayRect.top + overlayRect.height / 2, 45);
+                }
+                if (typeof playCelebrationSound === "function") {
+                  playCelebrationSound();
+                }
+
+                // 4. Reveal final card
+                setTimeout(() => {
+                  finalCard.style.display = "block";
+                }, 400);
+              }, 2600);
+            }, 1800);
+          }, 1400);
+        }
+
+        // Audio helper using Web Audio
+        function playBoxPopSound() {
+          try {
+            const ctx = (typeof getGameAudioContext === "function") ? getGameAudioContext() : new (window.AudioContext || window.webkitAudioContext)();
+            if (!ctx) return;
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(320, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(640, ctx.currentTime + 0.15);
+            gain.gain.setValueAtTime(0.18, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.25);
+          } catch (e) {}
+        }
+
+        function playHeartSound() {
+          if (typeof playHeartHitSound === "function") {
+            playHeartHitSound();
+          } else {
+            playBoxPopSound();
+          }
+        }
+
+        // Event listeners
+        boxesGrid.querySelectorAll(".loveMysteryGame-box").forEach(box => {
+          box.addEventListener("click", () => {
+            const idx = parseInt(box.getAttribute("data-box-index"), 10);
+            openBox(idx, box);
+          });
+          box.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              const idx = parseInt(box.getAttribute("data-box-index"), 10);
+              openBox(idx, box);
+            }
+          });
+        });
+
+        modalClose.addEventListener("click", () => {
+          clearTimeout(autoCloseTimer);
+          modalOverlay.classList.remove("active");
+        });
+
+        modalOverlay.addEventListener("click", (e) => {
+          if (e.target === modalOverlay) {
+            clearTimeout(autoCloseTimer);
+            modalOverlay.classList.remove("active");
+          }
+        });
+
+        btnMore.addEventListener("click", startFinalSurprise);
+        btnResetEarly.addEventListener("click", resetGame);
+        btnFinalRestart.addEventListener("click", resetGame);
+
+        // Initial setup
+        resetGame();
+      }
+
+      return {
+        init: init
+      };
+    })();
+
     function initApp() {
       setupPasscodeOverlay();
       setupRelationshipCounter();
@@ -5330,6 +6855,7 @@ Sahil ❤️`,
       setupAimGame();
       setupWheelGame();
       setupQuizGame();
+      if (window.LoveMysteryGame) window.LoveMysteryGame.init();
       setupLightbox();
       setupTypewriterLetter();
       setupNightMode();
