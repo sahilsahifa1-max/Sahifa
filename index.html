@@ -3238,6 +3238,812 @@
       }
     }
 
+
+    /* ==========================================================================
+       DEDICATED SECTION: FEATURED GAMES HUB, TRUTH OR DARE & BURNING HOUSE
+       ========================================================================== */
+
+    /* Desktop Navigation Dropdown for Games */
+    .nav-item-dropdown {
+      position: relative;
+    }
+
+    .nav-dropdown-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-caret {
+      font-size: 0.72rem;
+      transition: transform 0.3s ease;
+      opacity: 0.75;
+    }
+
+    .nav-item-dropdown:hover .nav-caret {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
+    .nav-dropdown-menu {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) translateY(8px);
+      background: rgba(26, 8, 24, 0.95);
+      border: 1px solid rgba(255, 182, 193, 0.22);
+      border-radius: 18px;
+      padding: 8px;
+      min-width: 190px;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.65), 0 0 24px rgba(255, 77, 109, 0.2);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+      z-index: 1000;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .nav-item-dropdown:hover .nav-dropdown-menu,
+    .nav-item-dropdown:focus-within .nav-dropdown-menu {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .nav-dropdown-menu .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: var(--text-main);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-dropdown-menu .dropdown-item:hover {
+      background: rgba(255, 77, 109, 0.18);
+      color: #ffffff;
+      transform: translateX(3px);
+    }
+
+    .dropdown-item-all {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 2px;
+      color: var(--accent-pink-soft) !important;
+    }
+
+    /* Mobile Drawer Sublinks */
+    .mobile-drawer-sublinks {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin: -2px 0 8px 18px;
+      padding-left: 12px;
+      border-left: 2px solid rgba(255, 77, 109, 0.25);
+    }
+
+    .mobile-drawer-sublink {
+      display: flex !important;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px !important;
+      border-radius: 14px;
+      font-size: 0.88rem !important;
+      color: var(--text-secondary) !important;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 182, 193, 0.08);
+      text-decoration: none;
+    }
+
+    .mobile-drawer-sublink:hover,
+    .mobile-drawer-sublink:active {
+      background: rgba(255, 77, 109, 0.16) !important;
+      color: #ffffff !important;
+      border-color: rgba(255, 77, 109, 0.35);
+    }
+
+    /* Games Showcase Hub (Two Beautiful Cards First) */
+    .games-hub-showcase {
+      margin-bottom: 44px;
+      position: relative;
+    }
+
+    .games-hub-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 22px;
+      margin-bottom: 24px;
+    }
+
+    .game-showcase-card {
+      background: linear-gradient(135deg, rgba(38, 12, 34, 0.78) 0%, rgba(20, 5, 22, 0.88) 100%);
+      border: 1.5px solid var(--bg-glass-border);
+      border-radius: 26px;
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 77, 109, 0.12);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s ease, box-shadow 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+    }
+
+    .game-showcase-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 77, 109, 0.55);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 32px rgba(255, 77, 109, 0.35);
+    }
+
+    .game-showcase-card:focus-visible {
+      outline: 2px solid var(--accent-pink);
+      outline-offset: 2px;
+    }
+
+    .showcase-glow-bg {
+      position: absolute;
+      top: -40px;
+      right: -40px;
+      width: 140px;
+      height: 140px;
+      background: radial-gradient(circle, rgba(255, 77, 109, 0.25) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .showcase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(255, 77, 109, 0.15);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      color: var(--accent-pink-soft);
+      width: fit-content;
+      margin-bottom: 14px;
+    }
+
+    .showcase-icon-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 2.2rem;
+      margin-bottom: 12px;
+      line-height: 1;
+    }
+
+    .showcase-icon-vs {
+      font-size: 0.85rem;
+      font-weight: 800;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .showcase-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      line-height: 1.3;
+    }
+
+    .showcase-subtitle {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    .showcase-tags-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .showcase-tag {
+      font-size: 0.76rem;
+      padding: 4px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    .showcase-cta-btn {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 13px 20px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 77, 109, 0.38);
+      background: linear-gradient(135deg, rgba(255, 77, 109, 0.2), rgba(201, 24, 74, 0.22));
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 48px;
+    }
+
+    .game-showcase-card:hover .showcase-cta-btn {
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.45);
+      border-color: #ff758f;
+    }
+
+    .showcase-cta-btn .btn-arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .game-showcase-card:hover .showcase-cta-btn .btn-arrow {
+      transform: translateX(4px);
+    }
+
+    /* Quick Game Tab Filter Pills */
+    .games-quick-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .game-tab-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bg-glass-border);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 42px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .game-tab-btn:hover {
+      background: rgba(255, 77, 109, 0.14);
+      border-color: rgba(255, 77, 109, 0.35);
+      color: #ffffff;
+    }
+
+    .game-tab-btn.active {
+      background: rgba(255, 77, 109, 0.24);
+      border-color: var(--accent-pink);
+      color: #ffffff;
+      box-shadow: 0 0 16px rgba(255, 77, 109, 0.28);
+    }
+
+    /* Target highlight animation when clicked from nav/tabs */
+    .game-highlight-focus {
+      animation: gamePulseHighlight 1.8s ease;
+    }
+
+    @keyframes gamePulseHighlight {
+      0% { box-shadow: 0 0 0 0 rgba(255, 77, 109, 0.7); }
+      50% { box-shadow: 0 0 35px 8px rgba(255, 77, 109, 0.5); }
+      100% { box-shadow: var(--shadow-glow); }
+    }
+
+    /* ==========================================================================
+       GAME 1: TRUTH OR DARE ❤️
+       ========================================================================== */
+    .tod-game-card {
+      position: relative;
+      overflow: hidden;
+      margin-top: 36px;
+      background: linear-gradient(135deg, rgba(38, 11, 32, 0.85) 0%, rgba(20, 5, 22, 0.92) 100%);
+    }
+
+    .tod-mode-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      max-width: 480px;
+      margin: 0 auto 28px;
+    }
+
+    .tod-mode-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 16px 20px;
+      border-radius: 20px;
+      font-size: 1.12rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      cursor: pointer;
+      min-height: 56px;
+      border: 1.5px solid transparent;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tod-mode-truth {
+      background: rgba(255, 77, 109, 0.12);
+      border-color: rgba(255, 77, 109, 0.32);
+      color: #ffb3c1;
+    }
+
+    .tod-mode-truth:hover,
+    .tod-mode-truth.active {
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      border-color: #ff758f;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(255, 77, 109, 0.42);
+      transform: translateY(-2px);
+    }
+
+    .tod-mode-dare {
+      background: rgba(255, 140, 0, 0.12);
+      border-color: rgba(255, 140, 0, 0.32);
+      color: #ffbe0b;
+    }
+
+    .tod-mode-dare:hover,
+    .tod-mode-dare.active {
+      background: linear-gradient(135deg, #fb5607, #d90429);
+      border-color: #ffaa00;
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(251, 86, 7, 0.42);
+      transform: translateY(-2px);
+    }
+
+    .tod-arena {
+      position: relative;
+      max-width: 680px;
+      margin: 0 auto;
+      min-height: 280px;
+    }
+
+    .tod-particles-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .tod-card {
+      position: relative;
+      z-index: 2;
+      background: rgba(30, 9, 26, 0.75);
+      border: 1.5px solid rgba(255, 182, 193, 0.22);
+      border-radius: 24px;
+      padding: clamp(24px, 4vw, 36px) clamp(18px, 3.5vw, 32px);
+      text-align: center;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(255, 77, 109, 0.15);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease, border-color 0.45s ease;
+      min-height: 250px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .tod-card.animating {
+      transform: scale(0.94) translateY(8px);
+      opacity: 0.4;
+    }
+
+    .tod-card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .tod-badge-truth {
+      background: rgba(255, 77, 109, 0.18);
+      border: 1px solid rgba(255, 77, 109, 0.38);
+      color: #ff8fa3;
+    }
+
+    .tod-badge-dare {
+      background: rgba(251, 86, 7, 0.18);
+      border: 1px solid rgba(251, 86, 7, 0.38);
+      color: #ffbe0b;
+    }
+
+    .tod-prompt-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.28rem, 3.2vw, 1.7rem);
+      font-style: italic;
+      color: #ffffff;
+      line-height: 1.5;
+      margin-bottom: 14px;
+      max-width: 580px;
+    }
+
+    .tod-prompt-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 26px;
+      line-height: 1.5;
+    }
+
+    .tod-actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .tod-next-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #ff4d6d, #c9184a);
+      border: none;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 0.98rem;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(255, 77, 109, 0.4);
+      transition: all 0.3s ease;
+      min-height: 50px;
+    }
+
+    .tod-next-btn:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 10px 28px rgba(255, 77, 109, 0.55);
+    }
+
+    .tod-next-btn:active {
+      transform: scale(0.98);
+    }
+
+    .tod-secondary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--bg-glass-border);
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      min-height: 50px;
+    }
+
+    .tod-secondary-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 77, 109, 0.35);
+      color: #ffffff;
+    }
+
+    .tod-toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(30px);
+      background: rgba(20, 5, 20, 0.95);
+      border: 1px solid var(--accent-pink);
+      color: #ffffff;
+      padding: 10px 22px;
+      border-radius: 20px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 77, 109, 0.35);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.35s ease;
+      z-index: 9999;
+    }
+
+    .tod-toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* ==========================================================================
+       GAME 2: 🔥 BURNING HOUSE
+       ========================================================================== */
+    .bh-game-card {
+      position: relative;
+      overflow: hidden;
+      margin-top: 40px;
+      background: linear-gradient(135deg, rgba(40, 10, 26, 0.88) 0%, rgba(22, 6, 20, 0.94) 100%);
+    }
+
+    .bh-scenario-banner {
+      background: linear-gradient(135deg, rgba(56, 14, 20, 0.75), rgba(30, 8, 22, 0.85));
+      border: 1.5px solid rgba(255, 90, 95, 0.28);
+      border-radius: 22px;
+      padding: 22px 20px;
+      text-align: center;
+      margin-bottom: 28px;
+      box-shadow: 0 8px 24px rgba(220, 53, 69, 0.18);
+    }
+
+    .bh-scenario-flame {
+      font-size: 2.2rem;
+      margin-bottom: 6px;
+      display: inline-block;
+      animation: bhFlamePulse 1.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes bhFlamePulse {
+      0% { transform: scale(1) rotate(-3deg); filter: drop-shadow(0 0 8px rgba(255, 100, 0, 0.4)); }
+      100% { transform: scale(1.15) rotate(3deg); filter: drop-shadow(0 0 18px rgba(255, 50, 50, 0.8)); }
+    }
+
+    .bh-scenario-quote {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3vw, 1.45rem);
+      font-weight: 700;
+      color: #ff9e9e;
+      margin-bottom: 8px;
+    }
+
+    .bh-scenario-text {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .bh-disclaimer-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--text-muted);
+    }
+
+    /* 4 Choice Cards Grid */
+    .bh-choices-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .bh-choices-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .bh-choice-card {
+      background: rgba(32, 10, 28, 0.72);
+      border: 1.5px solid rgba(255, 182, 193, 0.18);
+      border-radius: 20px;
+      padding: 24px 14px;
+      text-align: center;
+      cursor: pointer;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .bh-choice-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 77, 109, 0.55);
+      box-shadow: 0 12px 28px rgba(255, 77, 109, 0.3);
+    }
+
+    .bh-choice-card.selected {
+      border-color: #ffd166;
+      background: linear-gradient(135deg, rgba(89, 13, 34, 0.95), rgba(46, 10, 22, 0.95));
+      box-shadow: 0 0 35px rgba(255, 209, 102, 0.45), 0 0 18px rgba(255, 77, 109, 0.4);
+      transform: translateY(-8px) scale(1.04);
+    }
+
+    .bh-choice-card.dimmed {
+      opacity: 0.4;
+      transform: scale(0.96);
+      pointer-events: none;
+    }
+
+    .bh-choice-icon {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      line-height: 1;
+      filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.4));
+      transition: transform 0.3s ease;
+    }
+
+    .bh-choice-card:hover .bh-choice-icon {
+      transform: scale(1.12);
+    }
+
+    .bh-choice-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.18rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 4px;
+    }
+
+    .bh-choice-desc {
+      font-size: 0.78rem;
+      color: var(--text-secondary);
+      line-height: 1.35;
+      margin-bottom: 8px;
+    }
+
+    .bh-choice-tag {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--accent-pink-soft);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    /* Result Box with Heart & Fire particle animation */
+    .bh-result-wrap {
+      display: none;
+      position: relative;
+      margin-top: 14px;
+    }
+
+    .bh-result-wrap.active {
+      display: block;
+      animation: bhSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes bhSlideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bh-result-card {
+      background: linear-gradient(135deg, rgba(46, 12, 36, 0.94) 0%, rgba(24, 6, 22, 0.96) 100%);
+      border: 1.5px solid rgba(255, 209, 102, 0.45);
+      border-radius: 24px;
+      padding: clamp(26px, 4vw, 36px) clamp(18px, 3.5vw, 30px);
+      text-align: center;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65), 0 0 35px rgba(255, 77, 109, 0.25);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bh-result-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .bh-result-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .bh-result-icons {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+      animation: bhIconPop 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes bhIconPop {
+      0% { transform: scale(0.4) rotate(-15deg); }
+      70% { transform: scale(1.2) rotate(5deg); }
+      100% { transform: scale(1) rotate(0deg); }
+    }
+
+    .bh-result-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.35rem, 3.2vw, 1.75rem);
+      font-weight: 700;
+      color: #ffd166;
+      margin-bottom: 12px;
+    }
+
+    .bh-result-message {
+      font-size: 1.05rem;
+      color: var(--text-main);
+      line-height: 1.65;
+      max-width: 580px;
+      margin: 0 auto 24px;
+    }
+
+    .bh-play-again-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 34px;
+      border-radius: 25px;
+      background: linear-gradient(135deg, #ffd166, #ff758f);
+      border: none;
+      color: #1a0410;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      box-shadow: 0 6px 22px rgba(255, 209, 102, 0.4);
+      transition: all 0.3s ease;
+      min-height: 50px;
+    }
+
+    .bh-play-again-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 30px rgba(255, 209, 102, 0.55);
+    }
+
+    .bh-play-again-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* Starlight Night Mode Overrides */
+    body.night-mode .game-showcase-card {
+      border-color: rgba(186, 138, 247, 0.25);
+    }
+    body.night-mode .game-showcase-card:hover {
+      border-color: rgba(216, 180, 254, 0.55);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 32px rgba(192, 132, 252, 0.35);
+    }
+    body.night-mode .tod-card {
+      border-color: rgba(186, 138, 247, 0.25);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(192, 132, 252, 0.2);
+    }
+    body.night-mode .bh-choice-card {
+      border-color: rgba(186, 138, 247, 0.2);
+    }
+    body.night-mode .bh-choice-card:hover {
+      border-color: rgba(216, 180, 254, 0.5);
+    }
+
     /* ==========================================================================
        LOVE LETTER SECTION
        ========================================================================== */
@@ -3907,7 +4713,29 @@
       <ul class="nav-links">
         <li><a href="#timeline"><span>📖</span> Our Story</a></li>
         <li><a href="#photos-videos"><span>📸</span> Memories</a></li>
-        <li><a href="#games"><span>🎮</span> Games</a></li>
+        <li class="nav-item-dropdown">
+          <a href="#games" class="nav-dropdown-toggle"><span>🎮</span> Games <span class="nav-caret">▾</span></a>
+          <ul class="nav-dropdown-menu">
+            <li>
+              <a href="#truthOrDareGameCard" class="dropdown-item">
+                <span>❤️</span>
+                <span>Truth or Dare</span>
+              </a>
+            </li>
+            <li>
+              <a href="#burningHouseGameCard" class="dropdown-item">
+                <span>🔥</span>
+                <span>Burning House</span>
+              </a>
+            </li>
+            <li>
+              <a href="#games" class="dropdown-item dropdown-item-all">
+                <span>✨</span>
+                <span>View All Games</span>
+              </a>
+            </li>
+          </ul>
+        </li>
       </ul>
 
       <div class="nav-actions">
@@ -3955,9 +4783,19 @@
         <span>Memories &amp; Photos</span>
       </a>
       <a href="#games" class="mobile-nav-link">
-        <span class="drawer-icon">🎁</span>
-        <span>Games &amp; Surprises</span>
+        <span class="drawer-icon">🎮</span>
+        <span>Games</span>
       </a>
+      <div class="mobile-drawer-sublinks">
+        <a href="#truthOrDareGameCard" class="mobile-nav-link mobile-drawer-sublink">
+          <span class="sublink-icon">❤️</span>
+          <span>Truth or Dare</span>
+        </a>
+        <a href="#burningHouseGameCard" class="mobile-nav-link mobile-drawer-sublink">
+          <span class="sublink-icon">🔥</span>
+          <span>Burning House</span>
+        </a>
+      </div>
       <a href="#letter" class="mobile-nav-link">
         <span class="drawer-icon">💌</span>
         <span>A Letter For You</span>
@@ -4194,6 +5032,177 @@
         <span class="section-tag">Playful Love &amp; Sweet Smiles</span>
         <h2 class="section-title">Our Romantic Games ❤️</h2>
         <p class="section-desc">Interactive little moments crafted with all my love for you.</p>
+      </div>
+
+      <!-- ====================================================================
+           GAMES SHOWCASE HUB: TWO BEAUTIFUL CARDS FIRST
+           ==================================================================== -->
+      <div class="games-hub-showcase" id="gamesHubShowcase">
+        <div class="games-hub-grid">
+          <!-- Showcase Card 1: Truth or Dare -->
+          <div class="game-showcase-card" id="showcaseCardTod" role="button" tabindex="0" aria-label="Open Truth or Dare Game">
+            <div class="showcase-glow-bg"></div>
+            <div class="showcase-badge">❤️ Couple Favorite</div>
+            <div class="showcase-icon-row">
+              <span>💗</span>
+              <span class="showcase-icon-vs">vs</span>
+              <span>🔥</span>
+            </div>
+            <h3 class="showcase-title">TRUTH OR DARE ❤️</h3>
+            <p class="showcase-subtitle">How well do we really know each other?</p>
+            <div class="showcase-tags-row">
+              <span class="showcase-tag">💗 Deep Truths</span>
+              <span class="showcase-tag">🔥 Fun Dares</span>
+              <span class="showcase-tag">🎲 Random Challenges</span>
+            </div>
+            <button class="showcase-cta-btn" type="button">
+              <span>Play Truth or Dare</span>
+              <span class="btn-arrow">➔</span>
+            </button>
+          </div>
+
+          <!-- Showcase Card 2: Burning House -->
+          <div class="game-showcase-card" id="showcaseCardBh" role="button" tabindex="0" aria-label="Open Burning House Game">
+            <div class="showcase-glow-bg"></div>
+            <div class="showcase-badge">🔥 Relationship Fun</div>
+            <div class="showcase-icon-row">
+              <span>🔥🏠</span>
+            </div>
+            <h3 class="showcase-title">🔥 BURNING HOUSE</h3>
+            <p class="showcase-subtitle">Who would you save?</p>
+            <div class="showcase-tags-row">
+              <span class="showcase-tag">4 Fictional Choices</span>
+              <span class="showcase-tag">Playful Results</span>
+              <span class="showcase-tag">Particle Bursts</span>
+            </div>
+            <button class="showcase-cta-btn" type="button">
+              <span>Play Burning House</span>
+              <span class="btn-arrow">➔</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Quick Game Selector Tabs -->
+        <div class="games-quick-tabs" id="gamesQuickTabs">
+          <button class="game-tab-btn active" data-target="all" type="button">✨ All Games</button>
+          <button class="game-tab-btn" data-target="truthOrDareGameCard" type="button">❤️ Truth or Dare</button>
+          <button class="game-tab-btn" data-target="burningHouseGameCard" type="button">🔥 Burning House</button>
+          <button class="game-tab-btn" data-target="aimGameCard" type="button">🏹 Cupid's Bow</button>
+          <button class="game-tab-btn" data-target="wheelGameCard" type="button">🎡 Wheel of Truth</button>
+          <button class="game-tab-btn" data-target="loveMysteryGameCard" type="button">🎁 Mystery Box</button>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+           GAME 1 — TRUTH OR DARE ❤️
+           ==================================================================== -->
+      <div class="romantic-game-card tod-game-card" id="truthOrDareGameCard">
+        <div class="game-card-header">
+          <div class="game-badge-wrap">
+            <span class="game-badge">Game 1</span>
+            <span class="game-badge-title">Romantic Secrets</span>
+          </div>
+          <h3 class="game-title">TRUTH OR DARE ❤️</h3>
+          <p class="game-instruction">How well do we really know each other?</p>
+        </div>
+
+        <!-- Mode Buttons: TRUTH vs DARE -->
+        <div class="tod-mode-selector">
+          <button class="tod-mode-btn tod-mode-truth active" id="todTruthBtn" type="button">
+            <span>💗</span>
+            <span>TRUTH</span>
+          </button>
+          <button class="tod-mode-btn tod-mode-dare" id="todDareBtn" type="button">
+            <span>🔥</span>
+            <span>DARE</span>
+          </button>
+        </div>
+
+        <!-- Interactive Challenge Arena -->
+        <div class="tod-arena">
+          <canvas class="tod-particles-canvas" id="todParticlesCanvas"></canvas>
+
+          <div class="tod-card" id="todCard">
+            <div class="tod-card-badge tod-badge-truth" id="todCardBadge">
+              <span>💗 TRUTH QUESTION</span>
+            </div>
+
+            <div class="tod-prompt-text" id="todPromptText">
+              “What was your first impression of me?”
+            </div>
+
+            <p class="tod-prompt-desc" id="todPromptDesc">
+              Answer with complete honesty from the bottom of your heart! 🥺❤️
+            </p>
+
+            <div class="tod-actions-row">
+              <button class="tod-next-btn" id="todNextBtn" type="button">
+                <span>NEXT CHALLENGE</span>
+                <span>🎲</span>
+              </button>
+
+              <button class="tod-secondary-btn" id="todSwitchBtn" type="button">
+                <span id="todSwitchIcon">🔥</span>
+                <span id="todSwitchLabel">Switch to Dare</span>
+              </button>
+
+              <button class="tod-secondary-btn" id="todCopyBtn" type="button" title="Copy challenge to clipboard">
+                <span>📋</span>
+                <span>Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Temporary Floating Toast for Copy -->
+        <div class="tod-toast" id="todToast">Challenge copied! Send it to Sahifa 💌</div>
+      </div>
+
+      <!-- ====================================================================
+           GAME 2 — BURNING HOUSE 🔥
+           ==================================================================== -->
+      <div class="romantic-game-card bh-game-card" id="burningHouseGameCard">
+        <div class="game-card-header">
+          <div class="game-badge-wrap">
+            <span class="game-badge">Game 2</span>
+            <span class="game-badge-title">Playful Dilemma</span>
+          </div>
+          <h3 class="game-title">🔥 BURNING HOUSE</h3>
+          <p class="game-instruction">Who would you save?</p>
+        </div>
+
+        <!-- Fictional Scenario Banner -->
+        <div class="bh-scenario-banner">
+          <div class="bh-scenario-flame">🔥</div>
+          <h4 class="bh-scenario-quote">The house is burning 🔥</h4>
+          <p class="bh-scenario-text">
+            Inside are four fictional choices.<br>
+            <strong>You can save only ONE.</strong>
+          </p>
+          <span class="bh-disclaimer-pill">⚠️ Playful relationship game • 100% fictional and cute! 😉❤️</span>
+        </div>
+
+        <!-- The 4 Randomly Shuffled Choice Cards -->
+        <div class="bh-choices-grid" id="bhChoicesGrid">
+          <!-- Cards populated and randomized via JavaScript -->
+        </div>
+
+        <!-- Result Box with Heart & Fire particle animation -->
+        <div class="bh-result-wrap" id="bhResultWrap">
+          <div class="bh-result-card">
+            <canvas class="bh-result-canvas" id="bhResultCanvas"></canvas>
+            <div class="bh-result-inner">
+              <div class="bh-result-icons" id="bhResultIcons">🥺 ❤️ 🌹</div>
+              <h4 class="bh-result-title" id="bhResultTitle">A HERO'S CHOICE! ❤️</h4>
+              <p class="bh-result-message" id="bhResultMessage">
+                Sahil is safely carried out wrapped in a cozy blanket! In return, he signs a lifetime contract to bring you snacks, give foot massages, and love you forever! 💍🥰
+              </p>
+              <button class="bh-play-again-btn" id="bhPlayAgainBtn" type="button">
+                <span>PLAY AGAIN 🔄</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- ====================================================================
@@ -7076,12 +8085,552 @@ No matter how far we travel or where the roads of life lead us, my heart will al
       };
     })();
 
+
+    /* ==========================================================================
+       GAMES HUB & NAVIGATION CONTROLLER
+       ========================================================================== */
+    function setupGamesHubNavigation() {
+      // Showcase cards click handlers
+      const cardTod = document.getElementById("showcaseCardTod");
+      const cardBh = document.getElementById("showcaseCardBh");
+      const targetTod = document.getElementById("truthOrDareGameCard");
+      const targetBh = document.getElementById("burningHouseGameCard");
+
+      function scrollToCard(targetEl) {
+        if (!targetEl) return;
+        targetEl.scrollIntoView({ behavior: "smooth", block: "start" });
+        targetEl.classList.remove("game-highlight-focus");
+        // Force reflow
+        void targetEl.offsetWidth;
+        targetEl.classList.add("game-highlight-focus");
+        setTimeout(() => {
+          targetEl.classList.remove("game-highlight-focus");
+        }, 2000);
+      }
+
+      if (cardTod && targetTod) {
+        cardTod.addEventListener("click", () => scrollToCard(targetTod));
+        cardTod.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            scrollToCard(targetTod);
+          }
+        });
+      }
+
+      if (cardBh && targetBh) {
+        cardBh.addEventListener("click", () => scrollToCard(targetBh));
+        cardBh.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            scrollToCard(targetBh);
+          }
+        });
+      }
+
+      // Quick tabs filter/jump buttons
+      const tabBtns = document.querySelectorAll(".game-tab-btn");
+      tabBtns.forEach(btn => {
+        btn.addEventListener("click", () => {
+          tabBtns.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          const targetId = btn.getAttribute("data-target");
+          if (targetId === "all") {
+            const hub = document.getElementById("gamesHubShowcase");
+            if (hub) hub.scrollIntoView({ behavior: "smooth", block: "start" });
+          } else {
+            const target = document.getElementById(targetId);
+            if (target) scrollToCard(target);
+          }
+        });
+      });
+    }
+
+    /* ==========================================================================
+       GAME 1: TRUTH OR DARE ❤️ IMPLEMENTATION
+       ========================================================================== */
+    function setupTruthOrDareGame() {
+      const truthBtn = document.getElementById("todTruthBtn");
+      const dareBtn = document.getElementById("todDareBtn");
+      const card = document.getElementById("todCard");
+      const cardBadge = document.getElementById("todCardBadge");
+      const promptText = document.getElementById("todPromptText");
+      const promptDesc = document.getElementById("todPromptDesc");
+      const nextBtn = document.getElementById("todNextBtn");
+      const switchBtn = document.getElementById("todSwitchBtn");
+      const switchIcon = document.getElementById("todSwitchIcon");
+      const switchLabel = document.getElementById("todSwitchLabel");
+      const copyBtn = document.getElementById("todCopyBtn");
+      const toast = document.getElementById("todToast");
+      const canvas = document.getElementById("todParticlesCanvas");
+
+      if (!truthBtn || !dareBtn || !promptText) return;
+
+      let currentMode = "truth"; // 'truth' or 'dare'
+      let lastTruthIndex = -1;
+      let lastDareIndex = -1;
+
+      const truths = [
+        "What was your first impression of me?",
+        "What is your favorite memory of us?",
+        "What is one thing you secretly love about me?",
+        "When did you first realize you liked me?",
+        "What is something you want us to do together someday?",
+        "What is the cutest thing I do?",
+        "Which memory of us would you relive if you could?",
+        "What nickname do you secretly love?",
+        "What song reminds you of me every time you hear it?",
+        "What was the first thought that popped into your head when we first talked?",
+        "If you could freeze one single moment of us together, which one would it be?",
+        "What is the funniest thing that has ever happened between us?",
+        "What little habit of mine always makes you smile secretly?",
+        "Who is secretly more dramatic when things go slightly wrong — Sahil or Sahifa? 😉",
+        "What is the sweetest compliment I ever gave you that you still remember?",
+        "If our love story was made into a movie, what would the title be?",
+        "What was the very first thing you noticed about my face or voice?",
+        "What is one promise you make to me for our future together? 💍",
+        "On a scale of 1 to 10, how lucky do you feel having me in your life? (Only 10+ allowed!)",
+        "What is something simple we do together that brings you the most peace?",
+        "What is your absolute favorite photo of us together?",
+        "If we could teleport anywhere in the world right now for 24 hours, where would you take me?"
+      ];
+
+      const dares = [
+        "Send me your cutest selfie right now with zero filter!",
+        "Describe me using only 3 words.",
+        "Send a voice message saying something sweet and romantic.",
+        "Recreate our very first conversation in 3 text messages.",
+        "Send your funniest photo from your phone gallery.",
+        "Write me a tiny love letter in 30 seconds.",
+        "Tell me your favorite thing about us.",
+        "Close your eyes, think of my face, and send the first 3 emojis that describe your feelings.",
+        "Sing or hum 5 seconds of our favorite song in a voice note!",
+        "Give me the warmest compliment you've never said out loud before.",
+        "Send me a screenshot of the oldest message between us that you still have saved.",
+        "Set my photo as your phone wallpaper or lock screen for the rest of today!",
+        "Text me 'I love you more than anyone in the universe' right now with no context.",
+        "Dedicate your current WhatsApp status to me for the next hour!",
+        "Send me a 10-second voice note mimicking how I talk when I'm sleepy 😂",
+        "Tell me 3 romantic wishes you want us to fulfill together.",
+        "Send me a photo of whatever is in front of you right now with a romantic caption.",
+        "Send me a heart emoji for every single month we have been together!"
+      ];
+
+      // Canvas particles for challenge transitions
+      const ctx = canvas ? canvas.getContext("2d") : null;
+      let particles = [];
+      let animId = null;
+
+      function resizeCanvas() {
+        if (!canvas) return;
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      }
+      resizeCanvas();
+      window.addEventListener("resize", resizeCanvas);
+
+      function createBurst() {
+        if (!canvas || !ctx) return;
+        particles = [];
+        const isTruth = currentMode === "truth";
+        const colors = isTruth 
+          ? ["#ff4d6d", "#ff758f", "#ff8fa3", "#ffffff", "#ffd166"]
+          : ["#fb5607", "#ff006e", "#ffbe0b", "#ffaa00", "#ffffff"];
+        const count = 35;
+        const cx = canvas.width / 2;
+        const cy = canvas.height / 2;
+
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 2 + Math.random() * 5;
+          particles.push({
+            x: cx,
+            y: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            radius: 2 + Math.random() * 3.5,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            alpha: 1,
+            decay: 0.02 + Math.random() * 0.025,
+            isHeart: Math.random() > 0.4
+          });
+        }
+
+        if (!animId) renderParticles();
+      }
+
+      function renderParticles() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = 0;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          if (p.alpha > 0) {
+            active++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.05; // slight gravity
+            p.alpha -= p.decay;
+
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.alpha);
+            ctx.fillStyle = p.color;
+
+            if (p.isHeart) {
+              ctx.font = `${Math.floor(p.radius * 3.2)}px sans-serif`;
+              ctx.fillText("❤️", p.x, p.y);
+            } else {
+              ctx.beginPath();
+              ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+              ctx.fill();
+            }
+            ctx.restore();
+          }
+        }
+
+        if (active > 0) {
+          animId = requestAnimationFrame(renderParticles);
+        } else {
+          animId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      function getRandomPrompt(pool, lastIndex) {
+        let index;
+        do {
+          index = Math.floor(Math.random() * pool.length);
+        } while (index === lastIndex && pool.length > 1);
+        return { prompt: pool[index], index };
+      }
+
+      function updateCard(isSwitchingMode = false) {
+        card.classList.add("animating");
+
+        setTimeout(() => {
+          if (currentMode === "truth") {
+            const { prompt, index } = getRandomPrompt(truths, lastTruthIndex);
+            lastTruthIndex = index;
+            cardBadge.className = "tod-card-badge tod-badge-truth";
+            cardBadge.innerHTML = "<span>💗 TRUTH QUESTION</span>";
+            promptText.textContent = `“${prompt}”`;
+            promptDesc.textContent = "Answer with complete honesty from the bottom of your heart! 🥺❤️";
+            switchIcon.textContent = "🔥";
+            switchLabel.textContent = "Switch to Dare";
+            truthBtn.classList.add("active");
+            dareBtn.classList.remove("active");
+          } else {
+            const { prompt, index } = getRandomPrompt(dares, lastDareIndex);
+            lastDareIndex = index;
+            cardBadge.className = "tod-card-badge tod-badge-dare";
+            cardBadge.innerHTML = "<span>🔥 DARE CHALLENGE</span>";
+            promptText.textContent = `“${prompt}”`;
+            promptDesc.textContent = "No backing out allowed! Pay a penalty of 10 kisses if you skip! 💋🔥";
+            switchIcon.textContent = "💗";
+            switchLabel.textContent = "Switch to Truth";
+            truthBtn.classList.remove("active");
+            dareBtn.classList.add("active");
+          }
+
+          createBurst();
+          card.classList.remove("animating");
+        }, 180);
+      }
+
+      truthBtn.addEventListener("click", () => {
+        if (currentMode !== "truth") {
+          currentMode = "truth";
+          updateCard(true);
+        } else {
+          updateCard();
+        }
+      });
+
+      dareBtn.addEventListener("click", () => {
+        if (currentMode !== "dare") {
+          currentMode = "dare";
+          updateCard(true);
+        } else {
+          updateCard();
+        }
+      });
+
+      nextBtn.addEventListener("click", () => {
+        updateCard();
+      });
+
+      switchBtn.addEventListener("click", () => {
+        currentMode = currentMode === "truth" ? "dare" : "truth";
+        updateCard(true);
+      });
+
+      if (copyBtn) {
+        copyBtn.addEventListener("click", () => {
+          const textToCopy = `${currentMode === "truth" ? "💗 Truth Challenge" : "🔥 Dare Challenge"} for us:
+${promptText.textContent}
+— From our Sahil ❤️ Sahifa Diary`;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(textToCopy).then(() => {
+              showToast("Challenge copied! Send it on WhatsApp 💌");
+            }).catch(() => {
+              fallbackCopy(textToCopy);
+            });
+          } else {
+            fallbackCopy(textToCopy);
+          }
+        });
+      }
+
+      function fallbackCopy(str) {
+        const el = document.createElement("textarea");
+        el.value = str;
+        document.body.appendChild(el);
+        el.select();
+        document.execCommand("copy");
+        document.body.removeChild(el);
+        showToast("Challenge copied! Send it on WhatsApp 💌");
+      }
+
+      function showToast(msg) {
+        if (!toast) return;
+        toast.textContent = msg;
+        toast.classList.add("show");
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2500);
+      }
+    }
+
+    /* ==========================================================================
+       GAME 2: 🔥 BURNING HOUSE IMPLEMENTATION
+       ========================================================================== */
+    function setupBurningHouseGame() {
+      const grid = document.getElementById("bhChoicesGrid");
+      const resultWrap = document.getElementById("bhResultWrap");
+      const resultIcons = document.getElementById("bhResultIcons");
+      const resultTitle = document.getElementById("bhResultTitle");
+      const resultMessage = document.getElementById("bhResultMessage");
+      const playAgainBtn = document.getElementById("bhPlayAgainBtn");
+      const canvas = document.getElementById("bhResultCanvas");
+
+      if (!grid || !resultWrap) return;
+
+      const choicesData = [
+        {
+          id: "sahil",
+          title: "Sahil",
+          icon: "❤️ 🧑‍💼",
+          desc: "Your eternal boy & protector",
+          tag: "❤️ Sahil",
+          resultIcons: "🥺 💍 ❤️",
+          resultTitle: "A HERO'S CHOICE! 🥺❤️",
+          resultMessage: "You chose to save Sahil! He is safely carried out wrapped in a fluffy blanket, crying tears of joy, and immediately signs a lifetime contract to bring you favorite snacks, back rubs, and never argue over the TV remote ever again! 💍🥰"
+        },
+        {
+          id: "sahifa",
+          title: "Sahifa",
+          icon: "❤️ 👸",
+          desc: "The Queen of his universe",
+          tag: "❤️ Sahifa",
+          resultIcons: "👑 🌹 ✨",
+          resultTitle: "THE QUEEN IS SAVED! 👑🌹",
+          resultMessage: "Sahil sprinted straight through the flames in slow-motion Bollywood style just to make sure Sahifa is carried out completely safe, smiling, and with her hair perfectly intact! Royalty deserves nothing less than total salvation! ✨👸"
+        },
+        {
+          id: "pet",
+          title: "Your Pet",
+          icon: "🐶 ✨",
+          desc: "The fluffiest baby in the world",
+          tag: "🐶 Your Pet",
+          resultIcons: "🐶 🍖 💖",
+          resultTitle: "PRIORITIES 100% CORRECT! 🐶✨",
+          resultMessage: "The little fur baby is completely safe and happily chewing on treats on the front lawn! Sahil is still somewhere inside searching for his favorite slippers, but he 100% agrees that the pet comes first! 😂🐶"
+        },
+        {
+          id: "money",
+          title: "Your Money",
+          icon: "💰 💸",
+          desc: "All savings & emergency gold",
+          tag: "💰 Your Money",
+          resultIcons: "🏰 💸 🥳",
+          resultTitle: "THE BAG IS SECURED! 💰💸",
+          resultMessage: "ABSOLUTE FINANCIAL GENIUS! 😂 With the money safely rescued, you and Sahil can buy a luxury dream villa, book first-class flights to Paris, and order biryani every single night! Sahil salutes your practical wisdom! 🏰💸"
+        }
+      ];
+
+      // Particle Animation for Heart & Fire bursts
+      const ctx = canvas ? canvas.getContext("2d") : null;
+      let particles = [];
+      let animId = null;
+
+      function resizeCanvas() {
+        if (!canvas) return;
+        canvas.width = canvas.parentElement.clientWidth;
+        canvas.height = canvas.parentElement.clientHeight;
+      }
+
+      function launchFireHeartBurst() {
+        if (!canvas || !ctx) return;
+        resizeCanvas();
+        particles = [];
+        const count = 45;
+        const cx = canvas.width / 2;
+        const cy = canvas.height * 0.4;
+        const colors = ["#ff4d6d", "#ff758f", "#ff9e00", "#ff5400", "#ffd166", "#ffffff"];
+
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = 2.5 + Math.random() * 5.5;
+          particles.push({
+            x: cx,
+            y: cy,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.5, // float upward
+            radius: 2 + Math.random() * 4,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            alpha: 1,
+            decay: 0.015 + Math.random() * 0.02,
+            symbol: Math.random() > 0.5 ? "❤️" : (Math.random() > 0.5 ? "🔥" : "✨")
+          });
+        }
+
+        if (!animId) renderParticles();
+      }
+
+      function renderParticles() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let active = 0;
+
+        for (let i = 0; i < particles.length; i++) {
+          const p = particles[i];
+          if (p.alpha > 0) {
+            active++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy -= 0.02; // upward draft
+            p.alpha -= p.decay;
+
+            ctx.save();
+            ctx.globalAlpha = Math.max(0, p.alpha);
+            ctx.font = `${Math.floor(p.radius * 3.4)}px sans-serif`;
+            ctx.fillText(p.symbol, p.x, p.y);
+            ctx.restore();
+          }
+        }
+
+        if (active > 0) {
+          animId = requestAnimationFrame(renderParticles);
+        } else {
+          animId = null;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+      }
+
+      // Shuffle array helper
+      function shuffleArray(arr) {
+        const copy = [...arr];
+        for (let i = copy.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [copy[i], copy[j]] = [copy[j], copy[i]];
+        }
+        return copy;
+      }
+
+      let selectedChoice = null;
+
+      function renderChoices() {
+        grid.innerHTML = "";
+        resultWrap.classList.remove("active");
+        selectedChoice = null;
+
+        // Randomize the order of the choices on every round
+        const shuffled = shuffleArray(choicesData);
+
+        shuffled.forEach((choice, index) => {
+          const cardEl = document.createElement("div");
+          cardEl.className = "bh-choice-card";
+          cardEl.setAttribute("role", "button");
+          cardEl.setAttribute("tabindex", "0");
+          cardEl.setAttribute("data-choice-id", choice.id);
+          cardEl.setAttribute("aria-label", `Save ${choice.title}`);
+
+          cardEl.innerHTML = `
+            <div class="bh-choice-icon">${choice.icon}</div>
+            <div class="bh-choice-title">${choice.title}</div>
+            <div class="bh-choice-desc">${choice.desc}</div>
+            <div class="bh-choice-tag">${choice.tag}</div>
+          `;
+
+          function handleSelect() {
+            if (selectedChoice) return;
+            selectedChoice = choice;
+
+            // Animate cards
+            const allCards = grid.querySelectorAll(".bh-choice-card");
+            allCards.forEach(c => {
+              if (c === cardEl) {
+                c.classList.add("selected");
+              } else {
+                c.classList.add("dimmed");
+              }
+            });
+
+            // Populate result
+            resultIcons.textContent = choice.resultIcons;
+            resultTitle.textContent = choice.resultTitle;
+            resultMessage.textContent = choice.resultMessage;
+
+            resultWrap.classList.add("active");
+            launchFireHeartBurst();
+
+            // Smooth scroll into result view
+            setTimeout(() => {
+              resultWrap.scrollIntoView({ behavior: "smooth", block: "nearest" });
+            }, 150);
+          }
+
+          cardEl.addEventListener("click", handleSelect);
+          cardEl.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              handleSelect();
+            }
+          });
+
+          grid.appendChild(cardEl);
+        });
+      }
+
+      playAgainBtn.addEventListener("click", () => {
+        // Animate exit and re-render fresh shuffled choices
+        resultWrap.classList.remove("active");
+        const allCards = grid.querySelectorAll(".bh-choice-card");
+        allCards.forEach(c => {
+          c.style.transform = "scale(0.9)";
+          c.style.opacity = "0.5";
+        });
+
+        setTimeout(() => {
+          renderChoices();
+          grid.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }, 220);
+      });
+
+      // Initial render
+      renderChoices();
+    }
+
     function initApp() {
       setupPasscodeOverlay();
       setupRelationshipCounter();
       renderTimeline();
       renderPhotosSection();
       renderVideosSection();
+      setupGamesHubNavigation();
+      setupTruthOrDareGame();
+      setupBurningHouseGame();
       setupAimGame();
       setupWheelGame();
       setupQuizGame();
