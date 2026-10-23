@@ -5200,6 +5200,680 @@
     </section>
 
     <!-- ======================================================================
+         TODAY'S SPECIAL MOMENT (DROP-IN SELF-CONTAINED COMPONENT)
+         ====================================================================== -->
+    <div class="love-moment-root" id="loveMomentSpecialRoot">
+      <style>
+        /* ==========================================================================
+           LOVE MOMENT SPECIAL COMPONENT STYLES (ISOLATED & PREFIXED)
+           ========================================================================== */
+        @property --love-moment-angle {
+          syntax: '<angle>';
+          initial-value: 0deg;
+          inherits: false;
+        }
+
+        .love-moment-root {
+          position: relative;
+          width: 100%;
+          max-width: 1100px;
+          margin: 40px auto 60px auto;
+          padding: 0 16px;
+          box-sizing: border-box;
+          z-index: 5;
+        }
+
+        /* Pulsing Radial Glow Behind Card */
+        .love-moment-glow-backdrop {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 85%;
+          height: 80%;
+          transform: translate(-50%, -50%);
+          background: radial-gradient(ellipse at center, rgba(255, 107, 157, 0.28) 0%, rgba(201, 24, 74, 0.18) 45%, rgba(0, 0, 0, 0) 75%);
+          filter: blur(50px);
+          pointer-events: none;
+          z-index: 0;
+          animation: loveMomentBackdropPulse 5s ease-in-out infinite alternate;
+        }
+
+        @keyframes loveMomentBackdropPulse {
+          0% {
+            opacity: 0.55;
+            transform: translate(-50%, -50%) scale(0.94);
+          }
+          100% {
+            opacity: 0.95;
+            transform: translate(-50%, -50%) scale(1.06);
+          }
+        }
+
+        /* Main Glassmorphism Card Container */
+        .love-moment-card {
+          position: relative;
+          border-radius: 26px;
+          background: linear-gradient(135deg, rgba(38, 11, 32, 0.85) 0%, rgba(20, 5, 22, 0.92) 100%);
+          backdrop-filter: blur(24px);
+          -webkit-backdrop-filter: blur(24px);
+          padding: clamp(22px, 3.8vw, 38px);
+          box-shadow: 
+            0 24px 60px rgba(0, 0, 0, 0.6),
+            0 0 35px rgba(255, 107, 157, 0.2),
+            inset 0 1px 1px rgba(255, 255, 255, 0.15);
+          overflow: hidden;
+          z-index: 1;
+          box-sizing: border-box;
+        }
+
+        /* Animated Gradient Border using rotating conic-gradient */
+        .love-moment-border-glow {
+          position: absolute;
+          inset: 0;
+          border-radius: 26px;
+          padding: 1.8px;
+          background: conic-gradient(
+            from var(--love-moment-angle),
+            #ff6b9d,
+            #c9184a,
+            #ffb3c6,
+            #ff0054,
+            #ff758f,
+            #ff6b9d
+          );
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: xor;
+          mask-composite: exclude;
+          pointer-events: none;
+          animation: loveMomentBorderSpin 6s linear infinite;
+        }
+
+        @keyframes loveMomentBorderSpin {
+          to {
+            --love-moment-angle: 360deg;
+          }
+        }
+
+        /* Continuous Floating Hearts Container */
+        .love-moment-hearts-stream {
+          position: absolute;
+          inset: 0;
+          pointer-events: none;
+          overflow: hidden;
+          z-index: 2;
+        }
+
+        .love-moment-floating-heart {
+          position: absolute;
+          bottom: -20px;
+          font-size: 1rem;
+          color: #ff6b9d;
+          user-select: none;
+          pointer-events: none;
+          opacity: 0;
+          filter: drop-shadow(0 2px 8px rgba(255, 107, 157, 0.5));
+          animation: loveMomentRise 5.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        @keyframes loveMomentRise {
+          0% {
+            opacity: 0;
+            transform: translateY(0) scale(0.6) rotate(0deg);
+          }
+          15% {
+            opacity: 0.85;
+          }
+          80% {
+            opacity: 0.65;
+          }
+          100% {
+            opacity: 0;
+            transform: translateY(-340px) scale(1.15) rotate(25deg);
+          }
+        }
+
+        /* Responsive Two-Column Layout */
+        .love-moment-grid {
+          position: relative;
+          display: grid;
+          grid-template-columns: minmax(280px, 1fr) 1.25fr;
+          gap: clamp(24px, 4vw, 42px);
+          align-items: center;
+          z-index: 3;
+        }
+
+        @media (max-width: 820px) {
+          .love-moment-grid {
+            grid-template-columns: 1fr;
+            text-align: center;
+            gap: 26px;
+          }
+        }
+
+        /* Visual Column (Image Left) */
+        .love-moment-visual-col {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+        }
+
+        .love-moment-image-frame {
+          position: relative;
+          width: 100%;
+          max-width: 380px;
+          border-radius: 22px;
+          animation: loveMomentFloat 5s ease-in-out infinite alternate;
+          will-change: transform;
+        }
+
+        @keyframes loveMomentFloat {
+          0% {
+            transform: translateY(-8px) rotate(-0.5deg);
+          }
+          100% {
+            transform: translateY(8px) rotate(0.8deg);
+          }
+        }
+
+        .love-moment-image-halo {
+          position: absolute;
+          inset: -6px;
+          border-radius: 26px;
+          background: linear-gradient(135deg, rgba(255, 107, 157, 0.5), rgba(201, 24, 74, 0.35));
+          filter: blur(14px);
+          opacity: 0.75;
+          z-index: 0;
+        }
+
+        .love-moment-img {
+          position: relative;
+          display: block;
+          width: 100%;
+          height: auto;
+          aspect-ratio: 4 / 3.4;
+          object-fit: cover;
+          border-radius: 20px;
+          box-shadow: 
+            0 16px 40px rgba(0, 0, 0, 0.55),
+            0 0 30px rgba(255, 107, 157, 0.35);
+          border: 1.5px solid rgba(255, 182, 193, 0.3);
+          z-index: 1;
+          transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .love-moment-img:hover {
+          transform: scale(1.02);
+          box-shadow: 
+            0 20px 48px rgba(0, 0, 0, 0.65),
+            0 0 38px rgba(255, 107, 157, 0.5);
+        }
+
+        .love-moment-image-overlay {
+          position: absolute;
+          inset: 0;
+          border-radius: 20px;
+          background: linear-gradient(to top, rgba(20, 5, 20, 0.5) 0%, transparent 60%);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .love-moment-photo-tag {
+          position: absolute;
+          bottom: 14px;
+          left: 16px;
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 5px 13px;
+          border-radius: 14px;
+          background: rgba(20, 5, 20, 0.72);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          border: 1px solid rgba(255, 182, 193, 0.25);
+          color: #ffccd5;
+          font-size: 0.76rem;
+          font-weight: 600;
+          letter-spacing: 0.5px;
+          z-index: 3;
+          pointer-events: none;
+        }
+
+        .love-moment-tag-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #ff4d6d;
+          box-shadow: 0 0 8px #ff4d6d;
+          animation: loveMomentDotPulse 1.8s infinite;
+        }
+
+        @keyframes loveMomentDotPulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(0.8); }
+        }
+
+        /* Content Column (Text Right) */
+        .love-moment-content-col {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          box-sizing: border-box;
+        }
+
+        /* Meta Bar (Badge + Stamp Chip) */
+        .love-moment-meta-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 12px;
+        }
+
+        @media (max-width: 820px) {
+          .love-moment-meta-bar {
+            justify-content: center;
+          }
+        }
+
+        /* Glowing Uppercase Badge */
+        .love-moment-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          padding: 6px 16px;
+          border-radius: 20px;
+          background: linear-gradient(135deg, rgba(255, 107, 157, 0.18), rgba(201, 24, 74, 0.25));
+          border: 1px solid rgba(255, 107, 157, 0.45);
+          color: #ffb3c6;
+          font-size: 0.8rem;
+          font-weight: 700;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          box-shadow: 0 0 16px rgba(255, 107, 157, 0.25);
+          animation: loveMomentBadgePulse 2.8s ease-in-out infinite alternate;
+        }
+
+        @keyframes loveMomentBadgePulse {
+          0% {
+            box-shadow: 0 0 10px rgba(255, 107, 157, 0.2);
+            border-color: rgba(255, 107, 157, 0.35);
+          }
+          100% {
+            box-shadow: 0 0 20px rgba(255, 107, 157, 0.5);
+            border-color: rgba(255, 182, 193, 0.7);
+          }
+        }
+
+        .love-moment-badge-sparkle {
+          font-size: 0.85rem;
+          line-height: 1;
+        }
+
+        /* Stylish "Moment Stamp" Chip */
+        .love-moment-stamp-chip {
+          position: relative;
+          display: inline-flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 2px;
+          padding: 8px 18px;
+          border-radius: 20px;
+          background: rgba(30, 9, 26, 0.75);
+          border: 1.5px solid rgba(255, 107, 157, 0.4);
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4), 0 0 15px rgba(255, 107, 157, 0.25);
+          animation: loveMomentChipPulse 3.5s ease-in-out infinite alternate;
+          transition: transform 0.3s ease;
+        }
+
+        .love-moment-stamp-chip:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 22px rgba(255, 107, 157, 0.45);
+        }
+
+        @media (max-width: 820px) {
+          .love-moment-stamp-chip {
+            align-items: center;
+          }
+        }
+
+        @keyframes loveMomentChipPulse {
+          0% {
+            border-color: rgba(255, 107, 157, 0.35);
+          }
+          100% {
+            border-color: rgba(255, 182, 193, 0.65);
+          }
+        }
+
+        .love-moment-stamp-inner {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .love-moment-stamp-icon {
+          font-size: 1.05rem;
+          line-height: 1;
+          filter: drop-shadow(0 0 5px rgba(255, 107, 157, 0.6));
+        }
+
+        .love-moment-stamp-details {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          font-size: 0.92rem;
+          font-weight: 700;
+          color: #ffffff;
+          letter-spacing: 0.4px;
+        }
+
+        .love-moment-stamp-date {
+          color: #ffd1dc;
+        }
+
+        .love-moment-stamp-divider {
+          font-size: 0.78rem;
+          color: #ff4d6d;
+          animation: loveMomentHeartBeat 1.4s infinite;
+        }
+
+        .love-moment-stamp-time {
+          color: #ff6b9d;
+          text-shadow: 0 0 10px rgba(255, 107, 157, 0.6);
+          font-weight: 800;
+          letter-spacing: 0.8px;
+        }
+
+        .love-moment-stamp-sublabel {
+          font-size: 0.68rem;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          color: rgba(255, 204, 213, 0.75);
+          font-weight: 600;
+        }
+
+        /* Shimmering Gradient Headline */
+        .love-moment-title {
+          font-family: 'Playfair Display', Georgia, serif;
+          font-size: clamp(1.75rem, 3.8vw, 2.45rem);
+          font-weight: 700;
+          line-height: 1.25;
+          margin: 4px 0 0 0;
+          background: linear-gradient(90deg, #ffffff 0%, #ff8fa3 25%, #ffb3c6 50%, #ffffff 75%, #ff4d6d 100%);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          color: #ff6b9d;
+          animation: loveMomentShimmer 6s linear infinite;
+          letter-spacing: 0.5px;
+        }
+
+        @keyframes loveMomentShimmer {
+          to {
+            background-position: 200% center;
+          }
+        }
+
+        /* Intimate, Poetic Caption */
+        .love-moment-caption {
+          font-size: clamp(0.95rem, 1.8vw, 1.08rem);
+          line-height: 1.68;
+          color: rgba(255, 240, 245, 0.9);
+          margin: 0;
+          font-weight: 400;
+          letter-spacing: 0.2px;
+          text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Footer Bar: Heartbeat Row + Status */
+        .love-moment-footer-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 14px;
+          margin-top: 8px;
+          padding-top: 14px;
+          border-top: 1px solid rgba(255, 107, 157, 0.2);
+        }
+
+        @media (max-width: 820px) {
+          .love-moment-footer-bar {
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+          }
+        }
+
+        /* Heartbeat Row */
+        .love-moment-heartbeat-row {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .love-moment-heart {
+          font-size: 1.15rem;
+          line-height: 1;
+          display: inline-block;
+          filter: drop-shadow(0 2px 8px rgba(255, 77, 109, 0.5));
+          animation: loveMomentHeartBeat 1.4s ease-in-out infinite;
+        }
+
+        .love-moment-hb-1 { animation-delay: 0s; }
+        .love-moment-hb-2 { animation-delay: 0.15s; }
+        .love-moment-hb-3 { animation-delay: 0.3s; }
+        .love-moment-hb-4 { animation-delay: 0.45s; }
+        .love-moment-hb-5 { animation-delay: 0.6s; }
+
+        @keyframes loveMomentHeartBeat {
+          0%, 100% {
+            transform: scale(1);
+          }
+          14% {
+            transform: scale(1.3);
+          }
+          28% {
+            transform: scale(1);
+          }
+          42% {
+            transform: scale(1.22);
+          }
+          70% {
+            transform: scale(1);
+          }
+        }
+
+        .love-moment-status-note {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.82rem;
+          color: rgba(255, 204, 213, 0.85);
+          font-weight: 500;
+          letter-spacing: 0.3px;
+        }
+
+        .love-moment-pulse-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #ff4d6d;
+          box-shadow: 0 0 10px #ff4d6d;
+          animation: loveMomentDotPulse 1.5s infinite;
+        }
+
+        /* Accessibility: Prefers Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+          .love-moment-image-frame,
+          .love-moment-glow-backdrop,
+          .love-moment-border-glow,
+          .love-moment-title,
+          .love-moment-badge,
+          .love-moment-stamp-chip,
+          .love-moment-heart,
+          .love-moment-floating-heart {
+            animation: none !important;
+            transform: none !important;
+          }
+        }
+      </style>
+
+      <!-- Atmospheric Radial Glow -->
+      <div class="love-moment-glow-backdrop" aria-hidden="true"></div>
+
+      <!-- Main Glassmorphism Card -->
+      <article class="love-moment-card" id="loveMomentSpecialCard">
+        <!-- Animated Rotating Gradient Border Glow -->
+        <div class="love-moment-border-glow" aria-hidden="true"></div>
+
+        <!-- Continuous Floating Hearts Stream -->
+        <div class="love-moment-hearts-stream" id="loveMomentHeartsStream" aria-hidden="true"></div>
+
+        <div class="love-moment-grid">
+          <!-- Column Left: Visual Artwork -->
+          <div class="love-moment-visual-col">
+            <div class="love-moment-image-frame">
+              <div class="love-moment-image-halo" aria-hidden="true"></div>
+              <img 
+                src="https://i.postimg.cc/MTnqhtpr/IMG-0465.png" 
+                alt="Our special moment together at 5:20" 
+                class="love-moment-img"
+                loading="lazy"
+              />
+              <div class="love-moment-image-overlay" aria-hidden="true"></div>
+              <div class="love-moment-photo-tag">
+                <span class="love-moment-tag-dot"></span>
+                <span>Unforgettable Memory</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column Right: Poetic & Romantic Details -->
+          <div class="love-moment-content-col">
+            <!-- Header Meta Bar: Badge & Moment Stamp Chip -->
+            <div class="love-moment-meta-bar">
+              <span class="love-moment-badge">
+                <span class="love-moment-badge-sparkle">✨</span>
+                <span>Today's Special</span>
+                <span class="love-moment-badge-sparkle">✨</span>
+              </span>
+
+              <!-- Stylish "Moment Stamp" Chip -->
+              <div class="love-moment-stamp-chip" id="loveMomentStampChip" title="Our special moment stamp">
+                <div class="love-moment-stamp-inner">
+                  <span class="love-moment-stamp-icon" aria-hidden="true">🕔</span>
+                  <div class="love-moment-stamp-details">
+                    <span class="love-moment-stamp-date" id="loveMomentDynamicDate">October 23, 2026</span>
+                    <span class="love-moment-stamp-divider" aria-hidden="true">❤️</span>
+                    <span class="love-moment-stamp-time">5:20 PM</span>
+                  </div>
+                </div>
+                <span class="love-moment-stamp-sublabel">our time • the moment we met</span>
+              </div>
+            </div>
+
+            <!-- Shimmering Gradient Headline -->
+            <h2 class="love-moment-title">
+              Our Moment Together
+            </h2>
+
+            <!-- Intimate, poetic caption -->
+            <p class="love-moment-caption">
+              The world slowed to a gentle whisper the instant our eyes locked. Between soft laughter, stolen glances, and our hands gently intertwined, 5:20 became our sacred eternity — the breath where my heart quietly chose yours forever.
+            </p>
+
+            <!-- Footer: Heartbeat Row + Love Status -->
+            <div class="love-moment-footer-bar">
+              <div class="love-moment-heartbeat-row" aria-label="Heartbeats for you">
+                <span class="love-moment-heart love-moment-hb-1">❤️</span>
+                <span class="love-moment-heart love-moment-hb-2">💕</span>
+                <span class="love-moment-heart love-moment-hb-3">💖</span>
+                <span class="love-moment-heart love-moment-hb-4">💗</span>
+                <span class="love-moment-heart love-moment-hb-5">❤️</span>
+              </div>
+
+              <div class="love-moment-status-note">
+                <span class="love-moment-pulse-dot" aria-hidden="true"></span>
+                <span>Every breath belongs to you</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Scoped Script: Dynamic Date & Floating Hearts Stream -->
+      <script>
+        (function() {
+          // 1. Auto-generate Dynamic Date (e.g., October 23, 2026)
+          try {
+            const dateEl = document.getElementById("loveMomentDynamicDate");
+            if (dateEl) {
+              const now = new Date();
+              const formattedDate = now.toLocaleDateString("en-US", {
+                month: "long",
+                day: "numeric",
+                year: "numeric"
+              });
+              dateEl.textContent = formattedDate;
+            }
+          } catch (e) {
+            console.warn("Love moment date format error:", e);
+          }
+
+          // 2. Scoped Floating Hearts Stream
+          const heartsStream = document.getElementById("loveMomentHeartsStream");
+          if (!heartsStream) return;
+
+          // Check if user prefers reduced motion
+          const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+          if (prefersReducedMotion) return;
+
+          const heartIcons = ["❤️", "💕", "💖", "💗", "✨", "🌸"];
+          let heartInterval = null;
+
+          function spawnHeart() {
+            if (!document.body.contains(heartsStream)) {
+              if (heartInterval) clearInterval(heartInterval);
+              return;
+            }
+
+            const heart = document.createElement("span");
+            heart.className = "love-moment-floating-heart";
+            heart.textContent = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+
+            // Random positioning & sizing
+            const leftPercent = 5 + Math.random() * 90;
+            const sizeRem = 0.75 + Math.random() * 0.75;
+            const duration = 4.5 + Math.random() * 3.5;
+
+            heart.style.left = leftPercent + "%";
+            heart.style.fontSize = sizeRem + "rem";
+            heart.style.animationDuration = duration + "s";
+
+            heartsStream.appendChild(heart);
+
+            // Clean up when animation finishes
+            setTimeout(() => {
+              if (heart && heart.parentNode === heartsStream) {
+                heart.parentNode.removeChild(heart);
+              }
+            }, duration * 1000);
+          }
+
+          // Spawn an initial heart and then spawn at smooth staggered intervals
+          spawnHeart();
+          heartInterval = setInterval(spawnHeart, 1800);
+        })();
+      </script>
+    </div>
+
+    <!-- ======================================================================
          DIARY TIMELINE (Sahil & Sahifa's Story)
          ====================================================================== -->
     <section class="section-wrap" id="timeline">
