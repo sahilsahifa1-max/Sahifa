@@ -1750,10 +1750,10 @@
       transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.45s ease;
     }
 
-    /* Scroll Animation: Fade-in + Scale-up into view */
+    /* Scroll Animation: Fade-in + Scale-up into view with safe visible fallback */
     .video-card.video-card-animated {
-      opacity: 0;
-      transform: translateY(35px) scale(0.96);
+      opacity: 1;
+      transform: translateY(0) scale(1);
       transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.45s ease;
     }
 
@@ -1763,7 +1763,7 @@
     }
 
     /* Gentle Floating / Hover Lift Effect */
-    .video-card.video-visible:hover {
+    .video-card:hover {
       transform: translateY(-8px) scale(1.015);
       border-color: rgba(255, 117, 143, 0.65);
       box-shadow: 0 24px 60px rgba(0, 0, 0, 0.7), 0 0 45px rgba(255, 77, 109, 0.42);
@@ -5113,9 +5113,51 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 10px;
       margin-bottom: 10px;
       flex-shrink: 0;
-      z-index: 20;
+      z-index: 25;
+    }
+
+    /* Elegant Pill-Shaped "Back" Button */
+    .lightbox-back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      height: 44px;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      background: rgba(255, 77, 109, 0.18);
+      border: 1.5px solid rgba(255, 117, 143, 0.45);
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      pointer-events: auto !important;
+      z-index: 35;
+      user-select: none;
+    }
+
+    .lightbox-back-btn:hover {
+      background: rgba(255, 77, 109, 0.35);
+      border-color: rgba(255, 77, 109, 0.8);
+      transform: translateX(-2px);
+    }
+
+    .lightbox-back-btn:active {
+      transform: scale(0.95);
+    }
+
+    .lightbox-back-icon {
+      font-size: 1.15rem;
+      font-weight: 700;
+      line-height: 1;
     }
 
     .lightbox-counter-badge {
@@ -5133,34 +5175,35 @@
 
     /* Distinct Premium Pink Close (X) Button */
     .lightbox-close {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      min-height: 44px;
+      width: 48px;
+      height: 48px;
+      min-width: 48px;
+      min-height: 48px;
       border-radius: 50%;
       background: linear-gradient(135deg, #ff4d6d 0%, #c9184a 100%);
-      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      border: 1.5px solid rgba(255, 255, 255, 0.55);
       color: #ffffff;
-      font-size: 1.25rem;
+      font-size: 1.35rem;
       font-weight: 700;
       line-height: 1;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px rgba(255, 77, 109, 0.5);
+      box-shadow: 0 4px 16px rgba(255, 77, 109, 0.6);
       transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background 0.2s ease;
       touch-action: manipulation;
       -webkit-tap-highlight-color: transparent;
       pointer-events: auto !important;
-      z-index: 30;
+      z-index: 35;
       padding: 0;
+      user-select: none;
     }
 
     .lightbox-close:hover {
       background: linear-gradient(135deg, #ff758f 0%, #ff4d6d 100%);
       transform: scale(1.08) rotate(90deg);
-      box-shadow: 0 6px 20px rgba(255, 77, 109, 0.7);
+      box-shadow: 0 6px 22px rgba(255, 77, 109, 0.8);
     }
 
     .lightbox-close:active {
@@ -7332,14 +7375,18 @@
   <div class="lightbox-modal" id="lightboxModal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Photo memory viewer">
     <div class="lightbox-content" id="lightboxContent">
       <div class="lightbox-header">
+        <button type="button" class="lightbox-back-btn" id="lightboxBackBtn" aria-label="Back to memory album" onclick="window.closeLightbox && window.closeLightbox(event)">
+          <span class="lightbox-back-icon">←</span>
+          <span>Back</span>
+        </button>
         <span class="lightbox-counter-badge" id="lightboxCounter">Memory 1 of 8 • (01 / 08)</span>
-        <button type="button" class="lightbox-close" id="lightboxCloseBtn" aria-label="Close photo viewer">✕</button>
+        <button type="button" class="lightbox-close" id="lightboxCloseBtn" aria-label="Close and back to album" onclick="window.closeLightbox && window.closeLightbox(event)">✕</button>
       </div>
 
       <div class="lightbox-img-holder" id="lightboxImgHolder">
-        <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightboxPrevBtn" aria-label="Previous memory photo">‹</button>
+        <button type="button" class="lightbox-nav-btn lightbox-prev-btn" id="lightboxPrevBtn" aria-label="Previous memory photo" onclick="window.navigateLightbox && window.navigateLightbox(-1)">‹</button>
         <img id="lightboxImg" src="" alt="Memory Photo" draggable="false">
-        <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightboxNextBtn" aria-label="Next memory photo">›</button>
+        <button type="button" class="lightbox-nav-btn lightbox-next-btn" id="lightboxNextBtn" aria-label="Next memory photo" onclick="window.navigateLightbox && window.navigateLightbox(1)">›</button>
       </div>
 
       <div class="lightbox-details">
@@ -7443,6 +7490,26 @@
         rot: "-0.8deg"
       }
     ];
+
+    // ==========================================
+    // SAHIL & SAHIFA CLOUDINARY VIDEOS
+    // 2 Living Motion Memories
+    // ==========================================
+    const videos = [
+      {
+        src: "https://player.cloudinary.com/embed/?cloud_name=djvv7g1c&public_id=copy_C36A44CC-8E5F-4038-B9B1-885D951119C1",
+        title: "Laughter, Joy & Twirling Smiles ❤️",
+        date: "Living Memory • Part 1",
+        caption: "Her joyful laughter and radiant happiness lighting up our world in every frame."
+      },
+      {
+        src: "https://player.cloudinary.com/embed/?cloud_name=djvv7g1c&public_id=copy_52CE1D53-F0C7-440A-9652-A0D72A10F4AA",
+        title: "Cherished Moments & Endless Love 💕",
+        date: "Living Memory • Part 2",
+        caption: "Every shared glance, sweet whisper, and magical feeling captured in living motion."
+      }
+    ];
+    window.videos = videos;
 
     /* Audio Chime Synthesizer via Web Audio API (Client-side, lightweight) */
     let diaryChimeEnabled = true;
@@ -7754,11 +7821,27 @@
     function renderVideosSection() {
       const grid = document.getElementById("videosGrid");
       if (!grid) return;
+
+      const videoList = (typeof videos !== "undefined" && Array.isArray(videos)) ? videos : [
+        {
+          src: "https://player.cloudinary.com/embed/?cloud_name=djvv7g1c&public_id=copy_C36A44CC-8E5F-4038-B9B1-885D951119C1",
+          title: "Laughter, Joy & Twirling Smiles ❤️",
+          date: "Living Memory • Part 1",
+          caption: "Her joyful laughter and radiant happiness lighting up our world in every frame."
+        },
+        {
+          src: "https://player.cloudinary.com/embed/?cloud_name=djvv7g1c&public_id=copy_52CE1D53-F0C7-440A-9652-A0D72A10F4AA",
+          title: "Cherished Moments & Endless Love 💕",
+          date: "Living Memory • Part 2",
+          caption: "Every shared glance, sweet whisper, and magical feeling captured in living motion."
+        }
+      ];
+
       grid.innerHTML = "";
 
-      videos.forEach((video, index) => {
+      videoList.forEach((video, index) => {
         const card = document.createElement("div");
-        card.className = "video-card video-card-animated";
+        card.className = "video-card video-card-animated video-visible";
         card.setAttribute("data-video-index", index);
         card.innerHTML = `
           <!-- Shimmering Gradient Border on Hover -->
@@ -7818,8 +7901,8 @@
             }
           });
         }, {
-          threshold: 0.12,
-          rootMargin: "0px 0px -30px 0px"
+          threshold: 0.05,
+          rootMargin: "50px 0px 50px 0px"
         });
 
         animatedCards.forEach((card) => {
@@ -7879,6 +7962,10 @@
         document.body.classList.add("lightbox-open-lock");
         modal.classList.add("active");
         modal.setAttribute("aria-hidden", "false");
+
+        try {
+          window.history.pushState({ sahilLightboxOpen: true }, "");
+        } catch (e) {}
       }
     }
 
@@ -7899,7 +7986,7 @@
       openLightboxAtIndex(nextIndex);
     }
 
-    function closeLightbox() {
+    function closeLightbox(isFromPopState = false) {
       const modal = document.getElementById("lightboxModal");
       if (!modal) return;
 
@@ -7915,7 +8002,25 @@
           behavior: "instant"
         });
       }
+
+      // If user clicked X or Back button (not popstate event) and history state exists, pop history
+      if (!isFromPopState && window.history.state && window.history.state.sahilLightboxOpen) {
+        try {
+          window.history.back();
+        } catch (e) {}
+      }
     }
+
+    // Expose globally for instant inline access
+    window.openLightboxAtIndex = openLightboxAtIndex;
+    window.navigateLightbox = navigateLightbox;
+    window.closeLightbox = closeLightbox;
+
+    window.addEventListener("popstate", () => {
+      if (isLightboxOpen) {
+        closeLightbox(true);
+      }
+    });
 
     // ==========================================
     // LOVE STORY CONFIGURATION
@@ -8172,6 +8277,7 @@ Sahil ❤️`,
       const modal = document.getElementById("lightboxModal");
       const content = document.getElementById("lightboxContent");
       const closeBtn = document.getElementById("lightboxCloseBtn");
+      const backBtn = document.getElementById("lightboxBackBtn");
       const prevBtn = document.getElementById("lightboxPrevBtn");
       const nextBtn = document.getElementById("lightboxNextBtn");
       const imgHolder = document.getElementById("lightboxImgHolder");
@@ -8182,42 +8288,58 @@ Sahil ❤️`,
 
       function handleClose(e) {
         if (e) {
-          e.preventDefault();
-          e.stopPropagation();
+          try {
+            e.preventDefault();
+            e.stopPropagation();
+          } catch (err) {}
         }
         closeLightbox();
       }
 
       function handlePrev(e) {
         if (e) {
-          e.preventDefault();
-          e.stopPropagation();
+          try {
+            e.preventDefault();
+            e.stopPropagation();
+          } catch (err) {}
         }
         navigateLightbox(-1);
       }
 
       function handleNext(e) {
         if (e) {
-          e.preventDefault();
-          e.stopPropagation();
+          try {
+            e.preventDefault();
+            e.stopPropagation();
+          } catch (err) {}
         }
         navigateLightbox(1);
       }
 
-      // Close Button - click and touchend handlers with propagation stops
+      // Close Button (Pink X) - Click, pointerup, touchend
       if (closeBtn) {
         closeBtn.addEventListener("click", handleClose);
+        closeBtn.addEventListener("pointerup", handleClose);
         closeBtn.addEventListener("touchend", handleClose, { passive: false });
+      }
+
+      // Back Button ("← Back") - Click, pointerup, touchend
+      if (backBtn) {
+        backBtn.addEventListener("click", handleClose);
+        backBtn.addEventListener("pointerup", handleClose);
+        backBtn.addEventListener("touchend", handleClose, { passive: false });
       }
 
       // Previous and Next slide buttons
       if (prevBtn) {
         prevBtn.addEventListener("click", handlePrev);
+        prevBtn.addEventListener("pointerup", handlePrev);
         prevBtn.addEventListener("touchend", handlePrev, { passive: false });
       }
 
       if (nextBtn) {
         nextBtn.addEventListener("click", handleNext);
+        nextBtn.addEventListener("pointerup", handleNext);
         nextBtn.addEventListener("touchend", handleNext, { passive: false });
       }
 
@@ -10891,25 +11013,35 @@ No matter how far we travel or where the roads of life lead us, my heart will al
     }
 
     function initApp() {
-      setupPasscodeOverlay();
-      setupRelationshipCounter();
-      renderTimeline();
-      renderPhotosSection();
-      renderVideosSection();
-      setupGamesHubNavigation();
-      setupTruthOrDareGame();
-      setupBurningHouseGame();
-      setupAimGame();
-      setupWheelGame();
-      setupQuizGame();
-      if (window.LoveMysteryGame) window.LoveMysteryGame.init();
-      setupLightbox();
-      setupTypewriterLetter();
-      setupNightMode();
-      setupMusicPlayer();
-      setupMobileMenu();
-      setupFinalChapterCelebration();
-      initAmbientCanvas();
+      const initTasks = [
+        ["Passcode", setupPasscodeOverlay],
+        ["Counter", setupRelationshipCounter],
+        ["Timeline", renderTimeline],
+        ["Photos", renderPhotosSection],
+        ["Videos", renderVideosSection],
+        ["Lightbox", setupLightbox],
+        ["GamesHub", setupGamesHubNavigation],
+        ["TruthOrDare", setupTruthOrDareGame],
+        ["BurningHouse", setupBurningHouseGame],
+        ["AimGame", setupAimGame],
+        ["WheelGame", setupWheelGame],
+        ["QuizGame", setupQuizGame],
+        ["MysteryGame", () => window.LoveMysteryGame && window.LoveMysteryGame.init && window.LoveMysteryGame.init()],
+        ["Typewriter", setupTypewriterLetter],
+        ["NightMode", setupNightMode],
+        ["MusicPlayer", setupMusicPlayer],
+        ["MobileMenu", setupMobileMenu],
+        ["FinalChapter", setupFinalChapterCelebration],
+        ["AmbientCanvas", initAmbientCanvas]
+      ];
+
+      initTasks.forEach(([name, fn]) => {
+        try {
+          if (typeof fn === "function") fn();
+        } catch (err) {
+          console.warn(`[Init] ${name} module warning:`, err);
+        }
+      });
     }
 
     document.addEventListener("DOMContentLoaded", () => {
