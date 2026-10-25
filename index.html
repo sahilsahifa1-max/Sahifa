@@ -1013,186 +1013,688 @@
     }
 
     /* ==========================================================================
-       DEDICATED SECTION: OUR PHOTOS & VIDEOS GRIDS
+       DEDICATED SECTION: DIGITAL MEMORY DIARY ALBUM (ROMANTIC SCRAPBOOK)
        ========================================================================== */
-    .photos-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+    .diary-album-wrap {
+      width: 100%;
+      position: relative;
     }
 
-    @media (min-width: 768px) {
-      .photos-grid {
-        grid-template-columns: repeat(3, 1fr);
+    /* Ambient floating dust particles */
+    .diary-dust-particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .diary-dust-fleck {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 209, 102, 0.85) 0%, rgba(255, 77, 109, 0.2) 100%);
+      box-shadow: 0 0 8px rgba(255, 209, 102, 0.6);
+      animation: diaryFleckDrift 9s infinite ease-in-out;
+    }
+
+    @keyframes diaryFleckDrift {
+      0% {
+        transform: translateY(0) translateX(0) scale(0.8);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      80% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-80px) translateX(25px) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    /* Album Header & Toolbar */
+    .diary-album-header-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: linear-gradient(135deg, rgba(35, 12, 30, 0.7) 0%, rgba(20, 7, 20, 0.85) 100%);
+      border: 1px solid rgba(255, 209, 102, 0.25);
+      border-radius: 20px;
+      padding: 14px 22px;
+      margin-bottom: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+      position: relative;
+      z-index: 2;
+    }
+
+    .diary-album-title-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .diary-album-ribbon-icon {
+      font-size: 1.6rem;
+      filter: drop-shadow(0 2px 8px rgba(255, 77, 109, 0.5));
+      animation: diaryHeartFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes diaryHeartFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px) scale(1.05); }
+    }
+
+    .diary-album-title-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #ffffff 0%, #ffd166 45%, #ff758f 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin: 0;
+    }
+
+    .diary-album-subtitle {
+      font-size: 0.78rem;
+      color: rgba(255, 225, 235, 0.75);
+      margin-top: 2px;
+    }
+
+    .diary-album-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .diary-counter-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 77, 109, 0.14);
+      border: 1px solid rgba(255, 77, 109, 0.3);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #ffe5ec;
+      letter-spacing: 0.4px;
+    }
+
+    .diary-sound-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: rgba(255, 209, 102, 0.12);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #ffd166;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .diary-sound-btn:hover {
+      background: rgba(255, 209, 102, 0.25);
+      transform: translateY(-1px);
+    }
+
+    /* ==========================================================================
+       FEATURED HERO MEMORY (PHOTO 1)
+       ========================================================================== */
+    .diary-hero-card {
+      position: relative;
+      background: linear-gradient(145deg, rgba(32, 11, 28, 0.9) 0%, rgba(18, 6, 18, 0.95) 100%);
+      border: 1.5px solid rgba(255, 209, 102, 0.32);
+      border-radius: 26px;
+      padding: 22px;
+      margin-bottom: 34px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      box-shadow: 0 16px 45px rgba(0, 0, 0, 0.45), 0 0 35px rgba(255, 77, 109, 0.18);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      overflow: hidden;
+      z-index: 2;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+
+    @media (min-width: 860px) {
+      .diary-hero-card {
+        grid-template-columns: 1.15fr 0.85fr;
+        padding: 28px;
+        align-items: center;
+      }
+    }
+
+    .diary-hero-card:hover {
+      border-color: rgba(255, 209, 102, 0.6);
+      box-shadow: 0 22px 55px rgba(0, 0, 0, 0.55), 0 0 45px rgba(255, 77, 109, 0.28);
+    }
+
+    /* Golden Bookmark Ribbon */
+    .diary-bookmark-ribbon {
+      position: absolute;
+      top: -2px;
+      left: 36px;
+      width: 28px;
+      height: 48px;
+      background: linear-gradient(180deg, #ffd166 0%, #e09f3e 85%, transparent 100%);
+      box-shadow: 0 4px 12px rgba(224, 159, 62, 0.45);
+      clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+      z-index: 5;
+    }
+
+    /* Washi Tape Decorative Strip */
+    .diary-washi-tape {
+      position: absolute;
+      top: -10px;
+      right: 40px;
+      width: 110px;
+      height: 26px;
+      background: rgba(255, 235, 238, 0.65);
+      border: 1px dashed rgba(255, 77, 109, 0.4);
+      transform: rotate(3deg);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(4px);
+      z-index: 4;
+      pointer-events: none;
+    }
+
+    .diary-washi-tape.gold {
+      background: rgba(255, 243, 205, 0.65);
+      border-color: rgba(224, 159, 62, 0.5);
+      transform: rotate(-2.5deg);
+    }
+
+    /* Hero Photo Matting Frame */
+    .diary-hero-photo-mat {
+      position: relative;
+      background: rgba(14, 4, 14, 0.85);
+      padding: 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.6), 0 8px 24px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      overflow: hidden;
+      group: relative;
+    }
+
+    .diary-hero-img-wrap {
+      width: 100%;
+      height: 320px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 14px;
+      background: #0d030d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (min-width: 860px) {
+      .diary-hero-img-wrap {
+        height: 380px;
+      }
+    }
+
+    .diary-hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      display: block;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+    }
+
+    .diary-hero-card:hover .diary-hero-img-wrap img {
+      transform: scale(1.04);
+    }
+
+    /* Tap-to-expand badge */
+    .diary-expand-overlay {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: rgba(14, 4, 14, 0.78);
+      border: 1px solid rgba(255, 209, 102, 0.4);
+      border-radius: 999px;
+      font-size: 0.74rem;
+      color: #fff;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    .diary-hero-photo-mat:hover .diary-expand-overlay {
+      background: rgba(255, 77, 109, 0.85);
+      border-color: #ffd166;
+      transform: scale(1.05);
+    }
+
+    /* Hero Text & Story Details */
+    .diary-hero-body {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    .diary-hero-tag-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .diary-featured-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.12);
+      border: 1px solid rgba(255, 209, 102, 0.35);
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .diary-stamp-counter {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #ff758f;
+      letter-spacing: 1px;
+      background: rgba(255, 117, 143, 0.12);
+      padding: 3px 10px;
+      border-radius: 8px;
+      border: 1px dashed rgba(255, 117, 143, 0.35);
+    }
+
+    .diary-hero-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.3;
+      color: #fff;
+      margin: 0;
+    }
+
+    .diary-hero-quote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      font-style: italic;
+      color: #ffe5ec;
+      line-height: 1.55;
+      padding-left: 16px;
+      border-left: 3px solid #ff4d6d;
+      margin: 4px 0;
+    }
+
+    .diary-hero-note {
+      font-size: 0.85rem;
+      color: rgba(255, 220, 230, 0.7);
+      line-height: 1.55;
+    }
+
+    .diary-hero-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .diary-like-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      background: linear-gradient(135deg, rgba(255, 77, 109, 0.2) 0%, rgba(200, 29, 68, 0.25) 100%);
+      border: 1px solid rgba(255, 77, 109, 0.45);
+      border-radius: 999px;
+      color: #fff;
+      font-size: 0.84rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .diary-like-btn:hover {
+      background: linear-gradient(135deg, #ff4d6d 0%, #c81d44 100%);
+      border-color: #ffd166;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(255, 77, 109, 0.4);
+    }
+
+    .diary-like-btn:active {
+      transform: scale(0.96);
+    }
+
+    .diary-like-heart-icon {
+      font-size: 1.05rem;
+      transition: transform 0.3s ease;
+    }
+
+    .diary-like-btn.liked .diary-like-heart-icon {
+      animation: diaryHeartBeat 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes diaryHeartBeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
+    .diary-view-hero-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.84rem;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+
+    .diary-view-hero-btn:hover {
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    /* ==========================================================================
+       EDITORIAL SCRAPBOOK GALLERY (PHOTOS 2 - 8)
+       ========================================================================== */
+    .diary-scrapbook-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    @media (min-width: 600px) {
+      .diary-scrapbook-grid {
+        grid-template-columns: repeat(2, 1fr);
         gap: 22px;
       }
     }
 
     @media (min-width: 1024px) {
-      .photos-grid {
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
+      .diary-scrapbook-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 26px;
       }
     }
 
-    .photo-card {
-      background: var(--bg-card);
-      border: 1px solid var(--bg-glass-border);
+    /* Individual Scrapbook Memory Card */
+    .diary-scrapbook-card {
+      position: relative;
+      background: linear-gradient(155deg, rgba(28, 9, 24, 0.88) 0%, rgba(16, 5, 16, 0.96) 100%);
+      border: 1px solid rgba(255, 209, 102, 0.2);
       border-radius: 22px;
-      overflow: hidden;
-      box-shadow: var(--shadow-glow);
+      padding: 16px 16px 18px 16px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 77, 109, 0.1);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      transition: var(--transition-smooth);
       cursor: pointer;
       display: flex;
       flex-direction: column;
+      transform: rotate(var(--card-rot, 0deg));
+      transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.45s ease, border-color 0.3s ease;
+    }
+
+    .diary-scrapbook-card:hover {
+      transform: rotate(0deg) translateY(-8px) scale(1.02);
+      border-color: rgba(255, 209, 102, 0.55);
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6), 0 0 35px rgba(255, 77, 109, 0.35);
+      z-index: 6;
+    }
+
+    /* Decorative Tape on Scrapbook Card */
+    .diary-card-tape {
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%) rotate(var(--tape-rot, -1deg));
+      width: 75px;
+      height: 20px;
+      background: rgba(255, 235, 238, 0.55);
+      border: 1px dashed rgba(255, 77, 109, 0.35);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(3px);
+      border-radius: 2px;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .diary-card-tape.gold {
+      background: rgba(255, 243, 205, 0.55);
+      border-color: rgba(224, 159, 62, 0.45);
+    }
+
+    .diary-card-tape.rose {
+      background: rgba(255, 214, 224, 0.6);
+      border-color: rgba(255, 77, 109, 0.4);
+    }
+
+    .diary-card-tape.washi {
+      background: repeating-linear-gradient(45deg, rgba(255, 230, 240, 0.5), rgba(255, 230, 240, 0.5) 5px, rgba(255, 215, 230, 0.6) 5px, rgba(255, 215, 230, 0.6) 10px);
+      border-color: rgba(255, 117, 143, 0.4);
+    }
+
+    /* Photo Mat Inside Scrapbook Card */
+    .diary-photo-mat {
       position: relative;
-    }
-
-    .photo-card:hover {
-      transform: translateY(-6px) scale(1.01);
-      border-color: var(--bg-glass-border-hover);
-      box-shadow: 0 14px 40px rgba(255, 77, 109, 0.35);
-    }
-
-    .photo-img-wrap {
       width: 100%;
-      height: 220px;
+      background: #0b020b;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.5);
+    }
+
+    .diary-card-img-wrap {
+      width: 100%;
+      height: 240px;
       position: relative;
       overflow: hidden;
-      background: rgba(18, 5, 18, 0.8);
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     @media (min-width: 768px) {
-      .photo-img-wrap {
-        height: 250px;
+      .diary-card-img-wrap {
+        height: 260px;
       }
     }
 
-    .photo-img-wrap img {
+    .diary-card-img-wrap img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 20%;
       display: block;
-      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.55s ease;
     }
 
-    .photo-card:hover .photo-img-wrap img {
-      transform: scale(1.08);
+    .diary-scrapbook-card:hover .diary-card-img-wrap img {
+      transform: scale(1.06);
     }
 
-    /* Beautiful Graceful Error Message (No ugly broken image icon) */
-    .photo-unavailable-box {
-      width: 100%;
-      height: 100%;
+    /* Hover View Icon */
+    .diary-card-view-chip {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(14, 4, 14, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 20px 14px;
-      text-align: center;
-      background: radial-gradient(circle at center, rgba(255, 77, 109, 0.08) 0%, rgba(20, 6, 20, 0.95) 85%);
+      font-size: 13px;
+      color: #fff;
+      opacity: 0.85;
+      transition: all 0.3s ease;
+    }
+
+    .diary-scrapbook-card:hover .diary-card-view-chip {
+      opacity: 1;
+      background: var(--accent-pink);
+      border-color: #ffd166;
+      transform: scale(1.12);
+    }
+
+    /* Scrapbook Card Details */
+    .diary-card-details {
+      padding-top: 14px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .diary-card-header-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 8px;
     }
 
-    .ph-unavailable-icon {
-      font-size: 32px;
-      color: var(--accent-pink);
-      opacity: 0.85;
-      animation: heartbeat 2.6s infinite ease-in-out;
-    }
-
-    .ph-unavailable-text {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .ph-unavailable-path {
-      font-family: monospace;
-      font-size: 0.72rem;
-      color: var(--accent-pink-soft);
-      opacity: 0.8;
-      word-break: break-all;
-      max-width: 90%;
-    }
-
-    .photo-card-info {
-      padding: 16px 16px;
-      background: rgba(20, 7, 18, 0.6);
-      border-top: 1px solid rgba(255, 255, 255, 0.04);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .photo-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 6px;
-    }
-
-    .photo-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem;
+    .diary-card-stamp {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.76rem;
       font-weight: 700;
-      color: var(--text-main);
+      color: #ffd166;
+      background: rgba(255, 209, 102, 0.12);
+      border: 1px dashed rgba(255, 209, 102, 0.35);
+      padding: 2px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.6px;
+    }
+
+    .diary-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .photo-card-date {
-      font-size: 0.7rem;
-      color: var(--accent-pink-soft);
-      font-weight: 600;
-      background: rgba(255, 77, 109, 0.12);
-      padding: 3px 8px;
-      border-radius: 12px;
-      white-space: nowrap;
-    }
-
-    .photo-card-caption {
-      font-size: 0.8rem;
-      color: var(--text-secondary);
+    .diary-card-caption {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 0.92rem;
+      font-style: italic;
+      color: #ffe5ec;
       line-height: 1.45;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
+      margin: 2px 0 0 0;
+      opacity: 0.95;
     }
 
-    .photo-overlay-tap {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(15, 5, 14, 0.65);
-      border: 1px solid var(--bg-glass-border);
-      backdrop-filter: blur(8px);
+    .diary-card-footer {
       display: flex;
       align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #fff;
-      opacity: 0.85;
-      transition: var(--transition-smooth);
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 8px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
     }
 
-    .photo-card:hover .photo-overlay-tap {
+    .diary-heart-react-btn {
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 999px;
+      transition: all 0.2s ease;
+    }
+
+    .diary-heart-react-btn:hover {
+      color: #ff4d6d;
+      background: rgba(255, 77, 109, 0.12);
+    }
+
+    .diary-tap-view-text {
+      font-size: 0.72rem;
+      color: rgba(255, 220, 230, 0.55);
+      letter-spacing: 0.3px;
+    }
+
+    /* Scroll Reveal Animation */
+    .diary-scroll-item {
+      opacity: 0;
+      transform: translateY(28px) scale(0.96);
+      filter: blur(5px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), filter 0.75s ease;
+    }
+
+    .diary-scroll-item.diary-revealed {
       opacity: 1;
-      background: var(--accent-pink);
-      transform: scale(1.1);
+      transform: translateY(0) scale(1) rotate(var(--card-rot, 0deg));
+      filter: blur(0);
+    }
+
+    /* Rising Hearts Burst for Likes */
+    .floating-mini-heart {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99999;
+      font-size: 1.2rem;
+      animation: miniHeartRise 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes miniHeartRise {
+      0% {
+        transform: translate(-50%, 0) scale(0.5);
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.9;
+        transform: translate(calc(-50% + var(--dx, 0px)), -45px) scale(1.3);
+      }
+      100% {
+        transform: translate(calc(-50% + var(--dx, 0px)), -90px) scale(0.8);
+        opacity: 0;
+      }
     }
 
     /* ==========================================================================
@@ -4961,21 +5463,30 @@
       .memory-title {
         font-size: 1.3rem;
       }
-      .photos-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+      .diary-album-header-bar {
+        padding: 12px 16px;
+        flex-direction: column;
+        align-items: flex-start;
       }
-      .photo-img-wrap {
-        height: 160px;
+      .diary-hero-card {
+        padding: 16px;
+        gap: 16px;
       }
-      .photo-card-info {
-        padding: 12px 10px;
+      .diary-hero-img-wrap {
+        height: 250px;
       }
-      .photo-card-title {
-        font-size: 0.88rem;
+      .diary-hero-title {
+        font-size: 1.35rem;
       }
-      .photo-card-caption {
-        font-size: 0.74rem;
+      .diary-hero-quote {
+        font-size: 1rem;
+      }
+      .diary-scrapbook-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .diary-card-img-wrap {
+        height: 220px;
       }
       .chapter-btn {
         width: 100%;
@@ -5989,14 +6500,41 @@
         <p class="section-desc">Every glance, sweet laughter, and cherished memory of Sahil &amp; Sahifa.</p>
       </div>
 
-      <!-- Photos Subsection -->
-      <div class="media-subsection">
-        <div class="media-subsection-header">
-          <span class="media-sub-badge">📸 Photos ❤️</span>
-          <span class="media-sub-note">Tap any photo to open fullscreen</span>
-        </div>
-        <div class="photos-grid" id="photosGrid">
-          <!-- Populated only with verified loaded photos -->
+      <!-- Digital Memory Diary Album (Replacing old Photos Subsection) -->
+      <div class="media-subsection diary-subsection" id="diaryAlbumSection">
+        <div class="diary-album-wrap" id="diaryAlbumWrap">
+          <!-- Background ambient dust flecks -->
+          <div class="diary-dust-particles" aria-hidden="true">
+            <span class="diary-dust-fleck" style="top:10%; left:12%; animation-delay:0s;"></span>
+            <span class="diary-dust-fleck" style="top:25%; left:85%; animation-delay:2.5s;"></span>
+            <span class="diary-dust-fleck" style="top:60%; left:20%; animation-delay:4s;"></span>
+            <span class="diary-dust-fleck" style="top:75%; left:78%; animation-delay:1.2s;"></span>
+            <span class="diary-dust-fleck" style="top:90%; left:45%; animation-delay:5.5s;"></span>
+          </div>
+
+          <!-- Diary Album Toolbar Header -->
+          <div class="diary-album-header-bar">
+            <div class="diary-album-title-group">
+              <span class="diary-album-ribbon-icon">📖</span>
+              <div>
+                <h3 class="diary-album-title-text">Sahil &amp; Sahifa's Memory Diary</h3>
+                <p class="diary-album-subtitle">A handcrafted collection of our sacred moments, laughter &amp; timeless heartbeats</p>
+              </div>
+            </div>
+            <div class="diary-album-toolbar">
+              <span class="diary-counter-pill">✨ 08 Cherished Memories</span>
+              <button class="diary-sound-btn" id="diarySoundToggleBtn" type="button" aria-label="Toggle chime sound">
+                <span id="diarySoundIcon">🔔</span>
+                <span id="diarySoundLabel">Chime: ON</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Hidden fallback for legacy compatibility -->
+          <div class="photos-grid" id="photosGrid" style="display:none;" aria-hidden="true"></div>
+
+          <!-- Container rendered dynamically with all 8 Cloudinary photos -->
+          <div id="diaryDynamicContent"></div>
         </div>
       </div>
 
@@ -6699,186 +7237,380 @@
        ======================================================================== -->
   <script>
         // ==========================================
-    // SAHIL & SAHIFA MEDIA CONFIGURATION
-    // Valid Relative Paths in media/photos/ and media/videos/
+    // ==========================================
+    // SAHIL & SAHIFA DIGITAL MEMORY DIARY ALBUM
+    // 8 Exact Cloudinary Keepsakes & Poetic Captions
     // ==========================================
     const photos = [
       {
-        src: "media/photos/IMG_20260908_123640.jpg",
-        altSrc: "media/photos/photo1.jpg",
-        title: "The Day We Met",
-        caption: "We first met on the road going from home to school — our story began here.",
-        date: "30 March 2024"
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918820/IMG_0462.jpg",
+        title: "A Timeless Stare",
+        caption: "Some moments deserve to live forever.",
+        date: "Memory 01",
+        number: "01 / 08",
+        featured: true,
+        tapeStyle: "gold",
+        rot: "-0.8deg"
       },
       {
-        src: "media/photos/memory-04.jpg",
-        altSrc: "media/photos/photo2.jpg",
-        title: "Sahifa's Gentle Radiance",
-        caption: "A flower in her hair, bringing soft light and warmth to every moment.",
-        date: "Sweet Memory"
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918820/IMG_0453.jpg",
+        title: "Quiet Tenderness",
+        caption: "A little memory, a lifetime of meaning.",
+        date: "Memory 02",
+        number: "02 / 08",
+        tapeStyle: "rose",
+        rot: "-1.8deg"
       },
       {
-        src: "media/photos/Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg",
-        altSrc: "media/photos/photo3.jpg",
-        title: "Our Video Calls",
-        caption: "Miles away but never apart, laughing and talking for hours.",
-        date: "Cherished Calls"
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918818/75E5E28D-6BB8-4A98-A255-81E49DE49972.png",
+        title: "Infinite Heartbeats",
+        caption: "If time could pause, I’d choose this moment.",
+        date: "Memory 03",
+        number: "03 / 08",
+        tapeStyle: "washi",
+        rot: "1.4deg"
       },
       {
-        src: "media/photos/memory-03.jpg",
-        altSrc: "media/photos/photo4.jpg",
-        title: "Late Night Whispers",
-        caption: "Quiet conversations under starlight that brought our souls close together.",
-        date: "Endless Talks"
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918817/IMG_0456.jpg",
+        title: "Unspoken Love",
+        caption: "The kind of memories words can never explain.",
+        date: "Memory 04",
+        number: "04 / 08",
+        tapeStyle: "gold",
+        rot: "-1.2deg"
       },
       {
-        src: "media/photos/IMG_20260628_114036.jpg",
-        altSrc: "media/photos/photo5.jpg",
-        title: "When Our Eyes Met",
-        caption: "In your eyes, our souls recognized each other in a single tender heartbeat.",
-        date: "28 June 2024"
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918820/IMG_0452.jpg",
+        title: "Our Favorite Chapter",
+        caption: "A page from my favourite chapter.",
+        date: "Memory 05",
+        number: "05 / 08",
+        tapeStyle: "rose",
+        rot: "1.6deg"
       },
       {
-        src: "media/photos/memory-05.jpg",
-        altSrc: "media/photos/photo6.jpg",
-        title: "Reflections of Our Love",
-        caption: "A shared gaze holding all our promises and quiet dreams for the future.",
-        date: "28 June 2024"
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918826/IMG_0493.png",
+        title: "Sweet Simplicity",
+        caption: "Little things. Beautiful memories.",
+        date: "Memory 06",
+        number: "06 / 08",
+        tapeStyle: "washi",
+        rot: "-1.5deg"
       },
       {
-        src: "media/photos/memory-02.jpg",
-        altSrc: "media/photos/photo7.jpg",
-        title: "Sahil & Sahifa Forever",
-        caption: "Two souls, one heart, walking hand in hand into eternity.",
-        date: "Forever & Always"
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918822/IMG_0494.png",
+        title: "Where the Heart Rests",
+        caption: "Some photographs feel like home.",
+        date: "Memory 07",
+        number: "07 / 08",
+        tapeStyle: "gold",
+        rot: "1.2deg"
+      },
+      {
+        src: "https://res.cloudinary.com/djvv7g1c/image/upload/v1792918821/IMG_0485.png",
+        title: "Eternity in a Glance",
+        caption: "And somehow, this moment became timeless.",
+        date: "Memory 08",
+        number: "08 / 08",
+        tapeStyle: "rose",
+        rot: "-0.8deg"
       }
     ];
 
-    /* ==========================================================================
-       CLOUDINARY VIDEO EMBED REPLACEMENTS (Videos 1 & 2)
-       ========================================================================== */
-    const videos = [
-      {
-        // REPLACED VIDEO 1: Cloudinary Player Embed URL
-        src: "https://player.cloudinary.com/embed/?cloud_name=djvv7g1c&public_id=copy_C36A44CC-8E5F-4038-B9B1-885D951119C1",
-        title: "Laughter, Joy & Twirling Smiles ❤️",
-        caption: "Her joyful laughter and radiant happiness lighting up our world in every frame.",
-        date: "Living Memory • Part 1"
-      },
-      {
-        // REPLACED VIDEO 2: Cloudinary Player Embed URL
-        src: "https://player.cloudinary.com/embed/?cloud_name=djvv7g1c&public_id=copy_52CE1D53-F0C7-440A-9652-A0D72A10F4AA",
-        title: "Cherished Moments & Endless Love 💕",
-        caption: "Every shared glance, sweet whisper, and magical feeling captured in living motion.",
-        date: "Living Memory • Part 2"
+    /* Audio Chime Synthesizer via Web Audio API (Client-side, lightweight) */
+    let diaryChimeEnabled = true;
+    let diaryAudioCtx = null;
+
+    function playDiaryChime(pitchType = "high") {
+      if (!diaryChimeEnabled) return;
+      try {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContextClass) return;
+        if (!diaryAudioCtx) {
+          diaryAudioCtx = new AudioContextClass();
+        }
+        if (diaryAudioCtx.state === "suspended") {
+          diaryAudioCtx.resume();
+        }
+
+        const osc = diaryAudioCtx.createOscillator();
+        const gain = diaryAudioCtx.createGain();
+        osc.type = "sine";
+
+        const freq = pitchType === "high" ? 880 : pitchType === "heart" ? 659.25 : 587.33;
+        osc.frequency.setValueAtTime(freq, diaryAudioCtx.currentTime);
+        if (pitchType === "heart") {
+          osc.frequency.exponentialRampToValueAtTime(880, diaryAudioCtx.currentTime + 0.15);
+        }
+
+        gain.gain.setValueAtTime(0.001, diaryAudioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.12, diaryAudioCtx.currentTime + 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, diaryAudioCtx.currentTime + 0.55);
+
+        osc.connect(gain);
+        gain.connect(diaryAudioCtx.destination);
+        osc.start();
+        osc.stop(diaryAudioCtx.currentTime + 0.6);
+      } catch (e) {
+        // Silent graceful fallback
       }
-    ];
+    }
 
-    let currentLightboxIndex = 0;
-    let currentLightboxList = [];
+    /* Floating micro-heart burst effect on like click */
+    function triggerMiniHeartBurst(e) {
+      const x = e.clientX || (e.touches && e.touches[0] ? e.touches[0].clientX : window.innerWidth / 2);
+      const y = e.clientY || (e.touches && e.touches[0] ? e.touches[0].clientY : window.innerHeight / 2);
+
+      const symbols = ["❤️", "💕", "✨", "💖"];
+      for (let i = 0; i < 4; i++) {
+        const heart = document.createElement("span");
+        heart.className = "floating-mini-heart";
+        heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        heart.style.left = `${x}px`;
+        heart.style.top = `${y}px`;
+        heart.style.setProperty("--dx", `${(Math.random() - 0.5) * 60}px`);
+        heart.style.animationDelay = `${i * 0.08}s`;
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+          if (heart.parentNode) heart.parentNode.removeChild(heart);
+        }, 1300);
+      }
+    }
 
     /* ==========================================================================
-       DEDICATED SECTION: OUR PHOTOS & VIDEOS RENDERING
-       (No broken images, no 'Memory unavailable' cards)
+       DEDICATED SECTION: DIGITAL MEMORY DIARY ALBUM RENDERING
        ========================================================================== */
     function renderPhotosSection() {
-      const grid = document.getElementById("photosGrid");
-      if (!grid) return;
-      grid.innerHTML = "";
+      const container = document.getElementById("diaryDynamicContent");
+      if (!container) return;
+      container.innerHTML = "";
 
-      let loadedPhotos = [];
-      let pendingCount = photos.length;
+      // Ensure lightbox points directly to all 8 Cloudinary memories
+      currentLightboxList = photos;
 
-      photos.forEach((photo, idx) => {
-        const testImg = new Image();
-        const primarySrc = photo.src;
-        const fallbackSrc = photo.altSrc;
-
-        function onPhotoSuccess(resolvedSrc) {
-          loadedPhotos.push({
-            ...photo,
-            src: resolvedSrc,
-            originalIndex: idx
-          });
-
-          // Sort loaded photos by original order
-          loadedPhotos.sort((a, b) => a.originalIndex - b.originalIndex);
-          updatePhotosUI();
-        }
-
-        testImg.onload = () => {
-          onPhotoSuccess(primarySrc);
-        };
-
-        testImg.onerror = () => {
-          if (fallbackSrc && fallbackSrc !== primarySrc) {
-            const fallbackImg = new Image();
-            fallbackImg.onload = () => onPhotoSuccess(fallbackSrc);
-            fallbackImg.onerror = () => checkCompletion();
-            fallbackImg.src = fallbackSrc;
-          } else {
-            checkCompletion();
-          }
-        };
-
-        function checkCompletion() {
-          pendingCount--;
-          if (pendingCount <= 0 && loadedPhotos.length === 0) {
-            renderPhotosPrompt();
-          }
-        }
-
-        testImg.src = primarySrc;
-      });
-
-      function updatePhotosUI() {
-        grid.innerHTML = "";
-        currentLightboxList = loadedPhotos;
-
-        loadedPhotos.forEach((item, lIdx) => {
-          const card = document.createElement("div");
-          card.className = "photo-card";
-          card.innerHTML = `
-            <div class="photo-img-wrap">
-              <img src="${item.src}" alt="${item.title}" loading="lazy">
-              <div class="photo-overlay-tap" title="View Fullscreen">🔍</div>
-            </div>
-            <div class="photo-card-info">
-              <div class="photo-card-header">
-                <h4 class="photo-card-title">${item.title}</h4>
-                <span class="photo-card-date">${item.date}</span>
-              </div>
-              ${item.caption ? `<p class="photo-card-caption">${item.caption}</p>` : ""}
-            </div>
-          `;
-
-          card.addEventListener("click", () => {
-            openLightboxAtIndex(lIdx);
-          });
-
-          grid.appendChild(card);
+      // Setup audio toggle button
+      const soundBtn = document.getElementById("diarySoundToggleBtn");
+      const soundIcon = document.getElementById("diarySoundIcon");
+      const soundLabel = document.getElementById("diarySoundLabel");
+      if (soundBtn && !soundBtn.dataset.bound) {
+        soundBtn.dataset.bound = "true";
+        soundBtn.addEventListener("click", () => {
+          diaryChimeEnabled = !diaryChimeEnabled;
+          if (soundIcon) soundIcon.textContent = diaryChimeEnabled ? "🔔" : "🔕";
+          if (soundLabel) soundLabel.textContent = diaryChimeEnabled ? "Chime: ON" : "Chime: OFF";
+          if (diaryChimeEnabled) playDiaryChime("high");
         });
       }
 
-      function renderPhotosPrompt() {
-        grid.innerHTML = `
-          <div class="media-prompt-card">
-            <span class="media-prompt-icon">📸</span>
-            <h3 class="media-prompt-title">Our 7 Love Diary Photos</h3>
-            <p class="media-prompt-desc">
-              To display Sahil &amp; Sahifa's photos in this gallery, copy the 7 photos into the <strong>media/photos/</strong> folder.
-            </p>
-            <div class="media-prompt-list">
-              <span class="media-prompt-chip">IMG_20260908_123640.jpg</span>
-              <span class="media-prompt-chip">memory-04.jpg</span>
-              <span class="media-prompt-chip">Screenshot_2026-09-13-21-40-19-284_com.whatsapp.jpg</span>
-              <span class="media-prompt-chip">memory-03.jpg</span>
-              <span class="media-prompt-chip">IMG_20260628_114036.jpg</span>
-              <span class="media-prompt-chip">memory-05.jpg</span>
-              <span class="media-prompt-chip">memory-02.jpg</span>
+      // Memory Likes Storage in Memory / LocalStorage
+      let diaryLikes = {};
+      try {
+        const saved = localStorage.getItem("sahil_sahifa_diary_likes");
+        if (saved) diaryLikes = JSON.parse(saved);
+      } catch (e) {
+        diaryLikes = {};
+      }
+
+      function getLikes(idx) {
+        return diaryLikes[idx] || (idx === 0 ? 520 : 100 + (idx * 33));
+      }
+
+      function addLike(idx, btnEl, countEl, e) {
+        diaryLikes[idx] = getLikes(idx) + 1;
+        try {
+          localStorage.setItem("sahil_sahifa_diary_likes", JSON.stringify(diaryLikes));
+        } catch (err) {}
+        countEl.textContent = diaryLikes[idx];
+        btnEl.classList.add("liked");
+        playDiaryChime("heart");
+        triggerMiniHeartBurst(e);
+      }
+
+      // 1. Featured Hero Memory (Photo 1)
+      const heroPhoto = photos[0];
+      const heroCard = document.createElement("div");
+      heroCard.className = "diary-hero-card diary-scroll-item";
+      heroCard.id = "diaryHeroCard";
+
+      heroCard.innerHTML = `
+        <!-- Golden Bookmark Ribbon -->
+        <div class="diary-bookmark-ribbon" aria-hidden="true"></div>
+        <!-- Decorative Washi Tape -->
+        <div class="diary-washi-tape gold" aria-hidden="true"></div>
+
+        <!-- Featured Photo Mat -->
+        <div class="diary-hero-photo-mat" id="heroPhotoMat" role="button" tabindex="0" aria-label="Open featured memory in fullscreen">
+          <div class="diary-hero-img-wrap">
+            <img src="${heroPhoto.src}" alt="${heroPhoto.title}" loading="lazy">
+          </div>
+          <div class="diary-expand-overlay">
+            <span>🔍</span>
+            <span>View Fullscreen</span>
+          </div>
+        </div>
+
+        <!-- Hero Memory Story Details -->
+        <div class="diary-hero-body">
+          <div class="diary-hero-tag-row">
+            <span class="diary-featured-badge">🌟 Featured Keepsake</span>
+            <span class="diary-stamp-counter">${heroPhoto.number}</span>
+          </div>
+          <h4 class="diary-hero-title">${heroPhoto.title}</h4>
+          <blockquote class="diary-hero-quote">“${heroPhoto.caption}”</blockquote>
+          <p class="diary-hero-note">
+            A sacred glimpse into the tenderness of our love story — forever held in our hearts.
+          </p>
+          <div class="diary-hero-actions">
+            <button class="diary-like-btn" id="heroLikeBtn" type="button" aria-label="Love this memory">
+              <span class="diary-like-heart-icon">❤️</span>
+              <span>Loved</span>
+              <span id="heroLikeCount">${getLikes(0)}</span>
+            </button>
+            <button class="diary-view-hero-btn" id="heroViewBtn" type="button">
+              <span>📖 Open Fullscreen</span>
+            </button>
+          </div>
+        </div>
+      `;
+
+      // Hero events
+      const heroMat = heroCard.querySelector("#heroPhotoMat");
+      const heroViewBtn = heroCard.querySelector("#heroViewBtn");
+      const heroLikeBtn = heroCard.querySelector("#heroLikeBtn");
+      const heroLikeCount = heroCard.querySelector("#heroLikeCount");
+
+      const openHero = () => {
+        playDiaryChime("high");
+        openLightboxAtIndex(0);
+      };
+      if (heroMat) {
+        heroMat.addEventListener("click", openHero);
+        heroMat.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            openHero();
+          }
+        });
+      }
+      if (heroViewBtn) heroViewBtn.addEventListener("click", openHero);
+      if (heroLikeBtn) {
+        heroLikeBtn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          addLike(0, heroLikeBtn, heroLikeCount, e);
+        });
+      }
+
+      container.appendChild(heroCard);
+
+      // 2. Editorial Scrapbook Grid (Photos 2 to 8)
+      const scrapbookGrid = document.createElement("div");
+      scrapbookGrid.className = "diary-scrapbook-grid";
+
+      photos.slice(1).forEach((photo, sliceIdx) => {
+        const photoIdx = sliceIdx + 1; // 1 to 7 (corresponds to photos[1] through photos[7])
+        const card = document.createElement("div");
+        card.className = "diary-scrapbook-card diary-scroll-item";
+        card.style.setProperty("--card-rot", photo.rot || "0deg");
+        card.setAttribute("role", "button");
+        card.setAttribute("tabindex", "0");
+        card.setAttribute("aria-label", `Open memory ${photo.number}: ${photo.title}`);
+
+        const tapeClass = photo.tapeStyle || "rose";
+
+        card.innerHTML = `
+          <!-- Decorative Tape Sticker -->
+          <div class="diary-card-tape ${tapeClass}" aria-hidden="true"></div>
+
+          <!-- Photo Mat Frame -->
+          <div class="diary-photo-mat">
+            <div class="diary-card-img-wrap">
+              <img src="${photo.src}" alt="${photo.title}" loading="lazy">
+              <div class="diary-card-view-chip" title="View Fullscreen" aria-hidden="true">🔍</div>
+            </div>
+          </div>
+
+          <!-- Scrapbook Card Details -->
+          <div class="diary-card-details">
+            <div class="diary-card-header-line">
+              <h5 class="diary-card-title">${photo.title}</h5>
+              <span class="diary-card-stamp">${photo.number}</span>
+            </div>
+            <p class="diary-card-caption">“${photo.caption}”</p>
+            <div class="diary-card-footer">
+              <button class="diary-heart-react-btn" type="button" aria-label="Heart this memory">
+                <span>❤️</span>
+                <span class="diary-card-like-count">${getLikes(photoIdx)}</span>
+              </button>
+              <span class="diary-tap-view-text">Tap to enlarge</span>
             </div>
           </div>
         `;
+
+        // Card click / keydown to open lightbox
+        const openMemory = () => {
+          playDiaryChime("high");
+          openLightboxAtIndex(photoIdx);
+        };
+
+        card.addEventListener("click", (e) => {
+          if (e.target.closest(".diary-heart-react-btn")) return;
+          openMemory();
+        });
+
+        card.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            if (e.target.closest(".diary-heart-react-btn")) return;
+            e.preventDefault();
+            openMemory();
+          }
+        });
+
+        // Like button inside card
+        const heartBtn = card.querySelector(".diary-heart-react-btn");
+        const heartCount = card.querySelector(".diary-card-like-count");
+        if (heartBtn) {
+          heartBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            addLike(photoIdx, heartBtn, heartCount, e);
+          });
+        }
+
+        scrapbookGrid.appendChild(card);
+      });
+
+      container.appendChild(scrapbookGrid);
+
+      // 3. Cinematic Opening & Scroll Reveals (IntersectionObserver)
+      initDiaryScrollReveals();
+    }
+
+    /* Staggered Cinematic Blur-to-Focus Scroll Reveals */
+    function initDiaryScrollReveals() {
+      const items = document.querySelectorAll(".diary-scroll-item");
+      if (!items.length) return;
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("diary-revealed");
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.12,
+          rootMargin: "0px 0px -40px 0px"
+        });
+
+        items.forEach((item, index) => {
+          item.style.transitionDelay = `${(index % 3) * 0.12}s`;
+          observer.observe(item);
+        });
+      } else {
+        items.forEach((item) => {
+          item.classList.add("diary-revealed");
+        });
       }
     }
 
@@ -6987,8 +7719,8 @@
       img.src = item.src;
 
       title.textContent = item.title || "Our Memory";
-      caption.textContent = item.caption || "";
-      counter.textContent = `Photo ${currentLightboxIndex + 1} of ${currentLightboxList.length}`;
+      caption.textContent = item.caption ? `“${item.caption}”` : "";
+      counter.textContent = `Memory ${currentLightboxIndex + 1} of ${currentLightboxList.length} • (${item.number || `0${currentLightboxIndex + 1} / 08`})`;
 
       modal.classList.add("active");
     }
